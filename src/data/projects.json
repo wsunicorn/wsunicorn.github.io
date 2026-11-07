@@ -1,0 +1,741 @@
+[
+  {
+    "slug": "vihallulens",
+    "order": 1,
+    "kind": "thesis",
+    "featured": true,
+    "title": {
+      "en": "ViHalluLens — Hallucination Detection for Vietnamese RAG",
+      "vi": "ViHalluLens — Phát hiện ảo giác cho RAG tiếng Việt"
+    },
+    "tagline": {
+      "en": "Reads the model's own attention to tell whether an answer is grounded in the retrieved context — in one forward pass, no paid judge.",
+      "vi": "Đọc chính trọng số chú ý của mô hình để biết câu trả lời có bám ngữ cảnh truy xuất không — một lượt truyền xuôi, không cần giám khảo trả phí."
+    },
+    "period": {
+      "start": "2026-08",
+      "end": "2026-12"
+    },
+    "role": {
+      "en": "Bachelor's thesis · lead of a 2-person team",
+      "vi": "Khóa luận tốt nghiệp · trưởng nhóm 2 người"
+    },
+    "repo": "https://github.com/wsunicorn/vihallulens",
+    "tags": [
+      "ai-engineer",
+      "research",
+      "llm",
+      "rag",
+      "nlp",
+      "evaluation"
+    ],
+    "stack": [
+      "PyTorch",
+      "Transformers",
+      "Qwen2.5-7B (4-bit)",
+      "PhoBERT",
+      "Scikit-learn",
+      "FastAPI",
+      "Docker",
+      "Kaggle T4"
+    ],
+    "metrics": [
+      {
+        "value": "0.745",
+        "label": {
+          "en": "3-class macro-F1 with 2,271 params",
+          "vi": "macro-F1 ba lớp với 2.271 tham số"
+        }
+      },
+      {
+        "value": "87.8%",
+        "label": {
+          "en": "evidence chunk located by top head",
+          "vi": "mẫu có đầu chú ý chỉ đúng đoạn bằng chứng"
+        }
+      },
+      {
+        "value": "19",
+        "label": {
+          "en": "controlled experiments",
+          "vi": "thí nghiệm có kiểm soát"
+        }
+      }
+    ],
+    "bullets": {
+      "en": [
+        "Reproduced Lookback Lens and extended it to a chunk-aware lookback ratio; forward hooks fit Qwen2.5-7B-Instruct (4-bit) on a single 16 GB T4.",
+        "A linear probe on 756 lookback ratios (2,271 parameters) reached 3-class macro-F1 0.745 — on par with fine-tuned PhoBERT-large (0.749) and better on intrinsic hallucinations.",
+        "The strongest head points at the evidence chunk on 87.8% of ISE-DSC01 samples (14.3× chance) and beats context ablation (0.850 vs 0.733) at ~11× lower cost.",
+        "Reported the limits honestly across 19 experiments on 4 Vietnamese datasets; shipped a Python library, a REST service with an attention viewer, and a Docker image."
+      ],
+      "vi": [
+        "Tái lập Lookback Lens và mở rộng thành chunk-aware lookback ratio; forward hook giúp Qwen2.5-7B-Instruct 4 bit chạy vừa một card T4 16 GB.",
+        "Bộ phân loại tuyến tính trên 756 tỷ lệ lookback (2.271 tham số) đạt macro-F1 ba lớp 0,745 — ngang PhoBERT-large đã tinh chỉnh (0,749) và tốt hơn ở lớp ảo giác nội tại.",
+        "Đầu chú ý mạnh nhất chỉ đúng đoạn bằng chứng ở 87,8 % mẫu ISE-DSC01 (gấp 14,3 lần ngẫu nhiên), đúng hơn cắt bỏ ngữ cảnh (0,850 so với 0,733) mà rẻ hơn khoảng 11 lần.",
+        "Báo cáo trung thực giới hạn qua 19 thí nghiệm trên 4 bộ dữ liệu tiếng Việt; sản phẩm gồm thư viện Python, dịch vụ REST có giao diện quan sát chú ý và ảnh Docker."
+      ]
+    }
+  },
+  {
+    "slug": "viragops",
+    "order": 2,
+    "kind": "personal",
+    "featured": true,
+    "title": {
+      "en": "viRAGops — Vietnamese RAG with Full LLMOps",
+      "vi": "viRAGops — RAG tiếng Việt với LLMOps trọn vẹn"
+    },
+    "tagline": {
+      "en": "Q&A over university regulations built on one rule — every retrieval, prompt or model change goes through the gate.",
+      "vi": "Hỏi đáp quy chế đào tạo IUH xây trên một nguyên tắc — mọi thay đổi retrieval, prompt hay model đều phải qua cổng đánh giá."
+    },
+    "period": {
+      "start": "2026-07",
+      "end": "2026-07"
+    },
+    "role": {
+      "en": "Solo project",
+      "vi": "Dự án cá nhân"
+    },
+    "repo": "https://github.com/wsunicorn/viragops",
+    "tags": [
+      "ai-engineer",
+      "ml-engineer",
+      "llm",
+      "rag",
+      "llmops",
+      "evaluation",
+      "data-engineer"
+    ],
+    "stack": [
+      "Python",
+      "FastAPI",
+      "Qdrant",
+      "LiteLLM",
+      "Langfuse",
+      "Prometheus",
+      "Grafana",
+      "GitHub Actions",
+      "Next.js",
+      "Docker"
+    ],
+    "metrics": [
+      {
+        "value": "300",
+        "label": {
+          "en": "golden-set questions",
+          "vi": "câu hỏi golden set"
+        }
+      },
+      {
+        "value": "9",
+        "label": {
+          "en": "versioned modules",
+          "vi": "module có phiên bản"
+        }
+      },
+      {
+        "value": "6",
+        "label": {
+          "en": "experiment reports",
+          "vi": "báo cáo thực nghiệm"
+        }
+      }
+    ],
+    "bullets": {
+      "en": [
+        "Built the full stack as 9 versioned modules: DataOps ingest/chunk/embed/index on Qdrant, a RAG runtime with mandatory citations and grounded refusal, a PromptOps registry, and a LiteLLM gateway with fallback.",
+        "Enforced eval discipline with a 300-question golden set, a 4-tier evaluation engine and a PASS/WARN/BLOCK quality gate in CI/CD; 6 experiment reports keep negative results on record.",
+        "Ran it like production — Langfuse tracing, Prometheus/Grafana dashboards, feedback loop with error clustering, semantic caching and cost-aware model routing."
+      ],
+      "vi": [
+        "Xây trọn hệ thống thành 9 module có phiên bản: DataOps nạp/chia/nhúng/đánh chỉ mục trên Qdrant, RAG runtime bắt buộc trích dẫn và từ chối khi thiếu căn cứ, PromptOps registry, gateway LiteLLM có fallback.",
+        "Kỷ luật đánh giá bằng golden set 300 câu, bộ đánh giá 4 tầng và cổng chất lượng PASS/WARN/BLOCK trong CI/CD; 6 báo cáo thực nghiệm ghi cả kết quả âm.",
+        "Vận hành như production — tracing Langfuse, dashboard Prometheus/Grafana, vòng phản hồi gom cụm lỗi, semantic cache và định tuyến model theo chi phí."
+      ]
+    }
+  },
+  {
+    "slug": "study-app-mobile",
+    "order": 3,
+    "kind": "venture",
+    "featured": true,
+    "confidential": true,
+    "title": {
+      "en": "Page-Grounded AI Study App (iOS & Android)",
+      "vi": "Ứng dụng học tập AI neo theo trang (iOS & Android)"
+    },
+    "tagline": {
+      "en": "Learners upload their own course material; every answer, quiz and grade points back to the exact page — or says it isn't there.",
+      "vi": "Người học nạp tài liệu của chính mình; mọi câu trả lời, quiz và điểm chấm đều chỉ về đúng trang — hoặc nói thẳng là không có."
+    },
+    "period": {
+      "start": "2026-09",
+      "end": "2026-10"
+    },
+    "role": {
+      "en": "Own product venture · solo full-stack AI engineer — testing user reach and revenue",
+      "vi": "Sản phẩm riêng · tự làm full-stack AI — thử nghiệm khả năng tiếp cận người dùng và thu nhập"
+    },
+    "repo": null,
+    "tags": [
+      "ai-engineer",
+      "llm",
+      "rag",
+      "mobile",
+      "product"
+    ],
+    "stack": [
+      "React Native",
+      "Expo",
+      "TypeScript",
+      "Supabase (Postgres + pgvector + RLS)",
+      "Edge Functions",
+      "FastAPI",
+      "PyMuPDF",
+      "SQLite + Drizzle",
+      "FSRS"
+    ],
+    "metrics": [
+      {
+        "value": "255",
+        "label": {
+          "en": "commits in 6 weeks",
+          "vi": "commit trong 6 tuần"
+        }
+      },
+      {
+        "value": "3",
+        "label": {
+          "en": "AI features: cited Q&A, spaced review, rubric grading",
+          "vi": "tính năng AI: hỏi đáp có trích dẫn, ôn ngắt quãng, chấm theo rubric"
+        }
+      }
+    ],
+    "bullets": {
+      "en": [
+        "Built a verification layer that re-checks every generated sentence against its cited span before display, with a confidence label per answer.",
+        "Ingest worker (FastAPI + PyMuPDF) extracts text with page coordinates and OCRs multi-photo uploads; retrieval on Supabase pgvector behind an Edge Function LLM proxy with multi-model routing — no keys in the app.",
+        "Offline flashcards with FSRS spaced repetition on SQLite, quiz generation and rubric-based essay grading; bilingual Vietnamese–English from v1."
+      ],
+      "vi": [
+        "Xây lớp kiểm chứng đối chiếu từng câu mô hình sinh ra với đoạn đã trích trước khi hiển thị, kèm nhãn độ tin cậy cho mỗi câu trả lời.",
+        "Worker nạp tài liệu (FastAPI + PyMuPDF) trích text kèm toạ độ trang và OCR ảnh chụp nhiều trang; tìm kiếm trên Supabase pgvector qua Edge Function làm proxy LLM định tuyến nhiều model — không để khóa API trong app.",
+        "Flashcard offline lặp lại ngắt quãng FSRS trên SQLite, sinh quiz và chấm tự luận theo rubric; song ngữ Việt–Anh từ bản đầu."
+      ]
+    }
+  },
+  {
+    "slug": "agent-platform-hitl",
+    "order": 4,
+    "kind": "personal",
+    "featured": true,
+    "title": {
+      "en": "AI Agent Platform with Human Approval",
+      "vi": "Nền tảng AI Agent có người duyệt"
+    },
+    "tagline": {
+      "en": "A support-operations agent that drafts replies and runs tools — but keeps a human in control of every sensitive action.",
+      "vi": "Agent vận hành hỗ trợ khách hàng tự soạn trả lời và gọi công cụ — nhưng mọi hành động nhạy cảm đều do con người quyết."
+    },
+    "period": {
+      "start": "2026-06",
+      "end": "2026-07"
+    },
+    "role": {
+      "en": "Solo project",
+      "vi": "Dự án cá nhân"
+    },
+    "repo": "https://github.com/wsunicorn/AI-Agent-Platform-with-Human-Approval",
+    "tags": [
+      "ai-engineer",
+      "llm",
+      "agents",
+      "rag",
+      "backend"
+    ],
+    "stack": [
+      "FastAPI",
+      "LangGraph",
+      "PostgreSQL + pgvector",
+      "Alembic",
+      "Gemini",
+      "Ollama",
+      "Docker",
+      "Pytest"
+    ],
+    "metrics": [
+      {
+        "value": "3-tier",
+        "label": {
+          "en": "guardrail policy: safe / approval / blocked",
+          "vi": "chính sách bảo vệ: an toàn / cần duyệt / chặn"
+        }
+      }
+    ],
+    "bullets": {
+      "en": [
+        "Designed a 3-tier guardrail policy (safe / approval-required / blocked) with duplicate sensitive-action prevention and full audit logs.",
+        "FastAPI + LangGraph agent with hybrid RAG on pgvector and a real-time approval dashboard.",
+        "Kept it dependable with Gemini-first / Ollama-fallback routing and unit, integration and E2E test suites."
+      ],
+      "vi": [
+        "Thiết kế chính sách bảo vệ 3 tầng (an toàn / cần duyệt / chặn), chống lặp hành động nhạy cảm và ghi nhật ký kiểm toán đầy đủ.",
+        "Agent FastAPI + LangGraph với RAG lai trên pgvector và bảng duyệt thời gian thực.",
+        "Ổn định nhờ định tuyến Gemini trước / Ollama dự phòng cùng bộ test unit, integration và E2E."
+      ]
+    }
+  },
+  {
+    "slug": "rag-assistant-bilingual",
+    "order": 5,
+    "kind": "personal",
+    "featured": false,
+    "title": {
+      "en": "Vietnamese–English Document AI Assistant",
+      "vi": "Trợ lý AI tài liệu Việt–Anh"
+    },
+    "tagline": {
+      "en": "Ask questions over your own documents in Vietnamese or English — answers always cite their sources or honestly say \"not found\".",
+      "vi": "Hỏi đáp trên tài liệu của bạn bằng tiếng Việt hoặc tiếng Anh — luôn trích nguồn, hoặc nói thật là \"không tìm thấy\"."
+    },
+    "period": {
+      "start": "2026-06",
+      "end": "2026-07"
+    },
+    "role": {
+      "en": "Solo project",
+      "vi": "Dự án cá nhân"
+    },
+    "repo": "https://github.com/wsunicorn/Vietnamese_English_RAG_Assistant",
+    "tags": [
+      "ai-engineer",
+      "data-engineer",
+      "llm",
+      "rag",
+      "backend"
+    ],
+    "stack": [
+      "FastAPI",
+      "Qdrant",
+      "Redis workers",
+      "PostgreSQL",
+      "Docker Compose",
+      "Slack / Discord / Telegram bots"
+    ],
+    "metrics": [
+      {
+        "value": "7",
+        "label": {
+          "en": "source types ingested",
+          "vi": "loại nguồn dữ liệu"
+        }
+      }
+    ],
+    "bullets": {
+      "en": [
+        "Ingests 7 source types (PDF, DOCX, Markdown, Notion export, websites, sitemaps) with metadata-aware chunking.",
+        "Hybrid dense + BM25 retrieval on Qdrant with optional reranking, citations and no-answer handling.",
+        "Async FastAPI services with Redis workers, PostgreSQL job tracking, feedback/metrics endpoints; optional Slack, Discord and Telegram bots."
+      ],
+      "vi": [
+        "Nạp 7 loại nguồn (PDF, DOCX, Markdown, Notion export, website, sitemap) với chia đoạn theo metadata.",
+        "Tìm kiếm lai dense + BM25 trên Qdrant, có rerank tùy chọn, trích dẫn và xử lý khi không có câu trả lời.",
+        "Dịch vụ FastAPI bất đồng bộ với Redis worker, theo dõi job trên PostgreSQL, endpoint phản hồi/số liệu; bot Slack, Discord, Telegram tùy chọn."
+      ]
+    }
+  },
+  {
+    "slug": "content-agents",
+    "order": 6,
+    "kind": "academic",
+    "featured": false,
+    "title": {
+      "en": "Multi-Agent Content Generation Pipeline",
+      "vi": "Pipeline đa agent sinh nội dung"
+    },
+    "tagline": {
+      "en": "Give it a topic, audience and tone; a team of LangGraph agents researches, outlines, writes, fact-checks and optimises a long-form article.",
+      "vi": "Nhập chủ đề, đối tượng, giọng văn; một nhóm agent LangGraph tự nghiên cứu, lập dàn ý, viết, kiểm chứng và tối ưu bài viết dài."
+    },
+    "period": {
+      "start": "2026-03",
+      "end": "2026-07"
+    },
+    "role": {
+      "en": "Data Platforms course project · main developer",
+      "vi": "Đồ án môn Nền tảng dữ liệu · người phát triển chính"
+    },
+    "repo": "https://github.com/wsunicorn/Agent-based-Content-Generation",
+    "tags": [
+      "ai-engineer",
+      "llm",
+      "agents",
+      "backend",
+      "data-engineer"
+    ],
+    "stack": [
+      "LangGraph",
+      "LangChain",
+      "Django + DRF",
+      "Channels (WebSocket)",
+      "Celery",
+      "Redis",
+      "PostgreSQL",
+      "Ollama",
+      "Gemini",
+      "Tavily",
+      "Playwright"
+    ],
+    "metrics": [
+      {
+        "value": "8",
+        "label": {
+          "en": "specialised agents",
+          "vi": "agent chuyên trách"
+        }
+      },
+      {
+        "value": "3",
+        "label": {
+          "en": "quality modes: fast / standard / strict",
+          "vi": "chế độ chất lượng: fast / standard / strict"
+        }
+      }
+    ],
+    "bullets": {
+      "en": [
+        "Orchestrated 8 LangGraph agents (Research → Outline → Writer → Editor → FactChecker → SEO → QA) with fan-out/fan-in section writing, revision routing and optional human outline approval.",
+        "Long-running jobs on Django + Celery/Redis workers with live per-agent progress over WebSocket; exports to Markdown, HTML and DOCX.",
+        "Routes across Ollama, Gemini and any OpenAI-compatible server; auto-sources section images from Wikimedia Commons with URL filtering."
+      ],
+      "vi": [
+        "Điều phối 8 agent LangGraph (Research → Outline → Writer → Editor → FactChecker → SEO → QA), viết song song từng phần rồi gộp, định tuyến sửa lại và tùy chọn cho người duyệt dàn ý.",
+        "Job dài chạy trên Django + Celery/Redis, tiến trình từng agent cập nhật trực tiếp qua WebSocket; xuất Markdown, HTML, DOCX.",
+        "Định tuyến giữa Ollama, Gemini và server tương thích OpenAI; tự tìm ảnh minh họa từ Wikimedia Commons có lọc URL."
+      ]
+    }
+  },
+  {
+    "slug": "medical-vqa-vi",
+    "order": 7,
+    "kind": "academic",
+    "featured": true,
+    "title": {
+      "en": "Vietnamese Medical Visual Question Answering",
+      "vi": "Hỏi đáp hình ảnh y tế tiếng Việt"
+    },
+    "tagline": {
+      "en": "A two-stream vision-language model that answers Vietnamese questions about medical images.",
+      "vi": "Mô hình thị giác–ngôn ngữ hai luồng trả lời câu hỏi tiếng Việt về ảnh y tế."
+    },
+    "period": {
+      "start": "2026-05",
+      "end": "2026-05"
+    },
+    "role": {
+      "en": "NLP course project · solo",
+      "vi": "Đồ án môn NLP · cá nhân"
+    },
+    "repo": "https://github.com/wsunicorn/Medical-VQA-Vietnamese",
+    "tags": [
+      "ai-engineer",
+      "research",
+      "ml-engineer",
+      "nlp",
+      "computer-vision",
+      "deep-learning"
+    ],
+    "stack": [
+      "PyTorch",
+      "PhoBERT",
+      "ViT",
+      "ViT5",
+      "LoRA",
+      "Contrastive learning",
+      "Django demo"
+    ],
+    "metrics": [
+      {
+        "value": "0.76–0.81",
+        "label": {
+          "en": "test accuracy (C1–C3)",
+          "vi": "accuracy tập test (C1–C3)"
+        }
+      },
+      {
+        "value": "0.743",
+        "label": {
+          "en": "BERTScore F1 (C4)",
+          "vi": "BERTScore F1 (C4)"
+        }
+      }
+    ],
+    "bullets": {
+      "en": [
+        "Designed a two-stream pipeline on ImageCLEF VQA-Med 2019 (Vietnamese translation): PhoBERT + ViT cross-attention for classification and ViT + ViT5 with LoRA fine-tuning for answer generation.",
+        "Reached 0.76–0.81 test accuracy (C1–C3) and BERTScore F1 0.743 (C4), with contrastive learning, error analysis and a web demo."
+      ],
+      "vi": [
+        "Thiết kế pipeline hai luồng trên ImageCLEF VQA-Med 2019 (bản dịch tiếng Việt): PhoBERT + ViT cross-attention cho phân loại, ViT + ViT5 tinh chỉnh LoRA cho sinh câu trả lời.",
+        "Đạt accuracy 0,76–0,81 trên tập test (C1–C3) và BERTScore F1 0,743 (C4), có học tương phản, phân tích lỗi và web demo."
+      ]
+    }
+  },
+  {
+    "slug": "sleep-mlops",
+    "order": 8,
+    "kind": "academic",
+    "featured": false,
+    "title": {
+      "en": "Sleep Disorder Detection — MLOps Pipeline",
+      "vi": "Phát hiện rối loạn giấc ngủ — Pipeline MLOps"
+    },
+    "tagline": {
+      "en": "7-class EEG classification run like production ML, from data versioning to drift-triggered retraining on AWS.",
+      "vi": "Phân loại EEG 7 lớp vận hành như ML production, từ quản lý phiên bản dữ liệu đến tự huấn luyện lại khi drift trên AWS."
+    },
+    "period": {
+      "start": "2026-04",
+      "end": "2026-05"
+    },
+    "role": {
+      "en": "Emerging Technologies course · main developer (team of 2)",
+      "vi": "Môn Công nghệ mới · người làm chính (nhóm 2)"
+    },
+    "repo": "https://github.com/wsunicorn/sleep-disorder-mlops",
+    "tags": [
+      "ml-engineer",
+      "data-engineer",
+      "mlops",
+      "ai-engineer"
+    ],
+    "stack": [
+      "LightGBM",
+      "XGBoost",
+      "DVC",
+      "MLflow Registry",
+      "Django REST",
+      "Docker",
+      "GitHub Actions",
+      "AWS ECR / ECS Fargate / ALB / S3"
+    ],
+    "metrics": [
+      {
+        "value": "7",
+        "label": {
+          "en": "sleep-disorder classes",
+          "vi": "lớp rối loạn giấc ngủ"
+        }
+      },
+      {
+        "value": "24",
+        "label": {
+          "en": "EEG features per 2 s window",
+          "vi": "đặc trưng EEG mỗi cửa sổ 2 giây"
+        }
+      }
+    ],
+    "bullets": {
+      "en": [
+        "Built a 7-class EEG pipeline on CAP Sleep with DVC data versioning, MLflow Registry and drift-triggered retraining workflows.",
+        "Served the Production model via a Django REST API and dashboard, with S3 artifact fallback when the registry is unavailable.",
+        "GitHub Actions CI/CD: test → build → push to ECR → deploy on ECS Fargate behind an ALB → migrate → smoke test."
+      ],
+      "vi": [
+        "Xây pipeline EEG 7 lớp trên CAP Sleep với DVC quản lý phiên bản dữ liệu, MLflow Registry và quy trình tự huấn luyện lại khi phát hiện drift.",
+        "Phục vụ model stage Production qua Django REST API và dashboard, có fallback tải artifact từ S3.",
+        "CI/CD GitHub Actions: test → build → đẩy ECR → deploy ECS Fargate sau ALB → migrate → smoke test."
+      ]
+    }
+  },
+  {
+    "slug": "vehicle-counting",
+    "order": 9,
+    "kind": "academic",
+    "featured": true,
+    "title": {
+      "en": "Vehicle Turning-Movement Counting",
+      "vi": "Đếm phương tiện theo hướng di chuyển"
+    },
+    "tagline": {
+      "en": "Counts cars and trucks per turning movement from a fixed traffic camera — detection, tracking and region logic, evaluated end to end.",
+      "vi": "Đếm ô tô và xe tải theo từng hướng rẽ từ camera giao thông cố định — phát hiện, theo dõi và logic vùng, đánh giá trọn vẹn."
+    },
+    "period": {
+      "start": "2026-04",
+      "end": "2026-05"
+    },
+    "role": {
+      "en": "Computer Vision course · main developer",
+      "vi": "Đồ án môn Thị giác máy tính · người làm chính"
+    },
+    "repo": "https://github.com/wsunicorn/VEHICLE-COUNTING-SYSTEM-USING-DETECTION-TRACKING-COUNTING",
+    "tags": [
+      "ml-engineer",
+      "ai-engineer",
+      "computer-vision",
+      "deep-learning",
+      "research"
+    ],
+    "stack": [
+      "YOLO",
+      "Kalman filter",
+      "Hungarian matching",
+      "SAM",
+      "Grounding DINO",
+      "OpenCV",
+      "Django web demo"
+    ],
+    "metrics": [
+      {
+        "value": "98.96%",
+        "label": {
+          "en": "counting accuracy (95 of 96 vehicles)",
+          "vi": "độ chính xác đếm (95/96 xe)"
+        }
+      },
+      {
+        "value": "4",
+        "label": {
+          "en": "baselines incl. auto-ROI with SAM",
+          "vi": "baseline gồm ROI tự động bằng SAM"
+        }
+      }
+    ],
+    "bullets": {
+      "en": [
+        "Pipeline: YOLO detection → Kalman + Hungarian multi-object tracking → ROI/MOI movement assignment → counting CSV and overlay video (AI City Challenge Track 1 format).",
+        "Reached 98.96% counting accuracy (95/96 vehicles) on the reference camera; mined movement paths from trajectories to replace hand-drawn ones at the same accuracy.",
+        "Tested automatic ROI with SAM and Grounding DINO + SAM (77% and 70%), documenting where automation still loses to manual setup; web demo included."
+      ],
+      "vi": [
+        "Pipeline: YOLO phát hiện → theo dõi đa đối tượng Kalman + Hungarian → gán hướng ROI/MOI → CSV đếm và video overlay (định dạng AI City Challenge Track 1).",
+        "Đạt độ chính xác đếm 98,96 % (95/96 xe) trên camera tham chiếu; sinh MOI từ quỹ đạo thay cho vẽ tay mà giữ nguyên độ chính xác.",
+        "Thử ROI tự động bằng SAM và Grounding DINO + SAM (77 % và 70 %), ghi rõ chỗ tự động hóa còn thua cấu hình tay; có web demo."
+      ]
+    }
+  },
+  {
+    "slug": "rl-trading",
+    "order": 10,
+    "kind": "academic",
+    "featured": false,
+    "title": {
+      "en": "Risk-Sensitive Reinforcement Learning for Trading",
+      "vi": "Học tăng cường nhạy rủi ro cho giao dịch"
+    },
+    "tagline": {
+      "en": "Can a trading agent earn returns while controlling deep drawdowns? PPO versus CVaR- and Sortino-penalised variants on SPY.",
+      "vi": "Agent có thể vừa sinh lời vừa kiểm soát sụt giảm sâu không? So sánh PPO với biến thể phạt CVaR và Sortino trên SPY."
+    },
+    "period": {
+      "start": "2026-02",
+      "end": "2026-05"
+    },
+    "role": {
+      "en": "Quantitative Trading course · main developer (team of 2)",
+      "vi": "Môn Giao dịch định lượng · người làm chính (nhóm 2)"
+    },
+    "repo": "https://github.com/wsunicorn/Risk-sensitiveRLForTrading",
+    "tags": [
+      "research",
+      "ml-engineer",
+      "data-analyst",
+      "reinforcement-learning",
+      "finance"
+    ],
+    "stack": [
+      "PyTorch",
+      "PPO (Actor-Critic)",
+      "CVaR",
+      "Pandas",
+      "Technical indicators",
+      "Django demo"
+    ],
+    "metrics": [
+      {
+        "value": "+1.4%",
+        "label": {
+          "en": "CVaR-PPO return in the 2020 crash (buy-and-hold −5.6%)",
+          "vi": "lợi nhuận CVaR-PPO mùa sụp đổ 2020 (mua-giữ −5,6 %)"
+        }
+      },
+      {
+        "value": "−15%",
+        "label": {
+          "en": "max drawdown vs −34% buy-and-hold (2020)",
+          "vi": "sụt giảm tối đa so với −34 % của mua-giữ (2020)"
+        }
+      }
+    ],
+    "bullets": {
+      "en": [
+        "Built the data pipeline (16 market features incl. SMA, RSI, MACD, Bollinger, ATR) and a single-asset environment with 0.1% fees and 0.05% slippage.",
+        "Trained PPO, CVaR-PPO and Sortino-PPO in one Actor-Critic architecture; evaluated with Sharpe, Sortino, Calmar, Max DD, VaR/CVaR-95.",
+        "In the 2020 COVID crash CVaR-PPO returned +1.4% with a −15% max drawdown versus −5.6% / −34% for buy-and-hold; in the 2023–24 bull run buy-and-hold still won (+58.8% vs +19.0%), reported as is."
+      ],
+      "vi": [
+        "Xây pipeline dữ liệu (16 đặc trưng thị trường gồm SMA, RSI, MACD, Bollinger, ATR) và môi trường một tài sản với phí 0,1 %, trượt giá 0,05 %.",
+        "Huấn luyện PPO, CVaR-PPO, Sortino-PPO trên cùng kiến trúc Actor-Critic; đánh giá bằng Sharpe, Sortino, Calmar, Max DD, VaR/CVaR-95.",
+        "Mùa sụp đổ COVID 2020, CVaR-PPO lãi +1,4 % với sụt giảm tối đa −15 %, so với −5,6 % / −34 % của mua-giữ; ở thị trường tăng 2023–24 mua-giữ vẫn thắng (+58,8 % so với +19,0 %), báo cáo nguyên trạng."
+      ]
+    }
+  },
+  {
+    "slug": "food-recsys",
+    "order": 11,
+    "kind": "academic",
+    "featured": false,
+    "title": {
+      "en": "Food Recommendation System",
+      "vi": "Hệ thống gợi ý món ăn"
+    },
+    "tagline": {
+      "en": "Hybrid recommender that suggests dishes from what you liked and what similar users enjoyed.",
+      "vi": "Hệ gợi ý lai đề xuất món ăn từ món bạn đã thích và món người dùng tương tự yêu thích."
+    },
+    "period": {
+      "start": "2025-10",
+      "end": "2025-11"
+    },
+    "role": {
+      "en": "Recommender Systems course · main developer (team project)",
+      "vi": "Môn Hệ thống gợi ý · người làm chính (đồ án nhóm)"
+    },
+    "repo": "https://github.com/wsunicorn/food-recommendation-system",
+    "tags": [
+      "data-analyst",
+      "ml-engineer",
+      "recommender"
+    ],
+    "stack": [
+      "Python",
+      "Pandas",
+      "Scikit-learn",
+      "TF-IDF",
+      "Collaborative filtering",
+      "Flask"
+    ],
+    "metrics": [
+      {
+        "value": "70 / 30",
+        "label": {
+          "en": "content / collaborative hybrid weighting",
+          "vi": "trọng số lai nội dung / cộng tác"
+        }
+      }
+    ],
+    "bullets": {
+      "en": [
+        "Combined content-based filtering (TF-IDF, cosine similarity) with collaborative filtering in a weighted hybrid ranking (70% content, 30% collaborative) for better item diversity.",
+        "Cold-start users fall back to a popularity list; delivered as a Flask web app with login, category browsing, search and per-item recommendations."
+      ],
+      "vi": [
+        "Kết hợp lọc theo nội dung (TF-IDF, cosine similarity) với lọc cộng tác trong xếp hạng lai có trọng số (70 % nội dung, 30 % cộng tác) để gợi ý đa dạng hơn.",
+        "Người dùng mới chưa có lịch sử được gợi ý theo độ phổ biến; sản phẩm là web app Flask có đăng nhập, duyệt danh mục, tìm kiếm và gợi ý theo từng món."
+      ]
+    }
+  }
+]

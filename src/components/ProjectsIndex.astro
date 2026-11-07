@@ -1,0 +1,42 @@
+---
+import SubNav from './SubNav.astro';
+import ProjectVisual from './ProjectVisual.astro';
+import { useT, localePath, type Lang } from '../i18n/ui';
+import { projects, tr, period, cats, CATEGORIES, catLabel, accentFor } from '../lib/data';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useT(lang);
+---
+<SubNav lang={lang} path="/projects/" />
+<main class="sub wrap">
+  <header class="sub-head">
+    <span class="eyebrow"><i></i><span>{projects.length} · 2025 – 2026</span></span>
+    <h1>{t('projects_h')}</h1>
+    <p>{t('projects_p')}</p>
+    <div class="filters" role="group" aria-label="Filter">
+      {CATEGORIES.map((c, i) => <button type="button" class="pill" data-cat={c} aria-pressed={i === 0 ? 'true' : 'false'}>{tr(catLabel[c], lang)}</button>)}
+    </div>
+  </header>
+  <div class="pgrid">
+    {projects.map((p, i) => (
+      <a class="wcard" href={localePath(lang, `/projects/${p.slug}/`)} data-cats={cats(p).join(' ')} style={`--c:${accentFor(i)}`}>
+        <div class="vis"><div class="glow"></div><ProjectVisual slug={p.slug} /></div>
+        <div class="meta">
+          <span class="num">{String(i + 1).padStart(2, '0')}</span>
+          <h3>{tr(p.title, lang).split(' — ')[0]}</h3>
+          <span class="tg">{t(`kind_${p.kind}` as any)} · {period(p.period, lang)}</span>
+          <p class="tl">{tr(p.tagline, lang)}</p>
+          {p.metrics[0] && <span class="m">{p.metrics[0].value} · {tr(p.metrics[0].label, lang)}</span>}
+        </div>
+      </a>
+    ))}
+  </div>
+</main>
+<script>
+  const btns = [...document.querySelectorAll<HTMLButtonElement>('.filters button')];
+  const cards = [...document.querySelectorAll<HTMLElement>('.pgrid .wcard')];
+  btns.forEach(b => b.addEventListener('click', () => {
+    btns.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    cards.forEach(c => { c.hidden = !(c.dataset.cats ?? '').split(' ').includes(b.dataset.cat!); });
+  }));
+</script>

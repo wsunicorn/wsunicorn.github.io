@@ -1,0 +1,23 @@
+---
+import { useT, localePath, type Lang } from '../i18n/ui';
+interface Props { lang: Lang; path: string }
+const { lang, path } = Astro.props;
+const t = useT(lang);
+const alt = lang === 'en' ? 'vi' : 'en';
+const home = localePath(lang, '/');
+---
+<div class="grain" aria-hidden="true"></div>
+<nav class="nav" aria-label="Main">
+  <a href={home} aria-label={t('home')}><img class="sig" src="/img/signature.svg" alt="Nglan" width="80" height="22"></a>
+  <a class="lk" href={localePath(lang, '/projects/')}>{t('nav_work')}</a><a class="lk" href={home + '#research'}>{t('nav_research')}</a><a class="lk" href={home + '#about'}>{t('nav_about')}</a><a class="lk" href={home + '#contact'}>{t('nav_contact')}</a>
+  <a class="pill" href={localePath(alt, path)} hreflang={alt} lang={alt} aria-label={t('lang_name')}>{alt.toUpperCase()}</a>
+  <button class="pill" id="theme" type="button" aria-label={t('theme')} title={t('theme')}>◐</button>
+  <a class="btn" href={home + '#contact'} style="padding:6px 6px 6px 16px;font-size:13px"><span>CV</span><span class="k" aria-hidden="true">↗</span></a>
+</nav>
+<script>
+  const root = document.documentElement;
+  document.getElementById('theme')?.addEventListener('click', () => {
+    const next = root.dataset.skin === 'paper' ? 'noir' : 'paper'; root.dataset.skin = next;
+    try { localStorage.setItem('skin', next); } catch {}
+  });
+</script>

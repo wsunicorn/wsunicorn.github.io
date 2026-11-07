@@ -1,0 +1,34 @@
+---
+// Mảnh giao diện minh hoạ cho từng dự án (cùng ngôn ngữ hình ảnh với thẻ ở trang chủ).
+interface Props { slug: string }
+const { slug } = Astro.props;
+const heat = Array.from({ length: 40 }, (_, i) => ({ o: (0.15 + Math.abs(Math.sin(i * 1.7)) * 0.85).toFixed(2), d: `${-(i % 7) * 0.4}s` }));
+---
+{slug === 'vihallulens' && <div class="heat">{heat.map(h => <i style={`--o:${h.o};--d:${h.d}`}></i>)}</div>}
+{slug === 'study-app-mobile' && (
+  <div class="phone"><b style="font-size:9px">p. 42 · Chương 3</b><i class="pg"></i><i class="pg hl"></i><i class="pg"></i><i class="pg hl" style="width:70%"></i><i class="pg"></i><span class="cite" style="justify-self:start">verified ✓</span></div>
+)}
+{(slug === 'viragops' || slug === 'rag-assistant-bilingual') && (
+  <div class="mini"><div class="bub q">Vắng tối đa bao nhiêu buổi?</div><div class="bub">20% số buổi <span class="cite">QC §12.3</span></div><div class="chips"><span class="chip ok">PASS</span><span class="chip warn">WARN</span><span class="chip no">BLOCK</span></div></div>
+)}
+{slug === 'agent-platform-hitl' && (
+  <div class="mini"><div class="bub">refund_order(#8812) <span class="cite">needs approval</span></div><div class="chips"><span class="chip ok">safe</span><span class="chip warn">approve</span><span class="chip no">blocked</span></div><div class="bub" style="opacity:.7">✓ approved by human · audit #231</div></div>
+)}
+{slug === 'vehicle-counting' && (
+  <div class="boxes"><b data-l="car 0.94" style="left:18%;top:52%;width:26%;height:18%"></b><b data-l="truck 0.88" style="left:52%;top:28%;width:30%;height:22%;animation-delay:-1.6s"></b></div>
+)}
+{(slug === 'content-agents') && (
+  <div class="mini"><div class="pipe"><span>research</span><i></i><span>outline</span><i></i><span>write</span></div><div class="pipe"><span>edit</span><i></i><span>fact-check</span><i></i><span>QA</span></div><div class="chips"><span class="chip ok">revision 1 → PASS</span></div></div>
+)}
+{(slug === 'sleep-mlops') && (
+  <div class="mini"><div class="pipe"><span>DVC</span><i></i><span>MLflow</span><i></i><span>ECS</span></div><div class="bars"><div>insomnia<i style="--w:72%"></i>.72</div><div>healthy<i style="--w:18%"></i>.18</div><div>rbd<i style="--w:10%"></i>.10</div></div></div>
+)}
+{(slug === 'medical-vqa-vi') && (
+  <div class="mini"><div class="bub q">Ảnh này chụp bằng phương thức nào?</div><div class="bub">CT có cản quang <span class="cite">ViT + PhoBERT</span></div><div class="chips"><span class="chip ok">acc 0.81</span><span class="chip">BERTScore 0.743</span></div></div>
+)}
+{(slug === 'rl-trading') && (
+  <div class="mini"><div class="bars"><div>CVaR-PPO<i style="--w:62%"></i>+1.4%</div><div>B&amp;H<i style="--w:18%"></i>−5.6%</div></div><div class="chips"><span class="chip ok">max DD −15%</span><span class="chip no">B&amp;H −34%</span></div></div>
+)}
+{(slug === 'food-recsys') && (
+  <div class="mini"><div class="bub">Vì bạn thích <b>bún bò</b></div><div class="chips"><span class="chip ok">phở 0.91</span><span class="chip">hủ tiếu 0.84</span><span class="chip">mì Quảng 0.80</span></div><div class="bars"><div>content<i style="--w:70%"></i>70%</div><div>collab<i style="--w:30%"></i>30%</div></div></div>
+)}

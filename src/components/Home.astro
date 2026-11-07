@@ -1,0 +1,169 @@
+---
+import { useT, localePath, type Lang } from '../i18n/ui';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useT(lang);
+const alt = lang === 'en' ? 'vi' : 'en';
+const altHref = localePath(alt, '/');
+const p = (path: string) => localePath(lang, path);
+---
+<div class="grain" aria-hidden="true"></div>
+
+<nav class="nav" aria-label="Main">
+  <img class="sig" src="/img/signature.svg" alt="Nglan" width="80" height="22">
+  <a class="lk" href="#work">{t('nav_work')}</a><a class="lk" href="#research">{t('nav_research')}</a><a class="lk" href="#about">{t('nav_about')}</a><a class="lk" href="#contact">{t('nav_contact')}</a>
+  <a class="pill" id="lang" href={altHref} hreflang={alt} lang={alt} aria-label={t("lang_name")}>{alt.toUpperCase()}</a>
+  <button class="pill" id="theme" type="button" aria-label={t("theme")} title={t("theme")}>◐</button>
+  <a class="btn" href="#contact" style="padding:6px 6px 6px 16px;font-size:13px"><span>CV</span><span class="k" aria-hidden="true">↗</span></a>
+</nav>
+
+<header class="hero" id="top">
+  <div class="giant" id="giant" aria-hidden="true"></div>
+
+  <div class="h-left">
+    <span class="eyebrow"><i></i><span>{t('eyebrow')}</span></span>
+    <h1>Nguyễn<br>Ngọc Lân</h1>
+    <p class="role"><span>{t('role_pre')}</span> <span id="roleLine"></span></p>
+    <p class="pitch">{t('pitch')}</p>
+    <div class="cta">
+      <a class="btn" href="#work"><span>{t('cta_work')}</span><span class="k" aria-hidden="true">↗</span></a>
+      <a class="btn ghost" href="#contact"><span>{t('cta_cv')}</span><span class="k" aria-hidden="true">↓</span></a>
+    </div>
+  </div>
+
+  <div class="stage">
+    <img class="portrait" id="portrait" src="/img/hero-research.webp" alt="Nguyễn Ngọc Lân" width="720" height="843">
+    <svg class="lines" id="lines" aria-hidden="true"></svg>
+    <div class="orbits" id="orbits">
+      <article class="orbit c1" id="o1"><div class="core"></div></article>
+      <article class="orbit c2" id="o2"><div class="core"></div></article>
+      <article class="orbit c3" id="o3"><div class="core"></div></article>
+    </div>
+  </div>
+
+  <aside class="h-right" aria-label="Chỉ số">
+    <div class="stat"><b data-count="3.61" data-dec="2">3.61</b><span>GPA · IUH</span></div>
+    <div class="stat"><b data-count="11">11</b><span>{t('st_proj')}</span></div>
+    <div class="stat"><b data-count="4">4</b><span>{t('st_vb')}</span></div>
+    <div class="stat"><b>2026</b><span>{t('st_tma')}</span></div>
+  </aside>
+  <img class="h-sig" src="/img/signature.svg" alt="" width="190" height="80">
+
+  <div class="heads" role="tablist" aria-label="Attention heads" id="heads"></div>
+</header>
+
+<div class="band" aria-hidden="true"><div class="track" id="track"></div></div>
+
+<main>
+  <section class="s" id="work">
+    <div class="wrap">
+      <div class="s-head"><div><span class="idx">01 /</span><h2>{t('work_h')}</h2></div><p>{t('work_p')}</p></div>
+      <div class="work">
+        <a class="wcard" href={p("/projects/vihallulens/")} style="--c:var(--r-amber)">
+          <div class="vis"><div class="glow"></div><div class="heat" id="heat"></div></div>
+          <div class="meta"><span class="num">01</span><h3>ViHalluLens</h3><span class="tg">THESIS · ATTENTION · RAG</span><span class="m">macro-F1 0.745 · 2,271 params</span></div>
+        </a>
+        <a class="wcard" href={p("/projects/study-app-mobile/")} style="--c:var(--r-coral)">
+          <div class="vis"><div class="glow"></div><div class="phone"><b style="font-size:9px">p. 42 · Chương 3</b><i class="pg"></i><i class="pg hl"></i><i class="pg"></i><i class="pg hl" style="width:70%"></i><i class="pg"></i><span class="cite" style="--acc:var(--r-coral);justify-self:start">verified ✓</span></div></div>
+          <div class="meta"><span class="num">02</span><h3>{t('w2')}</h3><span class="tg">MOBILE · RAG · VERIFY</span><span class="m">255 commits · 6 weeks</span></div>
+        </a>
+        <a class="wcard" href={p("/projects/viragops/")} style="--c:var(--r-cyan)">
+          <div class="vis"><div class="glow"></div><div class="mini"><div class="bub q">Vắng tối đa bao nhiêu buổi?</div><div class="bub">20% số buổi <span class="cite" style="--acc:var(--r-cyan)">QC §12.3</span></div><div class="chips"><span class="chip ok">PASS</span><span class="chip warn">WARN</span><span class="chip no">BLOCK</span></div></div></div>
+          <div class="meta"><span class="num">03</span><h3>viRAGops</h3><span class="tg">LLMOPS · EVAL GATE</span><span class="m">300-question golden set</span></div>
+        </a>
+        <a class="wcard" href={p("/projects/agent-platform-hitl/")} style="--c:var(--r-blue)">
+          <div class="vis"><div class="glow"></div><div class="mini"><div class="bub">refund_order(#8812) <span class="cite" style="--acc:var(--r-blue)">needs approval</span></div><div class="chips"><span class="chip ok">safe</span><span class="chip warn">approve</span><span class="chip no">blocked</span></div><div class="bub" style="opacity:.7">✓ approved by human · audit #231</div></div></div>
+          <div class="meta"><span class="num">04</span><h3>{t('w4')}</h3><span class="tg">LANGGRAPH · GUARDRAILS</span><span class="m">3-tier action policy</span></div>
+        </a>
+        <a class="wcard" href={p("/projects/vehicle-counting/")} style="--c:#2fd27c">
+          <div class="vis"><div class="glow"></div><div class="boxes"><b data-l="car 0.94" style="left:18%;top:52%;width:26%;height:18%"></b><b data-l="truck 0.88" style="left:52%;top:28%;width:30%;height:22%;animation-delay:-1.6s"></b></div></div>
+          <div class="meta"><span class="num">05</span><h3>{t('w5')}</h3><span class="tg">YOLO · TRACKING · SAM</span><span class="m">98.96% · 95 / 96 vehicles</span></div>
+        </a>
+      </div>
+      <div class="allp"><a class="btn ghost" href={p("/projects/")}><span>{t('all')}</span><span class="k" aria-hidden="true">→</span></a></div>
+    </div>
+  </section>
+
+  <section class="s" id="research" style="background:var(--bg2)">
+    <div class="wrap">
+      <div class="s-head"><div><span class="idx" style="color:var(--r-amber)">02 /</span><h2>{t('res_h')}</h2></div><p>{t('res_p')}</p></div>
+      <div class="lab">
+        <div class="lens-box" id="lensBox">
+          <div class="ctx" id="ctx">
+            <div class="chunk"><small>CHUNK 1 · CONTEXT</small>Fansipan cao 3.143 mét, là đỉnh núi cao nhất Đông Dương, thuộc dãy Hoàng Liên Sơn.</div>
+            <div class="chunk"><small>CHUNK 2 · CONTEXT</small>Đỉnh nằm cách thị xã Sa Pa khoảng chín cây số về phía tây nam.</div>
+            <div class="chunk"><small>ANSWER · TO CHECK</small>Đỉnh núi cao nhất Đông Dương là Fansipan, cao 3.143 mét.</div>
+          </div>
+          <div class="lens" id="lens" aria-hidden="true"></div>
+        </div>
+        <div class="lab-side">
+          <div class="kpi"><b data-count="0.745" data-dec="3">0.745</b><span>{t('k1')}</span></div>
+          <div class="kpi"><b data-count="87.8" data-dec="1" data-suf="%">87.8%</b><span>{t('k2')}</span></div>
+          <div class="kpi"><b data-count="19">19</b><span>{t('k3')}</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="about">
+    <div class="wrap">
+      <div class="s-head"><div><span class="idx">03 /</span><h2>{t('how_h')}</h2></div><p>{t('how_p')}</p></div>
+      <figure class="talk"><img src="/img/scene-talk.jpg" alt="Lân đang trình bày kết quả trước màn hình" width="1400" height="933" loading="lazy"></figure>
+      <div class="steps">
+        <div class="step"><b>01</b><h3>{t('s1')}</h3><p>{t('s1p')}</p></div>
+        <div class="step"><b>02</b><h3>{t('s2')}</h3><p>{t('s2p')}</p></div>
+        <div class="step"><b>03</b><h3>{t('s3')}</h3><p>{t('s3p')}</p></div>
+        <div class="step"><b>04</b><h3>{t('s4')}</h3><p>{t('s4p')}</p></div>
+        <div class="step"><b>05</b><h3>{t('s5')}</h3><p>{t('s5p')}</p></div>
+      </div>
+      <div class="logos" aria-label="Tools">
+        <span><img src="/icons/python.svg" alt="Python" width="24" height="24"></span><span><img src="/icons/pytorch.svg" alt="PyTorch" width="24" height="24"></span><span><img src="/icons/hugging-face.svg" alt="Hugging Face" width="24" height="24"></span><span><img src="/icons/langchain.svg" alt="LangChain" width="24" height="24"></span><span><img src="/icons/gemini.svg" alt="Gemini" width="24" height="24"></span><span><img class="ink" src="/icons/ollama.svg" alt="Ollama" width="24" height="24"></span><span><img src="/icons/qdrant.svg" alt="Qdrant" width="24" height="24"></span><span><img src="/icons/postgres.svg" alt="PostgreSQL" width="24" height="24"></span><span><img src="/icons/redis.svg" alt="Redis" width="24" height="24"></span><span><img src="/icons/fastapi.svg" alt="FastAPI" width="24" height="24"></span><span><img src="/icons/django.svg" alt="Django" width="24" height="24"></span><span><img src="/icons/docker.svg" alt="Docker" width="24" height="24"></span><span><img src="/icons/github-actions.svg" alt="GitHub Actions" width="24" height="24"></span><span><img src="/icons/aws.svg" alt="AWS" width="24" height="24"></span><span><img src="/icons/prometheus.svg" alt="Prometheus" width="24" height="24"></span><span><img src="/icons/grafana.svg" alt="Grafana" width="24" height="24"></span><span><img src="/icons/supabase.svg" alt="Supabase" width="24" height="24"></span><span><img src="/icons/react.svg" alt="React Native" width="24" height="24"></span><span><img class="ink" src="/icons/nextjs.svg" alt="Next.js" width="24" height="24"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" style="padding-top:0">
+    <div class="wrap">
+      <div class="s-head"><div><span class="idx">04 /</span><h2>{t('log_h')}</h2></div></div>
+      <div class="log">
+        <div class="row"><time>09–12 / 2026</time><h3>TMA Solutions</h3><p>{t('l1')}</p><span class="tag">BU2 · Batch 53</span></div>
+        <div class="row"><time>08–12 / 2026</time><h3>{t('l2h')}</h3><p>{t('l2')}</p><span class="tag">IUH</span></div>
+        <div class="row"><time>09–10 / 2026</time><h3>{t('l3h')}</h3><p>{t('l3')}</p><span class="tag">{t('l3t')}</span></div>
+        <div class="row"><time>2025 – 2026</time><h3>{t('l4h')}</h3><p>{t('l4')}</p><span class="tag">7 projects</span></div>
+        <div class="row"><time>2022 – now</time><h3>{t('l5h')}</h3><p>{t('l5')}</p><span class="tag">#9</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" style="padding-top:0">
+    <div class="wrap">
+      <div class="court">
+        <div class="ttl"><span>{t('off1')}</span><br><em>{t('off2')}</em></div>
+        <div class="badge" aria-label="Thẻ của Lân"><span class="strap" aria-hidden="true">IUH · DATA SCIENCE · IUH · DATA SCIENCE</span><span class="clip" aria-hidden="true"></span><div class="card"><span class="slot" aria-hidden="true"></span><div class="bhead"><span>IUH · IT</span><span>2022 – 2027</span></div><img src="/img/id-photo.jpg" alt="Ảnh thẻ Nguyễn Ngọc Lân" width="450" height="600"><b class="bname">NGUYỄN NGỌC LÂN</b><span class="brole">{t('brole')}</span><div class="bfoot"><span class="bnum">#9</span><span class="bars9" aria-hidden="true"></span><img class="bsig" src="/img/signature.svg" alt="" width="90" height="34"></div></div></div>
+        <figure class="polaroid p-vb"><span class="tape"></span><img src="/img/pol-volleyball.jpg" alt="Lân đập bóng, áo số 9" width="520" height="585"><figcaption>#9 · Faculty of IT</figcaption></figure>
+        <figure class="polaroid p-bd"><span class="tape"></span><img src="/img/pol-badminton.jpg" alt="Lân ở sân cầu lông" width="520" height="557"><figcaption>{t('cap_bd')}</figcaption></figure>
+        <figure class="poses" id="poses" aria-label="Bốn dáng của Lân"><span class="mk tl"></span><span class="mk tr"></span><span class="mk bl"></span><span class="mk br"></span><img src="/img/pose-1.webp" alt="" width="330" height="560"><img src="/img/pose-2.webp" alt="" width="330" height="560"><img src="/img/pose-3.webp" alt="" width="330" height="560"><img src="/img/pose-4.webp" alt="" width="330" height="560"><figcaption>{t('poses')}</figcaption></figure>
+        <figure class="polaroid p-gt"><span class="tape"></span><img src="/img/pol-guitar.jpg" alt="Lân chơi guitar" width="520" height="290"><figcaption>guitar</figcaption></figure>
+        <div class="ball" aria-hidden="true"></div>
+        <div class="note n1">{t('n1')}</div>
+        <div class="note n2">{t('n2')}</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="contact">
+    <div class="wrap contact">
+      <span class="idx">05 /</span>
+      <h2><span>{t('ct1')}</span><br><em>{t('ct2')}</em></h2>
+      <div class="c-row">
+        <div class="who2"><span class="me" title="Hi!"><img class="a0" src="/img/avatar.webp" alt="Nguyễn Ngọc Lân" width="360" height="360"><img class="a1" src="/img/avatar-wink.webp" alt="" width="360" height="360"></span><div><div class="eyebrow" style="margin-bottom:10px"><i></i><span>{t('avail')}</span></div><div class="mail" id="mail">nguyenngoclan120904@gmail.com</div></div></div>
+        <div class="cta"><button class="btn" type="button" id="copy"><span>{t('copy')}</span><span class="k" aria-hidden="true">⧉</span></button><a class="btn ghost" href="https://github.com/wsunicorn" target="_blank" rel="noopener"><span>GitHub</span><span class="k" aria-hidden="true">↗</span></a><a class="btn ghost" href="https://www.linkedin.com/in/wsunicorn/" target="_blank" rel="noopener"><span>LinkedIn</span><span class="k" aria-hidden="true">↗</span></a></div>
+      </div>
+      <div><div class="eyebrow" style="margin-bottom:12px"><span>{t('cvby')}</span></div>
+        <div class="cvs"><span class="pill">AI Engineer ★</span><span class="pill">ML Engineer</span><span class="pill">AI Research</span><span class="pill">Data Engineer</span><span class="pill">Data Analyst</span></div></div>
+    </div>
+  </section>
+</main>
+<footer class="wrap"><div class="foot"><span><img src="/img/signature.svg" alt="Nglan" width="60" height="18"> © 2026 Nguyễn Ngọc Lân</span><span>{t('foot')}</span><span>Logos: Gil Barbara (CC0)</span></div></footer>
+
+<script src="../scripts/home.js"></script>

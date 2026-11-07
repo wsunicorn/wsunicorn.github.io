@@ -1,0 +1,305 @@
+{
+  "name": {
+    "full": "Nguyễn Ngọc Lân",
+    "ascii": "Nguyen Ngoc Lan",
+    "short": "Lân",
+    "signature": "Nglan"
+  },
+  "headline": {
+    "en": "AI Engineer · LLM Applications · RAG · AI Agents · LLMOps",
+    "vi": "Kỹ sư AI · Ứng dụng LLM · RAG · AI Agent · LLMOps"
+  },
+  "pitch": {
+    "en": "I build LLM systems that can prove what they say — every answer cited, every change gated by evaluation.",
+    "vi": "Tôi xây hệ thống LLM chứng minh được điều nó nói — câu trả lời nào cũng có nguồn, thay đổi nào cũng qua cổng đánh giá."
+  },
+  "contact": {
+    "email": "nguyenngoclan120904@gmail.com",
+    "city": {
+      "en": "Ho Chi Minh City, Vietnam",
+      "vi": "TP. Hồ Chí Minh"
+    },
+    "linkedin": "https://www.linkedin.com/in/wsunicorn/",
+    "github": "https://github.com/wsunicorn",
+    "github_handle": "wsunicorn",
+    "website": "https://wsunicorn.github.io"
+  },
+  "availability": {
+    "en": "AI Engineer intern at TMA Solutions until Dec 2026 · open to full-time AI / Data roles from Dec 2026",
+    "vi": "Đang thực tập AI Engineer tại TMA Solutions đến 12/2026 · sẵn sàng nhận việc toàn thời gian từ 12/2026"
+  },
+  "education": [
+    {
+      "school": {
+        "en": "Industrial University of Ho Chi Minh City (IUH)",
+        "vi": "Trường Đại học Công nghiệp TP. Hồ Chí Minh (IUH)"
+      },
+      "degree": {
+        "en": "Bachelor of Data Science",
+        "vi": "Cử nhân Khoa học Dữ liệu"
+      },
+      "start": "2022-09",
+      "end": "2027-03",
+      "end_note": {
+        "en": "expected",
+        "vi": "dự kiến"
+      },
+      "gpa": "3.61 / 4.0",
+      "coursework": {
+        "en": [
+          "Machine Learning",
+          "Deep Learning",
+          "NLP",
+          "Computer Vision",
+          "Recommender Systems",
+          "Quantitative Trading",
+          "Data Platforms",
+          "Databases",
+          "Software Engineering"
+        ],
+        "vi": [
+          "Học máy",
+          "Học sâu",
+          "Xử lý ngôn ngữ tự nhiên",
+          "Thị giác máy tính",
+          "Hệ thống gợi ý",
+          "Giao dịch định lượng",
+          "Nền tảng dữ liệu",
+          "Cơ sở dữ liệu",
+          "Công nghệ phần mềm"
+        ]
+      },
+      "thesis": "vihallulens"
+    }
+  ],
+  "experience": [
+    {
+      "id": "tma-intern",
+      "company": "TMA Solutions",
+      "role": {
+        "en": "AI Engineer Intern",
+        "vi": "Thực tập sinh Kỹ sư AI"
+      },
+      "unit": {
+        "en": "BU2 · Internship Batch 53 · part-time",
+        "vi": "BU2 · Thực tập Batch 53 · bán thời gian"
+      },
+      "location": {
+        "en": "Ho Chi Minh City",
+        "vi": "TP. Hồ Chí Minh"
+      },
+      "start": "2026-09",
+      "end": "2026-12",
+      "summary": {
+        "en": "LLM + RAG pipeline that drafts structured therapy exercises for an early-intervention app (internal PoC); I owned the knowledge base, retrieval, schema and validation.",
+        "vi": "Pipeline LLM + RAG tự soạn bản nháp bài tập có cấu trúc cho một ứng dụng can thiệp sớm (PoC nội bộ); tôi phụ trách kho tri thức, tìm kiếm, schema và kiểm tra hợp lệ."
+      },
+      "bullets": {
+        "en": [
+          "Built the retrieval layer over a 40-exercise library with Vietnamese embeddings in a vector DB; the right exercise ranks first on 26/32 forms (MRR 0.82).",
+          "Designed a three-tier output validator with reasoned retries, raising valid drafts from 34/40 to 40/40 at a median 9.45 s per form.",
+          "Shipped a near-duplicate warning that catches 28/29 labelled pairs (AUC 0.995) in 0.19 s; a prompt change lifted zero-defect drafts from 12/40 to 28/40 (McNemar p = 0.00086).",
+          "Ran every configuration choice as a pre-registered experiment with Wilson intervals, and reported the negative result too."
+        ],
+        "vi": [
+          "Xây tầng tìm kiếm trên thư viện 40 bài với embedding tiếng Việt trong cơ sở dữ liệu vector; bài đúng lên đầu ở 26/32 form (MRR 0,82).",
+          "Thiết kế bộ kiểm tra đầu ra ba tầng, bị chặn thì hỏi lại kèm lý do — số bản nháp hợp lệ tăng từ 34/40 lên 40/40, trung vị 9,45 giây mỗi form.",
+          "Làm cảnh báo trùng lặp bắt 28/29 cặp có nhãn (AUC 0,995) trong 0,19 giây; một chỉ dẫn prompt mới nâng bản nháp không lỗi từ 12/40 lên 28/40 (McNemar p = 0,00086).",
+          "Mọi lựa chọn cấu hình đều qua thử nghiệm có luật chọn viết trước, khoảng tin cậy Wilson, và báo cả kết quả âm."
+        ]
+      },
+      "stack": [
+        "Python",
+        "LLM structured output",
+        "RAG",
+        "Vietnamese embeddings",
+        "Vector DB",
+        "Pytest",
+        "GitLab"
+      ],
+      "tags": [
+        "ai-engineer",
+        "llm",
+        "rag",
+        "evaluation",
+        "research"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "group": {
+        "en": "LLM & Agents",
+        "vi": "LLM & Agent"
+      },
+      "items": [
+        "LangGraph",
+        "LangChain",
+        "RAG (hybrid dense + BM25, reranking, citations, grounded refusal)",
+        "Tool calling",
+        "Structured outputs",
+        "Guardrails",
+        "Human-in-the-loop",
+        "Prompt registry",
+        "Gemini",
+        "OpenAI",
+        "Ollama",
+        "LiteLLM"
+      ],
+      "tags": [
+        "ai-engineer",
+        "research"
+      ]
+    },
+    {
+      "group": {
+        "en": "ML / Deep Learning",
+        "vi": "ML / Học sâu"
+      },
+      "items": [
+        "PyTorch",
+        "Transformers",
+        "PhoBERT, ViT, ViT5, Qwen2.5",
+        "LoRA fine-tuning",
+        "Attention analysis",
+        "Scikit-learn",
+        "LightGBM / XGBoost",
+        "YOLO",
+        "SAM",
+        "Reinforcement learning (PPO)"
+      ],
+      "tags": [
+        "ai-engineer",
+        "ml-engineer",
+        "research"
+      ]
+    },
+    {
+      "group": {
+        "en": "LLMOps & Evaluation",
+        "vi": "LLMOps & Đánh giá"
+      },
+      "items": [
+        "Golden-set evals",
+        "CI quality gates",
+        "LLM-as-judge",
+        "Statistical testing (McNemar",
+        "Wilson CI)",
+        "Langfuse",
+        "Prometheus / Grafana",
+        "MLflow",
+        "DVC",
+        "Semantic caching",
+        "Model routing"
+      ],
+      "tags": [
+        "ai-engineer",
+        "ml-engineer",
+        "research"
+      ]
+    },
+    {
+      "group": {
+        "en": "Data & Backend",
+        "vi": "Dữ liệu & Backend"
+      },
+      "items": [
+        "Python",
+        "SQL",
+        "Pandas",
+        "FastAPI",
+        "Django",
+        "Celery",
+        "PostgreSQL + pgvector",
+        "Qdrant",
+        "Redis",
+        "Supabase"
+      ],
+      "tags": [
+        "ai-engineer",
+        "data-engineer",
+        "data-analyst"
+      ]
+    },
+    {
+      "group": {
+        "en": "Delivery",
+        "vi": "Triển khai"
+      },
+      "items": [
+        "Docker",
+        "GitHub Actions",
+        "AWS ECS / S3",
+        "Pytest",
+        "React Native / Expo",
+        "Next.js"
+      ],
+      "tags": [
+        "ai-engineer",
+        "data-engineer",
+        "ml-engineer"
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "name": {
+        "en": "Vietnamese",
+        "vi": "Tiếng Việt"
+      },
+      "level": {
+        "en": "Native",
+        "vi": "Bản ngữ"
+      }
+    },
+    {
+      "name": {
+        "en": "English",
+        "vi": "Tiếng Anh"
+      },
+      "level": {
+        "en": "IELTS 6.0 — technical reading & writing",
+        "vi": "IELTS 6.0 — đọc và viết tài liệu kỹ thuật"
+      }
+    }
+  ],
+  "certificates": [
+    {
+      "name": "IELTS Academic",
+      "score": "6.0",
+      "date": "2026-08",
+      "expires": "2028-08"
+    }
+  ],
+  "activities": [
+    {
+      "role": {
+        "en": "Volleyball player, jersey #9",
+        "vi": "Vận động viên bóng chuyền, áo số 9"
+      },
+      "org": {
+        "en": "Faculty of IT team, IUH",
+        "vi": "Đội bóng chuyền khoa Công nghệ Thông tin, IUH"
+      },
+      "start": "2022-09",
+      "end": "present",
+      "note": {
+        "en": "Four straight years — every year of university",
+        "vi": "Bốn năm liền — suốt cả bốn năm đại học"
+      }
+    }
+  ],
+  "hobbies": {
+    "en": [
+      "Volleyball",
+      "Badminton",
+      "Guitar"
+    ],
+    "vi": [
+      "Bóng chuyền",
+      "Cầu lông",
+      "Guitar"
+    ]
+  },
+  "references": []
+}

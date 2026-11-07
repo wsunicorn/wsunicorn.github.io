@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import SubNav from '../components/SubNav.astro';
+import { ui } from '../i18n/ui';
+---
+<Base lang="en" path="/404" title="404">
+  <SubNav lang="en" path="/" />
+  <main class="sub wrap nf">
+    <img src="/img/avatar-volleyball.webp" alt="" width="520" height="514">
+    <div>
+      <span class="eyebrow"><i></i><span>404</span></span>
+      <h1>{ui.en.notfound_h}</h1>
+      <p>{ui.en.notfound_p}</p>
+      <p lang="vi" class="vi">{ui.vi.notfound_h} — {ui.vi.notfound_p}</p>
+      <div class="cta"><a class="btn" href="/"><span>{ui.en.home}</span><span class="k" aria-hidden="true">↗</span></a><a class="btn ghost" href="/projects/"><span>{ui.en.projects_h}</span><span class="k" aria-hidden="true">→</span></a></div>
+    </div>
+  </main>
+</Base>

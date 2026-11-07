@@ -1,0 +1,72 @@
+---
+import SubNav from './SubNav.astro';
+import ProjectVisual from './ProjectVisual.astro';
+import { useT, localePath, type Lang } from '../i18n/ui';
+import { projects, tr, period, iconFor, INK_ICONS, accentFor, type Project } from '../lib/data';
+interface Props { lang: Lang; project: Project }
+const { lang, project: p } = Astro.props;
+const t = useT(lang);
+const i = projects.findIndex(x => x.slug === p.slug);
+const next = projects[(i + 1) % projects.length];
+const [name, sub] = tr(p.title, lang).split(' — ');
+const parseNum = (v: string) => { const m = v.match(/^([+−-]?)([\d.,]+)(.*)$/); if (!m || /–/.test(v)) return null;
+  const raw = m[2].replace(/,/g, ''); const dec = (raw.split('.')[1] || '').length; return { sign: m[1], n: raw, dec, suf: m[3] }; };
+---
+<SubNav lang={lang} path={`/projects/${p.slug}/`} />
+<main class="sub wrap" style={`--acc:${accentFor(i)}`}>
+  <a class="back" href={localePath(lang, '/projects/')}>← {t('back')}</a>
+  <header class="ph-head">
+    <div>
+      <span class="eyebrow"><i></i><span>{t(`kind_${p.kind}` as any)} · {period(p.period, lang)}</span></span>
+      <h1 class:list={[{ long: name.length > 26 }]}>{name}</h1>
+      {sub && <p class="ph-sub">{sub}</p>}
+      <p class="ph-tag">{tr(p.tagline, lang)}</p>
+      <div class="cta">
+        {p.repo
+          ? <a class="btn" href={p.repo} target="_blank" rel="noopener"><span>{t('repo')}</span><span class="k" aria-hidden="true">↗</span></a>
+          : <span class="pill">{t('private_repo')}</span>}
+      </div>
+    </div>
+    <div class="ph-vis"><div class="glow"></div><ProjectVisual slug={p.slug} /></div>
+  </header>
+
+  {p.metrics.length > 0 && (
+    <section class="ph-metrics">
+      {p.metrics.map(m => { const n = parseNum(m.value); return (
+        <div class="kpi">{n ? <b data-count={n.n} data-dec={n.dec} data-suf={n.suf} data-pre={n.sign}>{m.value}</b> : <b>{m.value}</b>}<span>{tr(m.label, lang)}</span></div>
+      ); })}
+    </section>
+  )}
+
+  <section class="ph-body">
+    <dl class="ph-meta">
+      <div><dt>{t('role')}</dt><dd>{tr(p.role, lang)}</dd></div>
+      <div><dt>{t('period')}</dt><dd>{period(p.period, lang)}</dd></div>
+      <div><dt>{t('stack')}</dt><dd class="stack">{p.stack.map(s => { const ic = iconFor(s); return (
+        <span class="st">{ic && <img class={INK_ICONS.has(ic) ? 'ink' : ''} src={`/icons/${ic}.svg`} alt="" width="18" height="18" />}{s}</span>
+      ); })}</dd></div>
+    </dl>
+    <div>
+      <h2>{t('highlights')}</h2>
+      <ol class="ph-list">{p.bullets[lang].map(b => <li>{b}</li>)}</ol>
+    </div>
+  </section>
+
+  <a class="ph-next" href={localePath(lang, `/projects/${next.slug}/`)}>
+    <span class="eyebrow">{t('next')} →</span>
+    <b>{tr(next.title, lang).split(' — ')[0]}</b>
+    <span>{tr(next.tagline, lang)}</span>
+  </a>
+</main>
+<script>
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return; io.unobserve(e.target);
+    const el = e.target as HTMLElement, end = +el.dataset.count!, dec = +(el.dataset.dec || 0), suf = el.dataset.suf || '', pre = el.dataset.pre || '';
+    if (reduce) return; const s = performance.now();
+    const tick = (n: number) => { const k = Math.min(1, (n - s) / 1200), v = end * (1 - Math.pow(1 - k, 3));
+      el.textContent = pre + v.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec }) + suf; if (k < 1) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+  }), { threshold: 0.6 });
+  document.querySelectorAll('[data-count]').forEach(el => io.observe(el));
+</script>

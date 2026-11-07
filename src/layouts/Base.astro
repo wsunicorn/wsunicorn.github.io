@@ -1,0 +1,50 @@
+---
+import '../styles/global.css';
+import { ui, type Lang } from '../i18n/ui';
+interface Props { lang: Lang; title?: string; description?: string; path: string; image?: string }
+const { lang, title, description, path, image = '/og.jpg' } = Astro.props;
+const site = Astro.site!.href.replace(/\/$/, '');
+const enPath = path;
+const viPath = path === '/' ? '/vi/' : `/vi${path}`;
+const canonical = site + (lang === 'en' ? enPath : viPath);
+const pageTitle = title ? `${title} · Nguyễn Ngọc Lân` : ui[lang].meta_title;
+const desc = description ?? ui[lang].meta_desc;
+---
+<!doctype html>
+<html lang={lang} data-skin="noir">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{pageTitle}</title>
+  <meta name="description" content={desc}>
+  <link rel="canonical" href={canonical}>
+  <link rel="alternate" hreflang="en" href={site + enPath}>
+  <link rel="alternate" hreflang="vi" href={site + viPath}>
+  <link rel="alternate" hreflang="x-default" href={site + enPath}>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content={pageTitle}>
+  <meta property="og:description" content={desc}>
+  <meta property="og:url" content={canonical}>
+  <meta property="og:image" content={site + image}>
+  <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'vi_VN'}>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#0b0c0e">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Be+Vietnam+Pro:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Patrick+Hand&display=swap">
+  <script is:inline>
+    try { const s = localStorage.getItem('skin'); if (s) document.documentElement.dataset.skin = s; } catch {}
+  </script>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org', '@type': 'Person', name: 'Nguyễn Ngọc Lân', alternateName: 'Nguyen Ngoc Lan',
+    jobTitle: 'AI Engineer', url: site, image: site + '/img/avatar.webp',
+    sameAs: ['https://github.com/wsunicorn', 'https://www.linkedin.com/in/wsunicorn/'],
+    alumniOf: 'Industrial University of Ho Chi Minh City',
+  })} />
+</head>
+<body>
+  <slot />
+</body>
+</html>
