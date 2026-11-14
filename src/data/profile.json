@@ -69,7 +69,13 @@
           "Công nghệ phần mềm"
         ]
       },
-      "thesis": "vihallulens"
+      "thesis": "vihallulens",
+      "awards": [
+        {
+          "en": "Academic Encouragement Scholarship (multiple semesters)",
+          "vi": "Học bổng khuyến khích học tập (nhiều học kỳ)"
+        }
+      ]
     }
   ],
   "experience": [
@@ -183,8 +189,7 @@
         "Golden-set evals",
         "CI quality gates",
         "LLM-as-judge",
-        "Statistical testing (McNemar",
-        "Wilson CI)",
+        "Statistical testing (McNemar, Wilson CI)",
         "Langfuse",
         "Prometheus / Grafana",
         "MLflow",

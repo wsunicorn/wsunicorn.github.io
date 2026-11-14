@@ -64,15 +64,15 @@
     ],
     "bullets": {
       "en": [
-        "Reproduced Lookback Lens and extended it to a chunk-aware lookback ratio; forward hooks fit Qwen2.5-7B-Instruct (4-bit) on a single 16 GB T4.",
-        "A linear probe on 756 lookback ratios (2,271 parameters) reached 3-class macro-F1 0.745 — on par with fine-tuned PhoBERT-large (0.749) and better on intrinsic hallucinations.",
+        "Extended Lookback Lens to a chunk-aware lookback ratio; a linear probe on 756 ratios (2,271 parameters) reached 3-class macro-F1 0.745 — on par with fine-tuned PhoBERT-large (0.749) and better on intrinsic hallucinations.",
         "The strongest head points at the evidence chunk on 87.8% of ISE-DSC01 samples (14.3× chance) and beats context ablation (0.850 vs 0.733) at ~11× lower cost.",
+        "Captured attention with forward hooks so Qwen2.5-7B-Instruct (4-bit) runs on a single 16 GB T4 GPU.",
         "Reported the limits honestly across 19 experiments on 4 Vietnamese datasets; shipped a Python library, a REST service with an attention viewer, and a Docker image."
       ],
       "vi": [
-        "Tái lập Lookback Lens và mở rộng thành chunk-aware lookback ratio; forward hook giúp Qwen2.5-7B-Instruct 4 bit chạy vừa một card T4 16 GB.",
-        "Bộ phân loại tuyến tính trên 756 tỷ lệ lookback (2.271 tham số) đạt macro-F1 ba lớp 0,745 — ngang PhoBERT-large đã tinh chỉnh (0,749) và tốt hơn ở lớp ảo giác nội tại.",
+        "Mở rộng Lookback Lens thành chunk-aware lookback ratio; bộ phân loại tuyến tính trên 756 tỷ lệ (2.271 tham số) đạt macro-F1 ba lớp 0,745 — ngang PhoBERT-large đã tinh chỉnh (0,749) và tốt hơn ở lớp ảo giác nội tại.",
         "Đầu chú ý mạnh nhất chỉ đúng đoạn bằng chứng ở 87,8 % mẫu ISE-DSC01 (gấp 14,3 lần ngẫu nhiên), đúng hơn cắt bỏ ngữ cảnh (0,850 so với 0,733) mà rẻ hơn khoảng 11 lần.",
+        "Lấy trọng số chú ý bằng forward hook để Qwen2.5-7B-Instruct 4 bit chạy vừa một GPU T4 16 GB.",
         "Báo cáo trung thực giới hạn qua 19 thí nghiệm trên 4 bộ dữ liệu tiếng Việt; sản phẩm gồm thư viện Python, dịch vụ REST có giao diện quan sát chú ý và ảnh Docker."
       ]
     }
@@ -95,8 +95,8 @@
       "end": "2026-07"
     },
     "role": {
-      "en": "Solo project",
-      "vi": "Dự án cá nhân"
+      "en": "Personal project · solo",
+      "vi": "Dự án cá nhân · tự làm toàn bộ"
     },
     "repo": "https://github.com/wsunicorn/viragops",
     "tags": [
@@ -145,13 +145,13 @@
     ],
     "bullets": {
       "en": [
-        "Built the full stack as 9 versioned modules: DataOps ingest/chunk/embed/index on Qdrant, a RAG runtime with mandatory citations and grounded refusal, a PromptOps registry, and a LiteLLM gateway with fallback.",
         "Enforced eval discipline with a 300-question golden set, a 4-tier evaluation engine and a PASS/WARN/BLOCK quality gate in CI/CD; 6 experiment reports keep negative results on record.",
+        "Built the full stack as 9 versioned modules: DataOps ingest/chunk/embed/index on Qdrant, a RAG runtime with mandatory citations and grounded refusal, a PromptOps registry, and a LiteLLM gateway with fallback.",
         "Ran it like production — Langfuse tracing, Prometheus/Grafana dashboards, feedback loop with error clustering, semantic caching and cost-aware model routing."
       ],
       "vi": [
-        "Xây trọn hệ thống thành 9 module có phiên bản: DataOps nạp/chia/nhúng/đánh chỉ mục trên Qdrant, RAG runtime bắt buộc trích dẫn và từ chối khi thiếu căn cứ, PromptOps registry, gateway LiteLLM có fallback.",
         "Kỷ luật đánh giá bằng golden set 300 câu, bộ đánh giá 4 tầng và cổng chất lượng PASS/WARN/BLOCK trong CI/CD; 6 báo cáo thực nghiệm ghi cả kết quả âm.",
+        "Xây trọn hệ thống thành 9 module có phiên bản: DataOps nạp/chia/nhúng/đánh chỉ mục trên Qdrant, RAG runtime bắt buộc trích dẫn và từ chối khi thiếu căn cứ, PromptOps registry, gateway LiteLLM có fallback.",
         "Vận hành như production — tracing Langfuse, dashboard Prometheus/Grafana, vòng phản hồi gom cụm lỗi, semantic cache và định tuyến model theo chi phí."
       ]
     }
@@ -244,8 +244,8 @@
       "end": "2026-07"
     },
     "role": {
-      "en": "Solo project",
-      "vi": "Dự án cá nhân"
+      "en": "Personal project · solo",
+      "vi": "Dự án cá nhân · tự làm toàn bộ"
     },
     "repo": "https://github.com/wsunicorn/AI-Agent-Platform-with-Human-Approval",
     "tags": [
@@ -305,8 +305,8 @@
       "end": "2026-07"
     },
     "role": {
-      "en": "Solo project",
-      "vi": "Dự án cá nhân"
+      "en": "Personal project · solo",
+      "vi": "Dự án cá nhân · tự làm toàn bộ"
     },
     "repo": "https://github.com/wsunicorn/Vietnamese_English_RAG_Assistant",
     "tags": [

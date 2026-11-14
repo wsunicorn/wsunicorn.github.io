@@ -137,7 +137,7 @@
 
   /* counters when in view */
   const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; io.unobserve(e.target); const el = e.target, end = +el.dataset.count, dec = +(el.dataset.dec || 0), suf = el.dataset.suf || '';
-    if (reduce) return; const s = performance.now(); const tick = n => { const k = Math.min(1, (n - s) / 1300), v = end * (1 - Math.pow(1 - k, 3)); el.textContent = v.toFixed(dec) + suf; if (k < 1) requestAnimationFrame(tick); }; requestAnimationFrame(tick); }), { threshold: .6 });
+    if (reduce || dec) return; const s = performance.now(); const tick = n => { const k = Math.min(1, (n - s) / 1300), v = end * (1 - Math.pow(1 - k, 3)); el.textContent = v.toFixed(dec) + suf; if (k < 1) requestAnimationFrame(tick); }; requestAnimationFrame(tick); }), { threshold: .6 });
   document.querySelectorAll('[data-count]').forEach(el => io.observe(el));
 
 

@@ -19,6 +19,8 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
+/* thanh menu nổi cao ~76px → nhảy tới mục không bị che tiêu đề */
+[id]{scroll-margin-top:96px}
 html,body{overflow-x:clip}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--f-text);
   background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px}
@@ -228,14 +230,15 @@ section.s{padding-block:clamp(96px,12vw,160px)}
 
 /* training log */
 .log{display:grid;gap:0}
-.row{display:grid;grid-template-columns:140px minmax(0,1fr) minmax(0,1.2fr) auto;gap:24px;padding:24px 0;border-top:1px solid var(--line);align-items:baseline;transition:background .4s var(--ease)}
+/* cột nhãn cố định: mỗi .row là một grid riêng — để `auto` thì nhãn dài/ngắn làm lệch cột mô tả */
+.row{display:grid;grid-template-columns:140px minmax(0,1fr) minmax(0,1.2fr) 9.5rem;gap:24px;padding:24px 0;border-top:1px solid var(--line);align-items:baseline;transition:background .4s var(--ease)}
 .row:last-child{border-bottom:1px solid var(--line)}
 .row:hover{background:var(--surf)}
 .row time{font:500 13px/1 var(--f-mono);color:var(--mute)}
 .row h3{font:600 clamp(18px,2vw,24px)/1.2 var(--f-head)}
 .row p{color:var(--mute);font-size:14.5px}
-.row .tag{font:500 11px/1 var(--f-mono);padding:7px 10px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
-@media(max-width:820px){.row{grid-template-columns:1fr;gap:6px}}
+.row .tag{justify-self:end;font:500 11px/1 var(--f-mono);padding:7px 10px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+@media(max-width:820px){.row{grid-template-columns:1fr;gap:6px}.row .tag{justify-self:start}}
 
 /* off court collage */
 .court{position:relative;min-height:620px;border-radius:32px;overflow:hidden;background:#eeebe3;color:#121212;
