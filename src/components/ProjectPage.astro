@@ -9,6 +9,7 @@ const t = useT(lang);
 const i = projects.findIndex(x => x.slug === p.slug);
 const next = projects[(i + 1) % projects.length];
 const [name, sub] = tr(p.title, lang).split(' — ');
+const c = p.case;
 const parseNum = (v: string) => { const m = v.match(/^([+−-]?)([\d.,]+)(.*)$/); if (!m || /–/.test(v)) return null;
   const raw = m[2].replace(/,/g, ''); const dec = (raw.split('.')[1] || '').length; return { sign: m[1], n: raw, dec, suf: m[3] }; };
 ---
@@ -33,8 +34,38 @@ const parseNum = (v: string) => { const m = v.match(/^([+−-]?)([\d.,]+)(.*)$/)
   {p.metrics.length > 0 && (
     <section class="ph-metrics">
       {p.metrics.map(m => { const n = parseNum(m.value); return (
-        <div class="kpi">{n ? <b data-count={n.n} data-dec={n.dec} data-suf={n.suf} data-pre={n.sign}>{m.value}</b> : <b>{m.value}</b>}<span>{tr(m.label, lang)}</span></div>
+        <div class="kpi">{n ? <b data-count={n.n} data-dec={n.dec} data-suf={n.suf} data-pre={n.sign}>{m.value}</b> : <b>{m.value}</b>}<span>{tr(m.label, lang)}</span>
+          {m.source && <a class="src" href={m.source} target="_blank" rel="noopener">{t('source')} ↗</a>}</div>
       ); })}
+    </section>
+  )}
+
+  {c && (c.problem || c.approach || c.evaluation) && (
+    <section class="ph-case" aria-labelledby="case-h">
+      <h2 id="case-h">{t('case_h')}</h2>
+      <div class="ph-case-grid">
+        {c.problem && <div><h3>{t('c_problem')}</h3><p>{tr(c.problem, lang)}</p></div>}
+        {c.approach && <div><h3>{t('c_approach')}</h3><p>{tr(c.approach, lang)}</p></div>}
+        {c.evaluation && <div><h3>{t('c_eval')}</h3><p>{tr(c.evaluation, lang)}</p></div>}
+      </div>
+    </section>
+  )}
+
+  {p.flow && p.flow.length > 0 && (
+    <section class="ph-flow" aria-labelledby="flow-h">
+      <h2 id="flow-h">{t('flow_h')}</h2>
+      <ol class="flow">{p.flow.map(s => <li><b>{tr(s.label, lang)}</b><span>{tr(s.note, lang)}</span></li>)}</ol>
+    </section>
+  )}
+
+  {p.gallery && p.gallery.length > 0 && (
+    <section class="ph-gallery" aria-labelledby="gal-h">
+      <h2 id="gal-h">{t('gallery_h')}</h2>
+      <div class:list={['shots', { one: p.gallery.length === 1 }]}>
+        {p.gallery.map(g => (
+          <figure><img src={g.src} alt={tr(g.alt, lang)} width={g.w} height={g.h} loading="lazy" decoding="async" /><figcaption>{tr(g.caption, lang)}</figcaption></figure>
+        ))}
+      </div>
     </section>
   )}
 
@@ -51,6 +82,13 @@ const parseNum = (v: string) => { const m = v.match(/^([+−-]?)([\d.,]+)(.*)$/)
       <ol class="ph-list">{p.bullets[lang].map(b => <li>{b}</li>)}</ol>
     </div>
   </section>
+
+  {c && (c.limits || c.next) && (
+    <section class="ph-limits">
+      {c.limits && <div><h2>{t('limits_h')}</h2><ul>{c.limits[lang].map(l => <li>{l}</li>)}</ul></div>}
+      {c.next && <div class="again"><h2>{t('next_time')}</h2><p>{tr(c.next, lang)}</p></div>}
+    </section>
+  )}
 
   <a class="ph-next" href={localePath(lang, `/projects/${next.slug}/`)}>
     <span class="eyebrow">{t('next')} →</span>

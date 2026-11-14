@@ -7,7 +7,11 @@ export interface Project {
   slug: string; order: number; kind: string; featured?: boolean; confidential?: boolean;
   title: Bi; tagline: Bi; role: Bi; period: { start: string; end: string };
   repo: string | null; tags: string[]; stack: string[];
-  metrics: { value: string; label: Bi }[]; bullets: { en: string[]; vi: string[] };
+  metrics: { value: string; label: Bi; source?: string }[]; bullets: { en: string[]; vi: string[] };
+  // case study (không bắt buộc): vấn đề → cách làm → đánh giá → giới hạn → nếu làm lại
+  case?: { problem?: Bi; approach?: Bi; evaluation?: Bi; limits?: { en: string[]; vi: string[] }; next?: Bi };
+  flow?: { label: Bi; note: Bi }[];                                   // sơ đồ luồng xử lý
+  gallery?: { src: string; w: number; h: number; alt: Bi; caption: Bi }[];   // ảnh chụp màn hình thật
 }
 export const projects = projectsJson as unknown as Project[];
 export const profile = profileJson as any;

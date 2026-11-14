@@ -45,37 +45,151 @@
         "label": {
           "en": "3-class macro-F1 with 2,271 params",
           "vi": "macro-F1 ba lớp với 2.271 tham số"
-        }
+        },
+        "source": "https://github.com/wsunicorn/vihallulens/blob/main/docs/EXPERIMENTS.md"
       },
       {
         "value": "87.8%",
         "label": {
           "en": "evidence chunk located by top head",
           "vi": "mẫu có đầu chú ý chỉ đúng đoạn bằng chứng"
-        }
+        },
+        "source": "https://github.com/wsunicorn/vihallulens/blob/main/docs/EXPERIMENTS.md"
       },
       {
         "value": "19",
         "label": {
           "en": "controlled experiments",
           "vi": "thí nghiệm có kiểm soát"
-        }
+        },
+        "source": "https://github.com/wsunicorn/vihallulens/blob/main/docs/EXPERIMENTS.md"
       }
     ],
     "bullets": {
       "en": [
-        "Extended Lookback Lens to a chunk-aware lookback ratio; a linear probe on 756 ratios (2,271 parameters) reached 3-class macro-F1 0.745 — on par with fine-tuned PhoBERT-large (0.749) and better on intrinsic hallucinations.",
+        "Reproduced Lookback Lens on Qwen2.5-7B: a linear probe on 756 lookback ratios (2,271 parameters) reached 3-class macro-F1 0.745 — on par with fine-tuned PhoBERT-large (0.749, 369M parameters) and better on intrinsic hallucinations.",
         "The strongest head points at the evidence chunk on 87.8% of ISE-DSC01 samples (14.3× chance) and beats context ablation (0.850 vs 0.733) at ~11× lower cost.",
+        "Proposed a chunk-aware lookback ratio: the best-calibrated detector in the study (ECE 0.044 vs 0.109), while its F1 gain (0.757 vs 0.745) was not statistically significant — reported as such.",
         "Captured attention with forward hooks so Qwen2.5-7B-Instruct (4-bit) runs on a single 16 GB T4 GPU.",
         "Reported the limits honestly across 19 experiments on 4 Vietnamese datasets; shipped a Python library, a REST service with an attention viewer, and a Docker image."
       ],
       "vi": [
-        "Mở rộng Lookback Lens thành chunk-aware lookback ratio; bộ phân loại tuyến tính trên 756 tỷ lệ (2.271 tham số) đạt macro-F1 ba lớp 0,745 — ngang PhoBERT-large đã tinh chỉnh (0,749) và tốt hơn ở lớp ảo giác nội tại.",
+        "Tái lập Lookback Lens trên Qwen2.5-7B: bộ phân loại tuyến tính trên 756 tỷ lệ lookback (2.271 tham số) đạt macro-F1 ba lớp 0,745 — ngang PhoBERT-large tinh chỉnh (0,749, 369 triệu tham số) và tốt hơn ở lớp ảo giác nội tại.",
         "Đầu chú ý mạnh nhất chỉ đúng đoạn bằng chứng ở 87,8 % mẫu ISE-DSC01 (gấp 14,3 lần ngẫu nhiên), đúng hơn cắt bỏ ngữ cảnh (0,850 so với 0,733) mà rẻ hơn khoảng 11 lần.",
+        "Đề xuất chunk-aware lookback ratio: bộ phát hiện hiệu chỉnh xác suất tốt nhất trong nghiên cứu (ECE 0,044 so với 0,109), còn mức tăng F1 (0,757 so với 0,745) không có ý nghĩa thống kê — ghi đúng như vậy.",
         "Lấy trọng số chú ý bằng forward hook để Qwen2.5-7B-Instruct 4 bit chạy vừa một GPU T4 16 GB.",
         "Báo cáo trung thực giới hạn qua 19 thí nghiệm trên 4 bộ dữ liệu tiếng Việt; sản phẩm gồm thư viện Python, dịch vụ REST có giao diện quan sát chú ý và ảnh Docker."
       ]
-    }
+    },
+    "case": {
+      "problem": {
+        "en": "A RAG answer can read well and still claim something the retrieved context does not support. Checking every answer with a paid LLM judge is slow and costly, and Vietnamese had no open tool for it.",
+        "vi": "Câu trả lời của hệ RAG có thể nghe hợp lý mà vẫn nói điều ngữ cảnh truy xuất không hề có. Chấm từng câu bằng một LLM giám khảo trả phí thì chậm và tốn, còn tiếng Việt chưa có công cụ mở nào cho việc này."
+      },
+      "approach": {
+        "en": "An open model (Qwen2.5-7B, 4-bit) re-reads the answer together with its context, and I record how much attention each head puts on the context versus on the answer itself: the lookback ratio. A linear classifier on the 756 ratios labels the answer as grounded, intrinsic or extrinsic hallucination. My extension splits the ratio per context chunk, so the detector can also point at the evidence.",
+        "vi": "Một mô hình mở (Qwen2.5-7B, 4 bit) đọc lại câu trả lời cùng ngữ cảnh; tôi ghi lại mỗi đầu chú ý dồn bao nhiêu trọng số vào ngữ cảnh so với vào chính câu trả lời — tỷ lệ lookback. Bộ phân loại tuyến tính trên 756 tỷ lệ gán nhãn: không ảo giác, ảo giác nội tại hay ngoại lai. Phần mở rộng của tôi tách tỷ lệ theo từng đoạn ngữ cảnh để bộ phát hiện chỉ được cả đoạn bằng chứng."
+      },
+      "evaluation": {
+        "en": "Four Vietnamese datasets normalised to one schema and re-split by context to stop leakage. Every score carries a 95% confidence interval and is compared with a trivial baseline, fine-tuned PhoBERT-large and XLM-R-large, and a free LLM judge — 19 experiments in all.",
+        "vi": "Bốn bộ dữ liệu tiếng Việt đưa về một lược đồ, chia lại theo ngữ cảnh để chặn rò rỉ. Mọi điểm số kèm khoảng tin cậy 95 % và so với baseline tầm thường, PhoBERT-large và XLM-R-large tinh chỉnh, và một LLM giám khảo miễn phí — tổng cộng 19 thí nghiệm."
+      },
+      "limits": {
+        "en": [
+          "Fine-tuned XLM-R-large still scores higher (macro-F1 0.776), with a 560M-parameter encoder on GPU.",
+          "The chunk-aware gain over the pooled ratio (0.757 vs 0.745) sits inside the confidence interval.",
+          "The three-class detector did not transfer to the other datasets; accuracy conclusions rest mainly on one dataset of GPT-4o answers.",
+          "Attention is a signal, not a causal explanation of what the model used."
+        ],
+        "vi": [
+          "XLM-R-large tinh chỉnh vẫn cao hơn (macro-F1 0,776), đổi lại là bộ mã hóa 560 triệu tham số chạy trên GPU.",
+          "Mức tăng của chunk-aware so với tỷ lệ gộp (0,757 so với 0,745) nằm trong khoảng tin cậy.",
+          "Bộ phát hiện ba lớp không chuyển được sang các bộ dữ liệu khác; kết luận về độ chính xác chủ yếu dựa trên một bộ dữ liệu phản hồi của GPT-4o.",
+          "Chú ý là tín hiệu, không phải lời giải thích nhân quả về điều mô hình đã dùng."
+        ]
+      },
+      "next": {
+        "en": "Score each part of an answer against span-level labels. The detector's most confident misses are a single unsupported claim inside an otherwise faithful answer.",
+        "vi": "Chấm từng phần của câu trả lời với nhãn ở mức đoạn. Lỗi tự tin nhất của bộ phát hiện là một mệnh đề không có căn cứ nằm giữa phần trả lời đúng."
+      }
+    },
+    "flow": [
+      {
+        "label": {
+          "en": "Question + context",
+          "vi": "Câu hỏi + ngữ cảnh"
+        },
+        "note": {
+          "en": "retrieved chunks",
+          "vi": "các đoạn truy xuất"
+        }
+      },
+      {
+        "label": {
+          "en": "Answer",
+          "vi": "Câu trả lời"
+        },
+        "note": {
+          "en": "from any generator",
+          "vi": "từ bất kỳ mô hình sinh nào"
+        }
+      },
+      {
+        "label": {
+          "en": "Reader model",
+          "vi": "Mô hình đọc"
+        },
+        "note": {
+          "en": "Qwen2.5-7B 4-bit · hooks",
+          "vi": "Qwen2.5-7B 4 bit · hook"
+        }
+      },
+      {
+        "label": {
+          "en": "Lookback ratios",
+          "vi": "Tỷ lệ lookback"
+        },
+        "note": {
+          "en": "756 heads · per chunk",
+          "vi": "756 đầu · theo đoạn"
+        }
+      },
+      {
+        "label": {
+          "en": "Linear probe",
+          "vi": "Bộ phân loại"
+        },
+        "note": {
+          "en": "2,271 parameters",
+          "vi": "2.271 tham số"
+        }
+      },
+      {
+        "label": {
+          "en": "Label + evidence",
+          "vi": "Nhãn + bằng chứng"
+        },
+        "note": {
+          "en": "attention viewer",
+          "vi": "giao diện quan sát"
+        }
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/img/projects/vihallulens/viewer.webp",
+        "w": 1560,
+        "h": 1484,
+        "alt": {
+          "en": "ViHalluLens attention viewer",
+          "vi": "Giao diện quan sát chú ý của ViHalluLens"
+        },
+        "caption": {
+          "en": "The attention viewer: the verdict with class probabilities, and every context sentence shaded by the attention it received.",
+          "vi": "Giao diện quan sát: kết luận kèm xác suất từng lớp, mỗi câu ngữ cảnh được tô theo trọng số chú ý nhận được."
+        }
+      }
+    ]
   },
   {
     "slug": "viragops",
@@ -122,39 +236,172 @@
     ],
     "metrics": [
       {
+        "value": "0.932",
+        "label": {
+          "en": "Recall@5 · hybrid retrieval",
+          "vi": "Recall@5 · truy hồi lai"
+        },
+        "source": "https://github.com/wsunicorn/viragops/blob/main/docs/system/experiments/results_retrieval_reranking.md"
+      },
+      {
+        "value": "0.838",
+        "label": {
+          "en": "citation accuracy (target 0.85)",
+          "vi": "độ chính xác trích dẫn (đích 0,85)"
+        },
+        "source": "https://github.com/wsunicorn/viragops/blob/main/docs/system/experiments/results_evaluation_smoke.md"
+      },
+      {
+        "value": "9/9",
+        "label": {
+          "en": "bad changes blocked in 16 simulated scenarios, 0 false blocks",
+          "vi": "thay đổi xấu bị chặn trong 16 kịch bản mô phỏng, không chặn nhầm"
+        },
+        "source": "https://github.com/wsunicorn/viragops/blob/main/docs/system/experiments/results_quality_gate_effectiveness.md"
+      },
+      {
         "value": "300",
         "label": {
           "en": "golden-set questions",
           "vi": "câu hỏi golden set"
-        }
-      },
-      {
-        "value": "9",
-        "label": {
-          "en": "versioned modules",
-          "vi": "module có phiên bản"
-        }
-      },
-      {
-        "value": "6",
-        "label": {
-          "en": "experiment reports",
-          "vi": "báo cáo thực nghiệm"
-        }
+        },
+        "source": "https://github.com/wsunicorn/viragops/blob/main/docs/system/experiments/golden_set_design.md"
       }
     ],
     "bullets": {
       "en": [
-        "Enforced eval discipline with a 300-question golden set, a 4-tier evaluation engine and a PASS/WARN/BLOCK quality gate in CI/CD; 6 experiment reports keep negative results on record.",
+        "Built a 300-question golden set and a PASS/WARN/BLOCK quality gate in CI/CD that blocked all 9 bad changes in 16 simulated scenarios with no false blocks; hybrid retrieval reached Recall@5 0.932.",
         "Built the full stack as 9 versioned modules: DataOps ingest/chunk/embed/index on Qdrant, a RAG runtime with mandatory citations and grounded refusal, a PromptOps registry, and a LiteLLM gateway with fallback.",
         "Ran it like production — Langfuse tracing, Prometheus/Grafana dashboards, feedback loop with error clustering, semantic caching and cost-aware model routing."
       ],
       "vi": [
-        "Kỷ luật đánh giá bằng golden set 300 câu, bộ đánh giá 4 tầng và cổng chất lượng PASS/WARN/BLOCK trong CI/CD; 6 báo cáo thực nghiệm ghi cả kết quả âm.",
+        "Xây golden set 300 câu và cổng chất lượng PASS/WARN/BLOCK trong CI/CD chặn đủ 9/9 thay đổi xấu trong 16 kịch bản mô phỏng, không chặn nhầm; truy hồi lai đạt Recall@5 0,932.",
         "Xây trọn hệ thống thành 9 module có phiên bản: DataOps nạp/chia/nhúng/đánh chỉ mục trên Qdrant, RAG runtime bắt buộc trích dẫn và từ chối khi thiếu căn cứ, PromptOps registry, gateway LiteLLM có fallback.",
         "Vận hành như production — tracing Langfuse, dashboard Prometheus/Grafana, vòng phản hồi gom cụm lỗi, semantic cache và định tuyến model theo chi phí."
       ]
-    }
+    },
+    "case": {
+      "problem": {
+        "en": "Students ask about academic regulations in Vietnamese and need answers they can trust. A chatbot is the easy part; keeping it correct while prompts, models and data keep changing is the hard part.",
+        "vi": "Sinh viên hỏi về quy chế đào tạo bằng tiếng Việt và cần câu trả lời tin được. Làm chatbot thì dễ; giữ nó đúng khi prompt, model và dữ liệu liên tục thay đổi mới khó."
+      },
+      "approach": {
+        "en": "Ten IUH regulation documents are split by article and clause into 222 chunks and searched with hybrid dense + BM25 retrieval on Qdrant. The answer must cite real chunks: invented citations are removed, and an answer left with no citation becomes a refusal. Every model call goes through a LiteLLM gateway with fallback, and prompts live in a versioned registry.",
+        "vi": "Mười văn bản quy chế IUH được cắt theo Điều/Khoản thành 222 đoạn, tìm bằng truy hồi lai dense + BM25 trên Qdrant. Câu trả lời phải dẫn về đoạn có thật: trích dẫn bịa bị loại, câu trả lời mất hết trích dẫn thì chuyển thành từ chối. Mọi lời gọi model đi qua gateway LiteLLM có fallback; prompt nằm trong registry có phiên bản."
+      },
+      "evaluation": {
+        "en": "A 300-question golden set in six groups (factoid, multi-hop, ambiguous, out-of-scope, adversarial and more), a four-tier evaluation engine, and a PASS/WARN/BLOCK gate in CI that stops any change that breaks a threshold. Negative results are kept in six experiment reports.",
+        "vi": "Golden set 300 câu chia sáu nhóm (factoid, multi-hop, mơ hồ, ngoài phạm vi, tấn công…), bộ đánh giá bốn tầng, và cổng PASS/WARN/BLOCK trong CI chặn mọi thay đổi vượt ngưỡng. Kết quả âm được giữ trong sáu báo cáo thực nghiệm."
+      },
+      "limits": {
+        "en": [
+          "Citation accuracy is 0.838, short of the 0.85 target, and much lower on multi-hop (0.678) and ambiguous questions (0.546). Two fixes I tried were rejected by the numbers.",
+          "Several experiments ran on 10–16 questions to stay inside free-tier quota: enough to check the mechanism, not to size the effect.",
+          "Golden-set labels and error reviews were not checked by a domain expert.",
+          "No automatic rollback yet: a BLOCK stops the release and prints a report."
+        ],
+        "vi": [
+          "Độ chính xác trích dẫn 0,838, chưa đạt đích 0,85, và thấp hơn nhiều ở câu multi-hop (0,678) và câu mơ hồ (0,546). Hai cách sửa đã thử đều bị số liệu bác bỏ.",
+          "Một số thực nghiệm chỉ chạy 10–16 câu để giữ trong hạn mức miễn phí: đủ kiểm tra cơ chế, chưa đủ đo độ lớn hiệu ứng.",
+          "Nhãn golden set và phần rà lỗi chưa được chuyên gia nghiệp vụ thẩm định.",
+          "Chưa có rollback tự động: BLOCK thì dừng phát hành và in báo cáo."
+        ]
+      },
+      "next": {
+        "en": "Enforce a minimum number of citations inside the citation layer itself instead of asking the prompt for it — the one fix for multi-hop answers I have not tested yet.",
+        "vi": "Bắt buộc số trích dẫn tối thiểu ngay trong tầng xử lý trích dẫn thay vì nhờ prompt — cách sửa câu multi-hop duy nhất tôi chưa thử."
+      }
+    },
+    "flow": [
+      {
+        "label": {
+          "en": "10 documents",
+          "vi": "10 văn bản"
+        },
+        "note": {
+          "en": "versioned ingest",
+          "vi": "nạp có phiên bản"
+        }
+      },
+      {
+        "label": {
+          "en": "222 chunks",
+          "vi": "222 đoạn"
+        },
+        "note": {
+          "en": "by article and clause",
+          "vi": "theo Điều/Khoản"
+        }
+      },
+      {
+        "label": {
+          "en": "Hybrid retrieval",
+          "vi": "Truy hồi lai"
+        },
+        "note": {
+          "en": "dense + BM25 · Qdrant",
+          "vi": "dense + BM25 · Qdrant"
+        }
+      },
+      {
+        "label": {
+          "en": "Model gateway",
+          "vi": "Gateway model"
+        },
+        "note": {
+          "en": "LiteLLM · fallback",
+          "vi": "LiteLLM · fallback"
+        }
+      },
+      {
+        "label": {
+          "en": "Cited answer",
+          "vi": "Trả lời có nguồn"
+        },
+        "note": {
+          "en": "or a grounded refusal",
+          "vi": "hoặc từ chối có căn cứ"
+        }
+      },
+      {
+        "label": {
+          "en": "Quality gate",
+          "vi": "Cổng chất lượng"
+        },
+        "note": {
+          "en": "PASS / WARN / BLOCK in CI",
+          "vi": "PASS / WARN / BLOCK trong CI"
+        }
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/img/projects/viragops/answer.webp",
+        "w": 1600,
+        "h": 900,
+        "alt": {
+          "en": "viRAGops answering a question with a citation",
+          "vi": "viRAGops trả lời một câu hỏi kèm trích dẫn"
+        },
+        "caption": {
+          "en": "A live answer: the regulation clause it cites, model, tokens, latency and cost per request.",
+          "vi": "Một câu trả lời thật: điều khoản được trích, model, số token, độ trễ và chi phí mỗi yêu cầu."
+        }
+      },
+      {
+        "src": "/img/projects/viragops/dashboard.webp",
+        "w": 1600,
+        "h": 900,
+        "alt": {
+          "en": "viRAGops experiment dashboard",
+          "vi": "Bảng số liệu thực nghiệm viRAGops"
+        },
+        "caption": {
+          "en": "The experiment dashboard reads its numbers straight from the reports in the repo: eight retrieval configurations compared on Recall@5.",
+          "vi": "Bảng thực nghiệm đọc số trực tiếp từ báo cáo trong repo: so sánh tám cấu hình truy hồi theo Recall@5."
+        }
+      }
+    ]
   },
   {
     "slug": "study-app-mobile",
@@ -224,7 +471,87 @@
         "Worker nạp tài liệu (FastAPI + PyMuPDF) trích text kèm toạ độ trang và OCR ảnh chụp nhiều trang; tìm kiếm trên Supabase pgvector qua Edge Function làm proxy LLM định tuyến nhiều model — không để khóa API trong app.",
         "Flashcard offline lặp lại ngắt quãng FSRS trên SQLite, sinh quiz và chấm tự luận theo rubric; song ngữ Việt–Anh từ bản đầu."
       ]
-    }
+    },
+    "case": {
+      "problem": {
+        "en": "Students study from their own slides and notes, but general chatbots answer from somewhere else and rarely say where.",
+        "vi": "Sinh viên học từ slide và ghi chép của chính mình, nhưng chatbot phổ thông trả lời từ nguồn khác và hiếm khi nói nguồn ở đâu."
+      },
+      "approach": {
+        "en": "Learners upload PDFs or photos. A FastAPI worker extracts text with page coordinates and runs OCR on photos. Retrieval runs on Supabase pgvector behind an Edge Function that proxies and routes LLM calls, so no API key ships in the app. Before an answer is shown, every sentence is re-checked against the span it cites.",
+        "vi": "Người học tải lên PDF hoặc ảnh chụp. Worker FastAPI trích text kèm tọa độ trang và OCR ảnh. Tìm kiếm chạy trên Supabase pgvector, đứng sau một Edge Function làm proxy và định tuyến model, nên app không chứa khóa API nào. Trước khi hiện câu trả lời, từng câu được đối chiếu lại với đoạn nó trích."
+      },
+      "limits": {
+        "en": [
+          "The repository is private and the product name is withheld while it is being tested with users; usage and revenue results are not public."
+        ],
+        "vi": [
+          "Repo riêng tư và chưa công bố tên sản phẩm trong lúc thử với người dùng; số liệu sử dụng và doanh thu chưa công khai."
+        ]
+      }
+    },
+    "flow": [
+      {
+        "label": {
+          "en": "Upload",
+          "vi": "Tải lên"
+        },
+        "note": {
+          "en": "PDF or photos",
+          "vi": "PDF hoặc ảnh chụp"
+        }
+      },
+      {
+        "label": {
+          "en": "Ingest worker",
+          "vi": "Worker nạp"
+        },
+        "note": {
+          "en": "text + page coordinates · OCR",
+          "vi": "text + tọa độ trang · OCR"
+        }
+      },
+      {
+        "label": {
+          "en": "Vector search",
+          "vi": "Tìm kiếm vector"
+        },
+        "note": {
+          "en": "Supabase pgvector · RLS",
+          "vi": "Supabase pgvector · RLS"
+        }
+      },
+      {
+        "label": {
+          "en": "LLM proxy",
+          "vi": "Proxy LLM"
+        },
+        "note": {
+          "en": "Edge Function · routing",
+          "vi": "Edge Function · định tuyến"
+        }
+      },
+      {
+        "label": {
+          "en": "Verified answer",
+          "vi": "Trả lời đã kiểm"
+        },
+        "note": {
+          "en": "each sentence vs its span",
+          "vi": "từng câu so với đoạn trích"
+        }
+      },
+      {
+        "label": {
+          "en": "Study tools",
+          "vi": "Công cụ học"
+        },
+        "note": {
+          "en": "FSRS cards · quiz · grading",
+          "vi": "thẻ FSRS · quiz · chấm bài"
+        }
+      }
+    ]
   },
   {
     "slug": "agent-platform-hitl",
@@ -271,7 +598,8 @@
         "label": {
           "en": "guardrail policy: safe / approval / blocked",
           "vi": "chính sách bảo vệ: an toàn / cần duyệt / chặn"
-        }
+        },
+        "source": "https://github.com/wsunicorn/AI-Agent-Platform-with-Human-Approval/blob/main/docs/GUARDRAILS_AND_APPROVALS.md"
       }
     ],
     "bullets": {
@@ -285,7 +613,101 @@
         "Agent FastAPI + LangGraph với RAG lai trên pgvector và bảng duyệt thời gian thực.",
         "Ổn định nhờ định tuyến Gemini trước / Ollama dự phòng cùng bộ test unit, integration và E2E."
       ]
-    }
+    },
+    "case": {
+      "problem": {
+        "en": "Support teams want agents that act, not just draft. An agent that can refund, email or delete on its own, though, is a financial and reputational risk.",
+        "vi": "Đội hỗ trợ khách hàng muốn agent làm việc thật chứ không chỉ soạn nháp. Nhưng agent tự hoàn tiền, gửi email hay xóa dữ liệu là rủi ro về tiền và uy tín."
+      },
+      "approach": {
+        "en": "A LangGraph workflow normalises the ticket, classifies intent, retrieves policy with hybrid search on pgvector (RRF + reranking) and plans tool calls. A policy engine sorts each call into safe (runs now), approval-required (paused for a reviewer, who can edit the payload) or blocked. Redis locks stop the same action from running twice; every decision goes to an audit log and to the React dashboard over WebSockets.",
+        "vi": "Workflow LangGraph chuẩn hóa ticket, phân loại ý định, tìm chính sách bằng tìm kiếm lai trên pgvector (RRF + rerank) rồi lập kế hoạch gọi công cụ. Bộ chính sách xếp mỗi lời gọi vào: an toàn (chạy ngay), cần duyệt (dừng chờ người duyệt, có thể sửa payload) hoặc chặn. Khóa Redis chống chạy lặp; mọi quyết định ghi vào nhật ký kiểm toán và đẩy lên dashboard React qua WebSocket."
+      },
+      "evaluation": {
+        "en": "Unit, integration and Playwright end-to-end tests cover the approval path: propose, edit, approve, execute, audit. Gemini runs first, with a local Ollama fallback when the free quota runs out.",
+        "vi": "Bộ test unit, integration và end-to-end Playwright phủ luồng duyệt: đề xuất, sửa, duyệt, thực thi, ghi kiểm toán. Gemini chạy trước, hết hạn mức miễn phí thì chuyển sang Ollama chạy cục bộ."
+      },
+      "limits": {
+        "en": [
+          "No authentication or reviewer roles yet.",
+          "Tools are mocks (refund, email, CRM), not real integrations.",
+          "Some Settings screens do not change runtime behaviour yet, and a few realtime channels are not wired.",
+          "No measured success rate on real tickets."
+        ],
+        "vi": [
+          "Chưa có xác thực và phân quyền người duyệt.",
+          "Công cụ là bản giả lập (hoàn tiền, email, CRM), chưa nối hệ thống thật.",
+          "Vài màn Settings chưa tác động tới hành vi lúc chạy, một số kênh realtime chưa nối.",
+          "Chưa đo tỷ lệ đúng trên ticket thật."
+        ]
+      },
+      "next": {
+        "en": "Add authentication and reviewer roles, then replay a labelled set of real tickets to measure how often the agent proposes the right action.",
+        "vi": "Thêm xác thực và vai trò người duyệt, rồi chạy lại một tập ticket thật có nhãn để đo agent đề xuất đúng hành động bao nhiêu lần."
+      }
+    },
+    "flow": [
+      {
+        "label": {
+          "en": "Ticket",
+          "vi": "Ticket"
+        },
+        "note": {
+          "en": "inbox",
+          "vi": "hộp thư"
+        }
+      },
+      {
+        "label": {
+          "en": "LangGraph agent",
+          "vi": "Agent LangGraph"
+        },
+        "note": {
+          "en": "triage · intent · plan",
+          "vi": "phân loại · ý định · kế hoạch"
+        }
+      },
+      {
+        "label": {
+          "en": "Hybrid RAG",
+          "vi": "RAG lai"
+        },
+        "note": {
+          "en": "pgvector · RRF + rerank",
+          "vi": "pgvector · RRF + rerank"
+        }
+      },
+      {
+        "label": {
+          "en": "Policy engine",
+          "vi": "Bộ chính sách"
+        },
+        "note": {
+          "en": "safe / approval / blocked",
+          "vi": "an toàn / cần duyệt / chặn"
+        }
+      },
+      {
+        "label": {
+          "en": "Human approval",
+          "vi": "Người duyệt"
+        },
+        "note": {
+          "en": "edit payload · approve",
+          "vi": "sửa payload · duyệt"
+        }
+      },
+      {
+        "label": {
+          "en": "Execute + audit",
+          "vi": "Thực thi + kiểm toán"
+        },
+        "note": {
+          "en": "Redis lock · WebSocket",
+          "vi": "khóa Redis · WebSocket"
+        }
+      }
+    ]
   },
   {
     "slug": "rag-assistant-bilingual",
