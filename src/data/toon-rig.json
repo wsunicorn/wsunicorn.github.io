@@ -22,7 +22,14 @@
         "w": 21.0,
         "h": 14.0
       }
-    ]
+    ],
+    "blink": {
+      "src": "/img/toon/rig/r-research-blink.webp",
+      "x": 26.551,
+      "y": 25.4,
+      "w": 40.981,
+      "h": 9.769
+    }
   },
   "build": {
     "base": "/img/toon/rig/b-build-base.webp",
@@ -45,7 +52,14 @@
         "w": 36.0,
         "h": 13.0
       }
-    ]
+    ],
+    "blink": {
+      "src": "/img/toon/rig/b-build-blink.webp",
+      "x": 19.913,
+      "y": 20.134,
+      "w": 41.991,
+      "h": 6.52
+    }
   },
   "data": {
     "base": "/img/toon/rig/d-data-base.webp",
@@ -98,7 +112,14 @@
         "h": 18.0,
         "rot": 6
       }
-    ]
+    ],
+    "blink": {
+      "src": "/img/toon/rig/d-data-blink.webp",
+      "x": 17.889,
+      "y": 19.61,
+      "w": 36.494,
+      "h": 7.9
+    }
   },
   "play": {
     "base": "/img/toon/rig/p-play-base.webp",
@@ -124,6 +145,13 @@
         "cy": 0.893
       }
     ],
-    "fx": []
+    "fx": [],
+    "blink": {
+      "src": "/img/toon/rig/p-play-blink.webp",
+      "x": 42.519,
+      "y": 21.81,
+      "w": 27.987,
+      "h": 11.475
+    }
   }
 }

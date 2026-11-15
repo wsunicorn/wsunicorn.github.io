@@ -308,11 +308,6 @@ section.s{padding-block:clamp(96px,12vw,160px)}
 .foot{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;padding-block:28px 40px;border-top:1px solid var(--line);font:500 12px/1.4 var(--f-mono);color:var(--mute)}
 .foot img{height:18px;vertical-align:middle;filter:invert(1) brightness(1.6)}
 :root[data-skin="paper"] .foot img{filter:none}
-.logos{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
-.logos span{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:var(--surf2);border:1px solid var(--line);transition:transform .4s var(--spring)}
-.logos span:hover{transform:translateY(-3px) rotate(-4deg)}
-.logos img{width:24px;height:24px}
-.logos img.ink{filter:var(--ink-filter,invert(1))}
 :root[data-skin="paper"] .logos img.ink{--ink-filter:none}
 
 
