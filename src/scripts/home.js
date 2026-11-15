@@ -120,12 +120,6 @@
   };
   if (document.readyState === 'complete') setTimeout(onLoaded, 0); else addEventListener('load', onLoaded, { once: true });
 
-  /* character sheet: đội mũ / bỏ mũ */
-  const csBtns = [...document.querySelectorAll('.cs-tabs button')], csImgs = [...document.querySelectorAll('.cs-stage img')];
-  csBtns.forEach((b, k) => b.addEventListener('click', () => {
-    csBtns.forEach((x, j) => x.setAttribute('aria-pressed', String(j === k)));
-    csImgs.forEach((im, j) => im.classList.toggle('on', j === k));
-  }));
 
   /* marquee */
   const words = ['RAG', 'AI Agents', 'LLMOps', 'Attention', 'PyTorch', 'Evaluation', 'Vietnamese NLP', 'Computer Vision', 'MLOps', 'Volleyball #9'];

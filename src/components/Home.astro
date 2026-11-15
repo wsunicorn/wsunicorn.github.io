@@ -136,46 +136,6 @@ const p = (path: string) => localePath(lang, path);
     </div>
   </section>
 
-  <section class="s cs-sec" id="character" style="padding-top:0">
-    <div class="wrap">
-      <div class="s-head"><div><h2>{t('cs_h')}</h2></div><p>{t('cs_p')}</p></div>
-      <div class="cs">
-        <div class="cs-card">
-          <div class="cs-id"><span class="cs-no">09</span><div><b class="cs-name">Lân</b><span class="cs-handle">wsunicorn · Kỳ Lân</span></div></div>
-          <dl class="cs-attr">
-            <div><dt>{t('cs_arch')}</dt><dd>{t('cs_arch_v')}</dd></div>
-            <div><dt>{t('cs_traits')}</dt><dd>{t('cs_traits_v')}</dd></div>
-            <div><dt>{t('cs_item')}</dt><dd>{t('cs_item_v')}</dd></div>
-            <div><dt>{t('cs_side')}</dt><dd>{t('cs_side_v')}</dd></div>
-          </dl>
-          <div class="cs-stats">
-            <span class="eyebrow">{t('cs_stats')}</span>
-            <ul>
-              <li><b>3.61</b><span>{t('cs_gpa')}</span></li>
-              <li><b>6.0</b><span>{t('cs_ielts')}</span></li>
-              <li><b>#9</b><span>{t('cs_jersey')}</span></li>
-              <li><b>{t('cs_avail_v')}</b><span>{t('cs_avail')}</span></li>
-              <li class="wide"><b>★</b><span>{t('cs_sch')} · {t('cs_sch_v')}</span></li>
-            </ul>
-          </div>
-          <p class="cs-why">{t('cs_why')}</p>
-        </div>
-        <div class="cs-turn">
-          <div class="cs-tabs" role="group" aria-label={t('cs_turn')}><button class="pill" type="button" aria-pressed="true">{t('cs_hood')}</button><button class="pill" type="button" aria-pressed="false">{t('cs_nohood')}</button></div>
-          <div class="cs-stage">
-            <img class="on" src="/img/toon/sheet-hood.webp" alt={t('cs_turn') + ' · ' + t('cs_hood')} width="1053" height="543" loading="lazy">
-            <img src="/img/toon/sheet-nohood.webp" alt={t('cs_turn') + ' · ' + t('cs_nohood')} width="982" height="526" loading="lazy">
-          </div>
-          <span class="eyebrow">{t('cs_turn')}</span>
-        </div>
-      </div>
-      <div class="cs-faces">
-        <span class="eyebrow">{t('cs_faces')}</span>
-        <ul>{(['calm', 'focused', 'grin', 'wink', 'surprised', 'thinking'] as const).map(f => <li><img src={'/img/toon/face-' + f + '.webp'} alt="" width="261" height="360" loading="lazy"><span>{t(('f_' + f) as any)}</span></li>)}</ul>
-      </div>
-    </div>
-  </section>
-
   <section class="s" style="padding-top:0">
     <div class="wrap">
       <div class="court">
