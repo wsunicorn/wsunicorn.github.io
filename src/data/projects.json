@@ -707,6 +707,34 @@
           "vi": "khóa Redis · WebSocket"
         }
       }
+    ],
+    "gallery": [
+      {
+        "src": "/img/projects/agent-platform-hitl/approval.webp",
+        "w": 1288,
+        "h": 414,
+        "alt": {
+          "en": "Approval queue with a pending send-email action",
+          "vi": "Hàng chờ duyệt với một hành động gửi email đang chờ"
+        },
+        "caption": {
+          "en": "The approval queue: the agent's outbound email waits here, with a full preview, until a person approves or rejects it. Sample data.",
+          "vi": "Hàng chờ duyệt: email agent định gửi dừng ở đây, kèm bản xem trước đầy đủ, cho tới khi người duyệt đồng ý hoặc từ chối. Dữ liệu mẫu."
+        }
+      },
+      {
+        "src": "/img/projects/agent-platform-hitl/timeline.webp",
+        "w": 1288,
+        "h": 628,
+        "alt": {
+          "en": "Agent execution timeline waiting for a human decision",
+          "vi": "Dòng thời gian của agent đang chờ người quyết định"
+        },
+        "caption": {
+          "en": "The run timeline: two tool calls, one paused for review, nothing delivered yet. Sample data.",
+          "vi": "Dòng thời gian một lượt chạy: hai lời gọi công cụ, một lời gọi dừng chờ duyệt, chưa gửi gì ra ngoài. Dữ liệu mẫu."
+        }
+      }
     ]
   },
   {
