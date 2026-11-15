@@ -423,3 +423,52 @@ section.s{padding-block:clamp(96px,12vw,160px)}
 .more-notes a{display:block;padding:14px 0;font:600 clamp(16px,1.4vw,19px)/1.35 var(--f-head);text-decoration:none;color:var(--ink)}
 .more-notes a::after{content:" →";color:var(--r-coral)}
 .more-notes a:hover,.more-notes a:focus-visible{color:var(--r-coral)}
+
+/* ── toon: hero nhún nhẹ, character sheet, popup ngón cái, notes ── */
+@keyframes bob{50%{translate:0 -10px}}
+.portrait{animation:bob 5.5s ease-in-out infinite}
+/* nhân vật chibi rộng hơn ảnh thật: chiều cao không vượt quá bề rộng cho phép / tỉ lệ ảnh (--ar do JS đặt theo head) */
+.hero{--mw:min(36vw,600px)}
+@media(min-width:821px){.portrait{height:min(calc(var(--ph,.8) * 100%),880px,calc(var(--mw) / var(--ar,.7)))}}
+@media(min-width:821px) and (max-width:1100px){.hero{--mw:50vw}.portrait{left:calc((min(360px,36vw) + 48px + 100%) / 2)}}
+.nf img{max-height:min(70vh,560px);width:auto}
+.cs{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(18px,3vw,32px);align-items:stretch}
+.cs-card,.cs-turn{border-radius:28px;background:var(--surf);border:1px solid var(--line);padding:clamp(20px,3vw,32px);min-width:0}
+.cs-card{display:grid;gap:22px;align-content:start}
+.cs-id{display:flex;gap:16px;align-items:flex-end}
+.cs-no{font:400 clamp(56px,7vw,84px)/.8 var(--f-giant);color:var(--r-coral)}
+.cs-name{display:block;font:800 clamp(34px,4vw,48px)/1 var(--f-head);letter-spacing:-.03em}
+.cs-handle{font:500 12px/1.4 var(--f-mono);color:var(--mute);letter-spacing:.06em}
+.cs-attr{margin:0;display:grid;border-top:1px solid var(--line)}
+.cs-attr div{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.cs-attr dt{font:500 11px/1.5 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.cs-attr dd{margin:0;font-size:15px}
+.cs-stats{display:grid;gap:12px}
+.cs-stats ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.cs-stats li{display:grid;gap:4px;padding:12px;border-radius:16px;background:var(--surf2);border:1px solid var(--line);min-width:0}
+.cs-stats li.wide{grid-column:1/-1;grid-template-columns:auto 1fr;align-items:center;gap:10px}
+.cs-stats b{font:400 26px/1 var(--f-giant);color:var(--ink);font-variant-numeric:tabular-nums}
+.cs-stats li.wide b{color:var(--r-amber)}
+.cs-stats span{font-size:12.5px;color:var(--mute);line-height:1.35}
+.cs-why{font-size:14px;color:var(--mute);border-left:3px solid var(--r-coral);padding-left:12px}
+.cs-turn{display:grid;grid-template-rows:auto 1fr auto;gap:14px}
+.cs-tabs{display:flex;gap:8px;flex-wrap:wrap}
+.cs-tabs .pill[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.cs-stage{position:relative;display:grid;place-items:center;min-height:0}
+.cs-stage img{grid-area:1/1;width:100%;height:auto;max-height:420px;object-fit:contain;opacity:0;transition:opacity .35s var(--ease)}
+.cs-stage img.on{opacity:1}
+.cs-faces{margin-top:clamp(18px,3vw,28px);display:grid;gap:14px}
+.cs-faces ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.cs-faces li{display:grid;justify-items:center;gap:8px;padding:14px 8px 12px;border-radius:20px;background:var(--surf);border:1px solid var(--line);transition:transform .4s var(--spring)}
+.cs-faces li:hover{transform:translateY(-4px) rotate(-2deg)}
+.cs-faces img{width:72%;height:auto}
+.cs-faces span{font:500 11px/1.3 var(--f-mono);color:var(--mute);text-align:center}
+@media(max-width:860px){.cs{grid-template-columns:1fr}.cs-stats ul{grid-template-columns:repeat(2,minmax(0,1fr))}.cs-faces ul{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.c-row .cta{position:relative}
+.thumbs{position:absolute;left:-10px;bottom:calc(100% + 6px);width:110px;height:auto;pointer-events:none;opacity:0;transform:translateY(12px) scale(.6);transform-origin:50% 100%;transition:opacity .25s var(--ease),transform .45s var(--spring)}
+.thumbs.pop{opacity:1;transform:none}
+.nz{margin:clamp(24px,4vw,48px) 0 0;display:flex;align-items:center;gap:18px;color:var(--mute)}
+.nz img{width:clamp(110px,14vw,160px);height:auto}
+.nz figcaption{font-size:14px;max-width:40ch}
+
+.me img[src*="/toon/"]{object-position:50% 50%}

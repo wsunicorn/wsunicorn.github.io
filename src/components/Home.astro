@@ -33,7 +33,7 @@ const p = (path: string) => localePath(lang, path);
   </div>
 
   <div class="stage">
-    <img class="portrait" id="portrait" src="/img/hero-research.webp" alt="Nguyễn Ngọc Lân" width="720" height="843">
+    <img class="portrait" id="portrait" src="/img/toon/r-research-poster.webp" alt="Nguyễn Ngọc Lân, phiên bản hoạt hình" width="520" height="737">
     <svg class="lines" id="lines" aria-hidden="true"></svg>
     <div class="orbits" id="orbits">
       <article class="orbit c1" id="o1"><div class="core"></div></article>
@@ -136,6 +136,46 @@ const p = (path: string) => localePath(lang, path);
     </div>
   </section>
 
+  <section class="s cs-sec" id="character" style="padding-top:0">
+    <div class="wrap">
+      <div class="s-head"><div><h2>{t('cs_h')}</h2></div><p>{t('cs_p')}</p></div>
+      <div class="cs">
+        <div class="cs-card">
+          <div class="cs-id"><span class="cs-no">09</span><div><b class="cs-name">Lân</b><span class="cs-handle">wsunicorn · Kỳ Lân</span></div></div>
+          <dl class="cs-attr">
+            <div><dt>{t('cs_arch')}</dt><dd>{t('cs_arch_v')}</dd></div>
+            <div><dt>{t('cs_traits')}</dt><dd>{t('cs_traits_v')}</dd></div>
+            <div><dt>{t('cs_item')}</dt><dd>{t('cs_item_v')}</dd></div>
+            <div><dt>{t('cs_side')}</dt><dd>{t('cs_side_v')}</dd></div>
+          </dl>
+          <div class="cs-stats">
+            <span class="eyebrow">{t('cs_stats')}</span>
+            <ul>
+              <li><b>3.61</b><span>{t('cs_gpa')}</span></li>
+              <li><b>6.0</b><span>{t('cs_ielts')}</span></li>
+              <li><b>#9</b><span>{t('cs_jersey')}</span></li>
+              <li><b>{t('cs_avail_v')}</b><span>{t('cs_avail')}</span></li>
+              <li class="wide"><b>★</b><span>{t('cs_sch')} · {t('cs_sch_v')}</span></li>
+            </ul>
+          </div>
+          <p class="cs-why">{t('cs_why')}</p>
+        </div>
+        <div class="cs-turn">
+          <div class="cs-tabs" role="group" aria-label={t('cs_turn')}><button class="pill" type="button" aria-pressed="true">{t('cs_hood')}</button><button class="pill" type="button" aria-pressed="false">{t('cs_nohood')}</button></div>
+          <div class="cs-stage">
+            <img class="on" src="/img/toon/sheet-hood.webp" alt={t('cs_turn') + ' · ' + t('cs_hood')} width="1053" height="543" loading="lazy">
+            <img src="/img/toon/sheet-nohood.webp" alt={t('cs_turn') + ' · ' + t('cs_nohood')} width="982" height="526" loading="lazy">
+          </div>
+          <span class="eyebrow">{t('cs_turn')}</span>
+        </div>
+      </div>
+      <div class="cs-faces">
+        <span class="eyebrow">{t('cs_faces')}</span>
+        <ul>{(['calm', 'focused', 'grin', 'wink', 'surprised', 'thinking'] as const).map(f => <li><img src={'/img/toon/face-' + f + '.webp'} alt="" width="261" height="360" loading="lazy"><span>{t(('f_' + f) as any)}</span></li>)}</ul>
+      </div>
+    </div>
+  </section>
+
   <section class="s" style="padding-top:0">
     <div class="wrap">
       <div class="court">
@@ -157,8 +197,8 @@ const p = (path: string) => localePath(lang, path);
       <span class="idx">05 /</span>
       <h2><span>{t('ct1')}</span><br><em>{t('ct2')}</em></h2>
       <div class="c-row">
-        <div class="who2"><span class="me" title="Hi!"><img class="a0" src="/img/avatar.webp" alt="Nguyễn Ngọc Lân" width="360" height="360"><img class="a1" src="/img/avatar-wink.webp" alt="" width="360" height="360"></span><div><div class="eyebrow" style="margin-bottom:10px"><i></i><span>{t('avail')}</span></div><div class="mail" id="mail">nguyenngoclan120904@gmail.com</div></div></div>
-        <div class="cta"><button class="btn" type="button" id="copy"><span>{t('copy')}</span><span class="k" aria-hidden="true">⧉</span></button><a class="btn ghost" href="https://github.com/wsunicorn" target="_blank" rel="noopener"><span>GitHub</span><span class="k" aria-hidden="true">↗</span></a><a class="btn ghost" href="https://www.linkedin.com/in/wsunicorn/" target="_blank" rel="noopener"><span>LinkedIn</span><span class="k" aria-hidden="true">↗</span></a></div>
+        <div class="who2"><span class="me" title="Hi!"><img class="a0" src="/img/toon/avatar-wave.webp" alt="Nguyễn Ngọc Lân" width="360" height="360"><img class="a1" src="/img/toon/avatar-wink.webp" alt="" width="360" height="360"></span><div><div class="eyebrow" style="margin-bottom:10px"><i></i><span>{t('avail')}</span></div><div class="mail" id="mail">nguyenngoclan120904@gmail.com</div></div></div>
+        <div class="cta"><img class="thumbs" id="thumbs" src="/img/toon/u-thumbs.webp" alt="" width="905" height="1100" loading="lazy"><button class="btn" type="button" id="copy"><span>{t('copy')}</span><span class="k" aria-hidden="true">⧉</span></button><a class="btn ghost" href="https://github.com/wsunicorn" target="_blank" rel="noopener"><span>GitHub</span><span class="k" aria-hidden="true">↗</span></a><a class="btn ghost" href="https://www.linkedin.com/in/wsunicorn/" target="_blank" rel="noopener"><span>LinkedIn</span><span class="k" aria-hidden="true">↗</span></a></div>
       </div>
       <div><div class="eyebrow" style="margin-bottom:12px"><span>{t('cvby')}</span></div>
         <div class="cvs">{cvs.map(c => <a class="pill" href={c.file[lang]} target="_blank" rel="noopener">{tr(c.label, lang)}{c.main && ' ★'} <span aria-hidden="true">↓</span></a>)}</div></div>

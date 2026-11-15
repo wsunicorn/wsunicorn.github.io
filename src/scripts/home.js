@@ -5,22 +5,22 @@
 
   /* ── four attention heads ── */
   const HEADS = [
-    { id:'research', img:'/img/hero-research.webp', ph:.92, hx:.6, hy:.06, no:'01', word:'RESEARCH', acc:'--r-amber', line:{en:'<b>research</b> LLM systems that can prove what they say.',vi:'<b>nghiên cứu</b> hệ thống LLM chứng minh được điều nó nói.'},
+    { id:'research', img:'/img/toon/r-research-anim.webp', still:'/img/toon/r-research-poster.webp', ar:520/737, ph:.8, hx:.46, hy:.17, no:'01', word:'RESEARCH', acc:'--r-amber', line:{en:'<b>research</b> LLM systems that can prove what they say.',vi:'<b>nghiên cứu</b> hệ thống LLM chứng minh được điều nó nói.'},
       cards:[
         { t:'Head 14 · layer 22', h:`<div class="bars"><div>chunk 1<i style="--w:88%"></i>.62</div><div>chunk 2<i style="--w:30%"></i>.21</div><div>chunk 3<i style="--w:14%"></i>.11</div><div>answer<i style="--w:9%"></i>.06</div></div>` },
         { t:'Thesis', h:`<div class="big">0.745</div><div class="sm"><b>macro-F1</b> · 2,271 params<br>≈ PhoBERT-large 0.749</div>` },
         { t:'Evidence found', h:`<div class="big">87.8%</div><div class="sm">strongest head on the right chunk · <b>14.3× chance</b></div>` } ] },
-    { id:'build', img:'/img/hero-build.webp', ph:.78, hx:.3, hy:.16, cy:[.08,.31], no:'02', word:'BUILD', acc:'--r-coral', line:{en:'<b>build</b> AI products where every answer cites its page.',vi:'<b>xây</b> sản phẩm AI mà câu trả lời nào cũng chỉ ra nguồn.'},
+    { id:'build', img:'/img/toon/b-build.webp', ar:575/1100, ph:.86, hx:.3, hy:.18, cy:[.08,.31], no:'02', word:'BUILD', acc:'--r-coral', line:{en:'<b>build</b> AI products where every answer cites its page.',vi:'<b>xây</b> sản phẩm AI mà câu trả lời nào cũng chỉ ra nguồn.'},
       cards:[
         { t:'viRAGops · /ask', h:`<div class="sm" style="color:var(--ink)">Students may miss up to <b>20% of sessions</b> <span class="cite">QC §12.3</span></div><div class="chips"><span class="chip ok">faithful ✓</span><span class="chip ok">cited ✓</span></div>` },
         { t:'Eval gate · CI', h:`<div class="chips"><span class="chip ok">PASS</span><span class="chip warn">WARN</span><span class="chip no">BLOCK</span></div><div class="sm"><b>300</b>-question golden set before any change ships</div>` },
         { t:'Study app · iOS / Android', h:`<div class="sm" style="color:var(--ink)">“Định nghĩa entropy?”</div><div class="sm">→ answer anchored to <span class="cite">p. 42</span> or an honest “not in your file”</div>` } ] },
-    { id:'data', img:'/img/hero-data.webp', ph:.8, hx:.52, hy:.13, no:'03', word:'DATA', acc:'--r-cyan', line:{en:'<b>pipe data</b> from raw files to indexed, versioned, monitored.',vi:'<b>dựng dữ liệu</b> từ file thô đến chỉ mục, có phiên bản, có giám sát.'},
+    { id:'data', img:'/img/toon/d-data.webp', ar:608/1100, ph:.86, hx:.36, hy:.17, no:'03', word:'DATA', acc:'--r-cyan', line:{en:'<b>pipe data</b> from raw files to indexed, versioned, monitored.',vi:'<b>dựng dữ liệu</b> từ file thô đến chỉ mục, có phiên bản, có giám sát.'},
       cards:[
         { t:'DataOps', h:`<div class="pipe"><span>ingest</span><i></i><span>chunk</span><i></i><span>embed</span><i></i><span>index</span></div><div class="sm">Qdrant · pgvector · BM25 hybrid</div>` },
         { t:'7 source types', h:`<div class="chips"><span class="chip">PDF</span><span class="chip">DOCX</span><span class="chip">MD</span><span class="chip">Notion</span><span class="chip">Web</span><span class="chip">Sitemap</span></div>` },
         { t:'MLOps · AWS', h:`<div class="sm"><b>DVC → MLflow → ECS</b><br>drift detected → retrain → smoke test</div>` } ] },
-    { id:'play', img:'/img/hero-play.webp', ph:.92, hx:.5, hy:.08, no:'04', word:'PLAY', acc:'--r-blue', line:{en:'<b>play</b> for the team — on court and in code.',vi:'<b>chơi</b> vì đội — trên sân bóng và trong code.'},
+    { id:'play', img:'/img/toon/p-play.webp', ar:740/1100, ph:.9, hx:.45, hy:.23, no:'04', word:'PLAY', acc:'--r-blue', line:{en:'<b>play</b> for the team — on court and in code.',vi:'<b>chơi</b> vì đội — trên sân bóng và trong code.'},
       cards:[
         { t:'Volleyball', h:`<div class="big">#9</div><div class="sm">Faculty of IT team · <b>4 straight years</b>, every year of uni</div>` },
         { t:'English', h:`<div class="big">6.0</div><div class="sm">IELTS · Aug 2026 · papers & docs daily</div>` },
@@ -38,6 +38,7 @@
   });
   const cardEls = ['#o1', '#o2', '#o3'].map($);
   let cur = -1, timer, holdT;
+  let pageLoaded = document.readyState === 'complete';   // bản động (~1 MB) chỉ thay ảnh tĩnh sau khi trang tải xong
   function setWord(w) {
     giant.style.setProperty('--len', w.length);
     giant.innerHTML = [...w].map(c => `<span>${c}</span>`).join('');
@@ -62,9 +63,10 @@
   }
   function setPortrait(h) {
     const done = () => { portrait.classList.remove('swap'); layout(); };
-    hero.style.setProperty('--ph', h.ph);
-    if (portrait.getAttribute('src') === h.img) return done();
-    portrait.onload = done; portrait.src = h.img;
+    hero.style.setProperty('--ph', h.ph); hero.style.setProperty('--ar', h.ar);   // tỉ lệ ảnh → giới hạn bề rộng
+    const src = (reduce || !pageLoaded) && h.still ? h.still : h.img;   // giảm chuyển động / chưa tải xong → ảnh tĩnh
+    if (portrait.getAttribute('src') === src) return done();
+    portrait.onload = done; portrait.src = src;
     if (portrait.complete) done();
   }
   function fill(h) { cardEls.forEach((c, k) => c.querySelector('.core').innerHTML = `<div class="t"><span>${h.cards[k].t}</span><em>H${h.no}</em></div>${h.cards[k].h}`); }
@@ -105,7 +107,19 @@
   addEventListener('resize', layout);
   new ResizeObserver(() => layout()).observe($('.h-left'));          // chữ dài hơn (tiếng Việt, font tải xong) → xếp lại
   document.fonts && document.fonts.ready.then(layout);
-  HEADS.forEach(h => { const im = new Image(); im.src = h.img; });  // tải trước ảnh của mọi head
+  const onLoaded = () => {
+    pageLoaded = true;
+    HEADS.forEach(h => { const im = new Image(); im.src = reduce && h.still ? h.still : h.img; });  // tải trước ảnh của mọi head
+    if (cur >= 0 && HEADS[cur].still && !reduce) setPortrait(HEADS[cur]);
+  };
+  if (document.readyState === 'complete') setTimeout(onLoaded, 0); else addEventListener('load', onLoaded, { once: true });
+
+  /* character sheet: đội mũ / bỏ mũ */
+  const csBtns = [...document.querySelectorAll('.cs-tabs button')], csImgs = [...document.querySelectorAll('.cs-stage img')];
+  csBtns.forEach((b, k) => b.addEventListener('click', () => {
+    csBtns.forEach((x, j) => x.setAttribute('aria-pressed', String(j === k)));
+    csImgs.forEach((im, j) => im.classList.toggle('on', j === k));
+  }));
 
   /* marquee */
   const words = ['RAG', 'AI Agents', 'LLMOps', 'Attention', 'PyTorch', 'Evaluation', 'Vietnamese NLP', 'Computer Vision', 'MLOps', 'Volleyball #9'];
@@ -147,7 +161,7 @@
 
   /* copy email */
   const label0 = $('#copy span').textContent;
-  $('#copy').onclick = async () => { const lbl = $('#copy span'); try { await navigator.clipboard.writeText($('#mail').textContent); lbl.textContent = lang === 'vi' ? 'Đã chép' : 'Copied'; } catch { getSelection().selectAllChildren($('#mail')); lbl.textContent = lang === 'vi' ? 'Đã chọn — Ctrl+C' : 'Selected — Ctrl+C'; } setTimeout(() => lbl.textContent = label0, 2200); };
+  $('#copy').onclick = async () => { const lbl = $('#copy span'); try { await navigator.clipboard.writeText($('#mail').textContent); lbl.textContent = lang === 'vi' ? 'Đã chép' : 'Copied'; const th = $('#thumbs'); if (th) { th.classList.add('pop'); setTimeout(() => th.classList.remove('pop'), 1600); } } catch { getSelection().selectAllChildren($('#mail')); lbl.textContent = lang === 'vi' ? 'Đã chọn — Ctrl+C' : 'Selected — Ctrl+C'; } setTimeout(() => lbl.textContent = label0, 2200); };
 
   select(0); requestAnimationFrame(layout);
 })();
