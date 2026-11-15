@@ -1,0 +1,129 @@
+{
+  "research": {
+    "base": "/img/toon/rig/r-research-base.webp",
+    "w": 677,
+    "h": 1100,
+    "parts": [
+      {
+        "src": "/img/toon/rig/r-research-part0.webp",
+        "x": 76.912,
+        "y": 81.972,
+        "w": 23.088,
+        "h": 18.028,
+        "area": 21123,
+        "cy": 0.91
+      }
+    ],
+    "fx": [
+      {
+        "type": "glow",
+        "x": 20.5,
+        "y": 23.0,
+        "w": 21.0,
+        "h": 14.0
+      }
+    ]
+  },
+  "build": {
+    "base": "/img/toon/rig/b-build-base.webp",
+    "w": 462,
+    "h": 1043,
+    "parts": [],
+    "fx": [
+      {
+        "type": "pop",
+        "x": 80.5,
+        "y": 38.3,
+        "w": 9.0,
+        "h": 4.4,
+        "src": "/img/toon/rig/b-build-pop.webp"
+      },
+      {
+        "type": "sheen",
+        "x": 59.0,
+        "y": 34.0,
+        "w": 36.0,
+        "h": 13.0
+      }
+    ]
+  },
+  "data": {
+    "base": "/img/toon/rig/d-data-base.webp",
+    "w": 559,
+    "h": 1076,
+    "parts": [
+      {
+        "src": "/img/toon/rig/d-data-part0.webp",
+        "x": 80.859,
+        "y": 15.335,
+        "w": 15.385,
+        "h": 8.457,
+        "area": 5404,
+        "cy": 0.196
+      },
+      {
+        "src": "/img/toon/rig/d-data-part1.webp",
+        "x": 70.483,
+        "y": 21.747,
+        "w": 9.123,
+        "h": 5.112,
+        "area": 1752,
+        "cy": 0.243
+      },
+      {
+        "src": "/img/toon/rig/d-data-part2.webp",
+        "x": 84.436,
+        "y": 25.465,
+        "w": 8.766,
+        "h": 4.74,
+        "area": 1519,
+        "cy": 0.278
+      },
+      {
+        "src": "/img/toon/rig/d-data-part3.webp",
+        "x": 62.075,
+        "y": 81.97,
+        "w": 37.03,
+        "h": 17.007,
+        "area": 23884,
+        "cy": 0.905
+      }
+    ],
+    "fx": [
+      {
+        "type": "sheen",
+        "x": 63.0,
+        "y": 31.0,
+        "w": 31.0,
+        "h": 18.0,
+        "rot": 6
+      }
+    ]
+  },
+  "play": {
+    "base": "/img/toon/rig/p-play-base.webp",
+    "w": 728,
+    "h": 1100,
+    "parts": [
+      {
+        "src": "/img/toon/rig/p-play-part0.webp",
+        "x": 70.398,
+        "y": 0.356,
+        "w": 22.928,
+        "h": 15.324,
+        "area": 33768,
+        "cy": 0.08
+      },
+      {
+        "src": "/img/toon/rig/p-play-part1.webp",
+        "x": 0.538,
+        "y": 78.974,
+        "w": 34.015,
+        "h": 20.599,
+        "area": 43417,
+        "cy": 0.893
+      }
+    ],
+    "fx": []
+  }
+}

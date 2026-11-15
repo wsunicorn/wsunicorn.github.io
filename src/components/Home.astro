@@ -2,6 +2,8 @@
 import { useT, localePath, type Lang } from '../i18n/ui';
 import { cvs, mainCv, tr, profile, projects, iconFor, INK_ICONS } from '../lib/data';
 import { notesFor, fmtDate } from '../lib/notes';
+import rig from '../data/toon-rig.json';
+const r0 = rig.research;   // nhân vật đầu tiên render sẵn trong HTML (không chờ script)
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = useT(lang);
@@ -41,7 +43,7 @@ const latestNotes = notesFor(lang).slice(0, 3);
   <a class="btn" href={mainCv(lang)} target="_blank" rel="noopener" style="padding:6px 6px 6px 16px;font-size:13px"><span>CV</span><span class="k" aria-hidden="true">↗</span></a>
 </nav>
 
-<header class="hero" id="top">
+<header class="hero" id="top" style={`--ar:${(r0.w / r0.h).toFixed(4)}`}>
   <div class="giant" id="giant" aria-hidden="true"></div>
 
   <div class="h-left">
@@ -56,7 +58,7 @@ const latestNotes = notesFor(lang).slice(0, 3);
   </div>
 
   <div class="stage">
-    <img class="portrait" id="portrait" src="/img/toon/r-research-poster.webp" alt="Nguyễn Ngọc Lân, phiên bản hoạt hình" width="520" height="744">
+    <div class="portrait rig" id="portrait" role="img" aria-label="Nguyễn Ngọc Lân, phiên bản hoạt hình"><img class="rb" src={r0.base} alt="" width={r0.w} height={r0.h}></div>
     <svg class="lines" id="lines" aria-hidden="true"></svg>
     <div class="orbits" id="orbits">
       <article class="orbit c1" id="o1"><div class="core"></div></article>
@@ -148,7 +150,7 @@ const latestNotes = notesFor(lang).slice(0, 3);
   <section class="s" id="about">
     <div class="wrap">
       <div class="s-head"><div><span class="idx">04 /</span><h2>{t('how_h')}</h2></div><p>{t('how_p')}</p></div>
-      <figure class="talk"><img src="/img/scene-talk.jpg" alt="Lân đang trình bày kết quả trước màn hình" width="1400" height="933" loading="lazy"></figure>
+      <figure class="talk"><img src="/img/how-i-work.webp" alt={lang === 'vi' ? 'Lân (bản hoạt hình) trình bày heatmap chú ý và biểu đồ kết quả trong phòng seminar' : 'Cartoon Lân presenting an attention heatmap and a results chart in a seminar room'} width="1536" height="1024" loading="lazy"></figure>
       <div class="steps">
         <div class="step"><b>01</b><h3>{t('s1')}</h3><p>{t('s1p')}</p></div>
         <div class="step"><b>02</b><h3>{t('s2')}</h3><p>{t('s2p')}</p></div>
@@ -215,7 +217,7 @@ const latestNotes = notesFor(lang).slice(0, 3);
       <span class="idx">07 /</span>
       <h2><span>{t('ct1')}</span><br><em>{t('ct2')}</em></h2>
       <div class="c-row">
-        <div class="who2"><span class="me" title="Hi!"><picture><source srcset="/img/toon/avatar-wave-poster.webp" media="(prefers-reduced-motion: reduce)"><img class="a0" src="/img/toon/avatar-wave-anim.webp" alt="Nguyễn Ngọc Lân" width="360" height="360" loading="lazy"></picture><img class="a1" src="/img/toon/avatar-wink.webp" alt="" width="360" height="360"></span><div><div class="eyebrow" style="margin-bottom:10px"><i></i><span>{t('avail')}</span></div><div class="mail" id="mail">nguyenngoclan120904@gmail.com</div></div></div>
+        <div class="who2"><span class="me" title="Hi!"><img class="a0" src="/img/toon/avatar-wave.webp" alt="Nguyễn Ngọc Lân" width="360" height="360" loading="lazy"><img class="a1" src="/img/toon/avatar-wink.webp" alt="" width="360" height="360"></span><div><div class="eyebrow" style="margin-bottom:10px"><i></i><span>{t('avail')}</span></div><div class="mail" id="mail">nguyenngoclan120904@gmail.com</div></div></div>
         <div class="cta"><img class="thumbs" id="thumbs" src="/img/toon/u-thumbs.webp" alt="" width="905" height="1100" loading="lazy"><button class="btn" type="button" id="copy"><span>{t('copy')}</span><span class="k" aria-hidden="true">⧉</span></button><a class="btn ghost" href="https://github.com/wsunicorn" target="_blank" rel="noopener"><span>GitHub</span><span class="k" aria-hidden="true">↗</span></a><a class="btn ghost" href="https://www.linkedin.com/in/wsunicorn/" target="_blank" rel="noopener"><span>LinkedIn</span><span class="k" aria-hidden="true">↗</span></a></div>
       </div>
       <div><div class="eyebrow" style="margin-bottom:12px"><span>{t('cvby')}</span></div>

@@ -1,3 +1,6 @@
+// Lớp nhân vật (thân, vật rời, hiệu ứng, chớp mắt) — sinh bởi toon_puppet.py từ ảnh tĩnh đợt 2
+import rig from '../data/toon-rig.json';
+
 (() => {
   const root = document.documentElement, $ = s => document.querySelector(s);
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -5,22 +8,22 @@
 
   /* ── four attention heads ── */
   const HEADS = [
-    { id:'research', img:'/img/toon/r-research-anim.webp', still:'/img/toon/r-research-poster.webp', ar:520/744, ph:.8, hx:.45, hy:.22, no:'01', word:'RESEARCH', acc:'--r-amber', line:{en:'<b>research</b> LLM systems that can prove what they say.',vi:'<b>nghiên cứu</b> hệ thống LLM chứng minh được điều nó nói.'},
+    { id:'research', ph:.74, hx:.4, hy:.22, no:'01', word:'RESEARCH', acc:'--r-amber', line:{en:'<b>research</b> LLM systems that can prove what they say.',vi:'<b>nghiên cứu</b> hệ thống LLM chứng minh được điều nó nói.'},
       cards:[
         { t:'Head 14 · layer 22', h:`<div class="bars"><div>chunk 1<i style="--w:88%"></i>.62</div><div>chunk 2<i style="--w:30%"></i>.21</div><div>chunk 3<i style="--w:14%"></i>.11</div><div>answer<i style="--w:9%"></i>.06</div></div>` },
         { t:'Thesis', h:`<div class="big">0.745</div><div class="sm"><b>macro-F1</b> · 2,271 params<br>≈ PhoBERT-large 0.749</div>` },
         { t:'Evidence found', h:`<div class="big">87.8%</div><div class="sm">strongest head on the right chunk · <b>14.3× chance</b></div>` } ] },
-    { id:'build', img:'/img/toon/b-build-anim.webp', still:'/img/toon/b-build-poster.webp', ar:520/901, ph:.86, hx:.38, hy:.2, cy:[.08,.31], no:'02', word:'BUILD', acc:'--r-coral', line:{en:'<b>build</b> AI products where every answer cites its page.',vi:'<b>xây</b> sản phẩm AI mà câu trả lời nào cũng chỉ ra nguồn.'},
+    { id:'build', ph:.8, hx:.4, hy:.14, cy:[.08,.31], no:'02', word:'BUILD', acc:'--r-coral', line:{en:'<b>build</b> AI products where every answer cites its page.',vi:'<b>xây</b> sản phẩm AI mà câu trả lời nào cũng chỉ ra nguồn.'},
       cards:[
         { t:'viRAGops · /ask', h:`<div class="sm" style="color:var(--ink)">Students may miss up to <b>20% of sessions</b> <span class="cite">QC §12.3</span></div><div class="chips"><span class="chip ok">faithful ✓</span><span class="chip ok">cited ✓</span></div>` },
         { t:'Eval gate · CI', h:`<div class="chips"><span class="chip ok">PASS</span><span class="chip warn">WARN</span><span class="chip no">BLOCK</span></div><div class="sm"><b>300</b>-question golden set before any change ships</div>` },
         { t:'Study app · iOS / Android', h:`<div class="sm" style="color:var(--ink)">“Định nghĩa entropy?”</div><div class="sm">→ answer anchored to <span class="cite">p. 42</span> or an honest “not in your file”</div>` } ] },
-    { id:'data', img:'/img/toon/d-data-anim.webp', still:'/img/toon/d-data-poster.webp', ar:520/880, ph:.86, hx:.42, hy:.18, no:'03', word:'DATA', acc:'--r-cyan', line:{en:'<b>pipe data</b> from raw files to indexed, versioned, monitored.',vi:'<b>dựng dữ liệu</b> từ file thô đến chỉ mục, có phiên bản, có giám sát.'},
+    { id:'data', ph:.8, hx:.42, hy:.15, no:'03', word:'DATA', acc:'--r-cyan', line:{en:'<b>pipe data</b> from raw files to indexed, versioned, monitored.',vi:'<b>dựng dữ liệu</b> từ file thô đến chỉ mục, có phiên bản, có giám sát.'},
       cards:[
         { t:'DataOps', h:`<div class="pipe"><span>ingest</span><i></i><span>chunk</span><i></i><span>embed</span><i></i><span>index</span></div><div class="sm">Qdrant · pgvector · BM25 hybrid</div>` },
         { t:'7 source types', h:`<div class="chips"><span class="chip">PDF</span><span class="chip">DOCX</span><span class="chip">MD</span><span class="chip">Notion</span><span class="chip">Web</span><span class="chip">Sitemap</span></div>` },
         { t:'MLOps · AWS', h:`<div class="sm"><b>DVC → MLflow → ECS</b><br>drift detected → retrain → smoke test</div>` } ] },
-    { id:'play', img:'/img/toon/p-play-anim.webp', still:'/img/toon/p-play-poster.webp', ar:520/607, ph:.82, hx:.6, hy:.28, no:'04', word:'PLAY', acc:'--r-blue', line:{en:'<b>play</b> for the team — on court and in code.',vi:'<b>chơi</b> vì đội — trên sân bóng và trong code.'},
+    { id:'play', ph:.78, hx:.6, hy:.27, cy:[.3,.6], no:'04', word:'PLAY', acc:'--r-blue', line:{en:'<b>play</b> for the team — on court and in code.',vi:'<b>chơi</b> vì đội — trên sân bóng và trong code.'},
       cards:[
         { t:'Volleyball', h:`<div class="big">#9</div><div class="sm">Faculty of IT team · <b>4 straight years</b>, every year of uni</div>` },
         { t:'English', h:`<div class="big">6.0</div><div class="sm">IELTS · Aug 2026 · papers & docs daily</div>` },
@@ -38,7 +41,6 @@
   });
   const cardEls = ['#o1', '#o2', '#o3'].map($);
   let cur = -1, timer, holdT;
-  let pageLoaded = document.readyState === 'complete';   // bản động (~1 MB) chỉ thay ảnh tĩnh sau khi trang tải xong
   function setWord(w) {
     giant.style.setProperty('--len', w.length);
     giant.innerHTML = [...w].map(c => `<span>${c}</span>`).join('');
@@ -61,19 +63,33 @@
     }, 380);
     schedule();
   }
-  // Ảnh poster (khung đầu, nhẹ) hiện ngay; bản động (~1 MB) chỉ tải khi head đó được chọn, xong mới thay vào.
-  const animReady = new Set();
+  // Nhân vật dựng từ lớp ảnh tĩnh: chuyển động do CSS chạy ở tốc độ màn hình — nét như ảnh gốc, nhẹ.
+  const kind = p => p.cy > 0.8 ? 'duck' : (p.cy < 0.15 && p.area > 20000 ? 'ball' : 'float');
+  const pct = o => `left:${o.x}%;top:${o.y}%;width:${o.w}%`;
+  function rigHTML(r) {
+    const blink = r.blink ? `<img class="blink" src="${r.blink.src}" alt="" style="${pct(r.blink)}">` : '';
+    const parts = r.parts.map((p, k) => `<img class="rp ${kind(p)}" src="${p.src}" alt="" style="${pct(p)};--d:${(-k * 0.8).toFixed(1)}s">`).join('');
+    const fx = (r.fx || []).map(f => f.type === 'pop'
+      ? `<img class="fx pop" src="${f.src}" alt="" style="${pct(f)}">`
+      : `<span class="fx ${f.type}" style="${pct(f)};height:${f.h}%${f.rot ? `;rotate:${f.rot}deg` : ''}"></span>`).join('');
+    return `<img class="rb" src="${r.base}" alt="" width="${r.w}" height="${r.h}">${blink}${parts}${fx}`;
+  }
   function setPortrait(h) {
+    const r = rig[h.id];
     const done = () => { portrait.classList.remove('swap'); layout(); };
-    hero.style.setProperty('--ph', h.ph); hero.style.setProperty('--ar', h.ar);   // tỉ lệ ảnh → giới hạn bề rộng
-    const wantAnim = !!h.still && !reduce && pageLoaded;
-    const src = h.still && !(wantAnim && animReady.has(h.img)) ? h.still : h.img;
-    if (portrait.getAttribute('src') === src) done(); else { portrait.onload = done; portrait.src = src; if (portrait.complete) done(); }
-    if (wantAnim && !animReady.has(h.img)) {
-      const im = new Image();
-      im.onload = () => { animReady.add(h.img); if (HEADS[cur] === h) portrait.src = h.img; };
-      im.src = h.img;
+    hero.style.setProperty('--ph', h.ph); hero.style.setProperty('--ar', r.w / r.h);   // tỉ lệ ảnh → giới hạn bề rộng
+    if (portrait.dataset.head !== h.id) { portrait.dataset.head = h.id; portrait.innerHTML = rigHTML(r); }
+    const base = portrait.querySelector('.rb');
+    if (base.complete) done(); else base.onload = done;
+  }
+  // chớp mắt ngẫu nhiên 3–6 giây một lần, đôi khi chớp hai lần (chỉ khi có lớp chớp mắt)
+  function blinkLoop() {
+    const b = portrait.querySelector('.blink');
+    if (b && !reduce && !document.hidden) {
+      const once = (t = 0) => setTimeout(() => { b.classList.add('on'); setTimeout(() => b.classList.remove('on'), 120); }, t);
+      once(); if (Math.random() < 0.25) once(260);
     }
+    setTimeout(blinkLoop, 3000 + Math.random() * 3000);
   }
   function fill(h) { cardEls.forEach((c, k) => c.querySelector('.core').innerHTML = `<div class="t"><span>${h.cards[k].t}</span><em>H${h.no}</em></div>${h.cards[k].h}`); }
   function schedule() { clearTimeout(timer); if (!reduce && !heads.classList.contains('paused')) timer = setTimeout(() => select((cur + 1) % HEADS.length), 5500); }
@@ -114,9 +130,8 @@
   new ResizeObserver(() => layout()).observe($('.h-left'));          // chữ dài hơn (tiếng Việt, font tải xong) → xếp lại
   document.fonts && document.fonts.ready.then(layout);
   const onLoaded = () => {
-    pageLoaded = true;
-    HEADS.forEach(h => { const im = new Image(); im.src = h.still || h.img; });  // tải trước poster (nhẹ) của mọi head
-    if (cur >= 0) setPortrait(HEADS[cur]);
+    HEADS.forEach(h => { const r = rig[h.id]; [r.base, ...r.parts.map(p => p.src)].forEach(src => { const im = new Image(); im.src = src; }); });  // tải trước lớp của mọi head
+    blinkLoop();
   };
   if (document.readyState === 'complete') setTimeout(onLoaded, 0); else addEventListener('load', onLoaded, { once: true });
 
