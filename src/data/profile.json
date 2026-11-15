@@ -289,6 +289,96 @@
       ]
     }
   ],
+  "core_skills": [
+    {
+      "group": {
+        "en": "LLM & RAG",
+        "vi": "LLM & RAG"
+      },
+      "items": [
+        {
+          "name": "RAG (hybrid retrieval, citations)",
+          "evidence": "viragops"
+        },
+        {
+          "name": "LangGraph agents",
+          "evidence": "agent-platform-hitl"
+        },
+        {
+          "name": "Guardrails & human approval",
+          "evidence": "agent-platform-hitl"
+        }
+      ]
+    },
+    {
+      "group": {
+        "en": "Evaluation",
+        "vi": "Đánh giá"
+      },
+      "items": [
+        {
+          "name": "Golden sets & CI quality gates",
+          "evidence": "viragops"
+        },
+        {
+          "name": "Statistical testing (McNemar, Wilson CI)",
+          "evidence": "experience"
+        },
+        {
+          "name": "LLM observability (Langfuse)",
+          "evidence": "viragops"
+        }
+      ]
+    },
+    {
+      "group": {
+        "en": "Machine learning",
+        "vi": "Học máy"
+      },
+      "items": [
+        {
+          "name": "PyTorch & Transformers",
+          "evidence": "vihallulens"
+        },
+        {
+          "name": "Attention analysis",
+          "evidence": "vihallulens"
+        },
+        {
+          "name": "LoRA fine-tuning",
+          "evidence": "medical-vqa-vi"
+        },
+        {
+          "name": "Computer vision (YOLO + tracking)",
+          "evidence": "vehicle-counting"
+        }
+      ]
+    },
+    {
+      "group": {
+        "en": "Engineering",
+        "vi": "Kỹ thuật"
+      },
+      "items": [
+        {
+          "name": "Python",
+          "evidence": "viragops"
+        },
+        {
+          "name": "FastAPI",
+          "evidence": "vihallulens"
+        },
+        {
+          "name": "Qdrant & PostgreSQL + pgvector",
+          "evidence": "viragops"
+        },
+        {
+          "name": "Docker & GitHub Actions",
+          "evidence": "viragops"
+        }
+      ]
+    }
+  ],
   "languages": [
     {
       "name": {

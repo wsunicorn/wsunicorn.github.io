@@ -15,41 +15,46 @@ const p = (path: string) => localePath(lang, path);
 const exp = profile.experience[0];
 const ym = (s: string) => { const [y, m] = String(s).split('-'); return lang === 'vi' ? `${m}/${y}` : `${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][+m - 1]} ${y}`; };
 
-// Kỹ năng kèm bằng chứng: mỗi mục link tới dự án đầu tiên có dùng nó (theo stack hoặc bullet)
-const tokens = (item: string) => item.split(' (')[0].split(/\s*(?:\/|\+|,)\s*/).map(x => x.trim()).filter(Boolean);
-const uses = (tok: string, pr: any) => {
-  const rx = new RegExp(`(^|[^A-Za-z0-9])${tok.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}([^A-Za-z0-9]|$)`, 'i');
-  return [...pr.stack, ...pr.bullets.en].some((s: string) => rx.test(s));
-};
-const skillGroups = profile.skills.map((g: any) => ({
+// 14 kỹ năng cốt lõi (profile.yaml → core_skills), mỗi kỹ năng link tới bằng chứng
+const projName = (slug: string) => { const pr = projects.find(x => x.slug === slug); return pr ? tr(pr.title, lang).split(' — ')[0] : ''; };
+const evHref = (ev: string) => ev === 'experience' ? '#experience' : p(`/projects/${ev}/`);
+const evTitle = (ev: string) => ev === 'experience' ? `${tr(exp.role, lang)} · ${exp.company}` : projName(ev);
+const skillGroups = profile.core_skills.map((g: any) => ({
   group: tr(g.group, lang),
-  items: g.items.map((item: string) => {
-    const name = item.split(' (')[0];
-    const ev = g.evidence?.[name];                     // đối chiếu thủ công trong profile.yaml
-    if (ev === 'experience') return { name, icon: iconFor(name), href: '#experience', title: `${tr(exp.role, lang)} · ${exp.company}` };
-    const used = ev ? projects.filter(pr => pr.slug === ev) : projects.filter(pr => tokens(item).some(tok => uses(tok, pr)));
-    return { name, icon: iconFor(name), href: used[0] ? p(`/projects/${used[0].slug}/`) : null, title: used.map(u => tr(u.title, lang).split(' — ')[0]).join(' · ') };
-  }),
+  items: g.items.map((it: any) => ({ name: it.name, icon: iconFor(it.name), href: evHref(it.evidence), title: evTitle(it.evidence) })),
 }));
 const latestNotes = notesFor(lang).slice(0, 3);
+
+// Khóa luận nổi bật (thay mục "Where the model looks" cũ): ảnh thật từ giao diện quan sát + số liệu
+const thesis = projects.find(x => x.slug === 'vihallulens')!;
+// Cách tôi làm: mỗi bước có một ví dụ thật
+const stepEx = [
+  { k: 's1', href: p('/projects/vihallulens/'), label: 'ViHalluLens' },
+  { k: 's2', href: p('/projects/viragops/'), label: 'viRAGops' },
+  { k: 's3', href: p('/projects/agent-platform-hitl/'), label: projName('agent-platform-hitl') },
+  { k: 's4', href: '#experience', label: `${exp.company}` },
+  { k: 's5', href: p('/notes/attention-hallucination/'), label: t('note_label') },
+];
+// Học vấn (profile.yaml → education[0])
+const ed = profile.education[0];
 ---
 <div class="grain" aria-hidden="true"></div>
 
 <nav class="nav" aria-label="Main">
   <img class="sig" src="/img/signature.svg" alt="Nglan" width="80" height="22">
-  <a class="lk" href="#work">{t('nav_work')}</a><a class="lk" href="#experience">{t('nav_exp')}</a><a class="lk" href="#research">{t('nav_research')}</a><a class="lk" href="#about">{t('nav_about')}</a><a class="lk" href={p('/notes/')}>{t('nav_notes')}</a><a class="lk" href="#contact">{t('nav_contact')}</a>
+  <a class="lk" href="#work">{t('nav_work')}</a><a class="lk" href="#experience">{t('nav_exp')}</a><a class="lk" href="#how">{t('nav_how')}</a><a class="lk" href="#notes-home">{t('nav_notes')}</a><a class="lk" href="#about">{t('nav_about')}</a><a class="lk" href="#contact">{t('nav_contact')}</a>
   <a class="pill" id="lang" href={altHref} hreflang={alt} lang={alt} aria-label={t("lang_name")}>{alt.toUpperCase()}</a>
   <button class="pill" id="theme" type="button" aria-label={t("theme")} title={t("theme")}>◐</button>
   <a class="btn" href={mainCv(lang)} target="_blank" rel="noopener" style="padding:6px 6px 6px 16px;font-size:13px"><span>CV</span><span class="k" aria-hidden="true">↗</span></a>
 </nav>
 
-<header class="hero" id="top" style={`--ar:${(r0.w / r0.h).toFixed(4)}`}>
+<header class="hero" id="top" style={`--ar:${(r0.w / r0.h).toFixed(4)};--ph:.74`}>
   <div class="giant" id="giant" aria-hidden="true"></div>
 
   <div class="h-left">
     <span class="eyebrow"><i></i><span>{t('eyebrow')}</span></span>
     <h1>Nguyễn<br>Ngọc Lân</h1>
-    <p class="role"><span>{t('role_pre')}</span> <span id="roleLine"></span></p>
+    <p class="role"><span>{t('role_pre')}</span> <span id="roleLine" set:html={t('role_init')}></span></p>
     <p class="pitch">{t('pitch')}</p>
     <div class="cta">
       <a class="btn" href="#work"><span>{t('cta_work')}</span><span class="k" aria-hidden="true">↗</span></a>
@@ -61,9 +66,9 @@ const latestNotes = notesFor(lang).slice(0, 3);
     <div class="portrait rig" id="portrait" role="img" aria-label="Nguyễn Ngọc Lân, phiên bản hoạt hình"><img class="rb" src={r0.base} alt="" width={r0.w} height={r0.h}></div>
     <svg class="lines" id="lines" aria-hidden="true"></svg>
     <div class="orbits" id="orbits">
-      <article class="orbit c1" id="o1"><div class="core"></div></article>
-      <article class="orbit c2" id="o2"><div class="core"></div></article>
-      <article class="orbit c3" id="o3"><div class="core"></div></article>
+      <article class="orbit c1 pending" id="o1"><div class="core"></div></article>
+      <article class="orbit c2 pending" id="o2"><div class="core"></div></article>
+      <article class="orbit c3 pending" id="o3"><div class="core"></div></article>
     </div>
   </div>
 
@@ -75,7 +80,9 @@ const latestNotes = notesFor(lang).slice(0, 3);
   </aside>
   <img class="h-sig" src="/img/signature.svg" alt="" width="190" height="80">
 
-  <div class="heads" role="tablist" aria-label="Attention heads" id="heads"></div>
+  <div class="heads" role="tablist" aria-label="Attention heads" id="heads">{['research', 'build', 'data', 'play'].map((id, i) => (
+    <button class="tab" type="button" role="tab" id={`tab-${id}`} aria-selected={i === 0 ? 'true' : 'false'}><small>{`0${i + 1}`}</small>{id.toUpperCase()}<i class="prog"></i></button>
+  ))}</div>
 </header>
 
 <div class="band" aria-hidden="true"><div class="track" id="track"></div></div>
@@ -84,11 +91,25 @@ const latestNotes = notesFor(lang).slice(0, 3);
   <section class="s" id="work">
     <div class="wrap">
       <div class="s-head"><div><span class="idx">01 /</span><h2>{t('work_h')}</h2></div><p>{t('work_p')}</p></div>
+      <article class="feat" style="--c:var(--r-amber)">
+        <a class="feat-shot" href={p('/projects/vihallulens/')}><img src="/img/projects/vihallulens/viewer.webp" alt={lang === 'vi' ? 'Giao diện quan sát chú ý thật của ViHalluLens' : 'The real ViHalluLens attention viewer'} width="1560" height="1484" loading="lazy"><span class="feat-cap">{t('feat_cap')}</span></a>
+        <div class="feat-body">
+          <span class="eyebrow"><i></i><span>01 · {t('feat_eyebrow')}</span></span>
+          <h3>ViHalluLens</h3>
+          <p class="feat-sub">{tr(thesis.tagline, lang)}</p>
+          <div class="feat-kpis">
+            <div class="kpi"><b>0.745</b><span>{t('k1')}</span></div>
+            <div class="kpi"><b>87.8%</b><span>{t('k2')}</span></div>
+            <div class="kpi"><b>19</b><span>{t('k3')}</span></div>
+          </div>
+          <div class="cta">
+            <a class="btn" href={p('/projects/vihallulens/')}><span>{t('feat_case')}</span><span class="k" aria-hidden="true">→</span></a>
+            <a class="btn ghost" href={p('/notes/attention-hallucination/')}><span>{t('feat_note')}</span><span class="k" aria-hidden="true">→</span></a>
+            <a class="btn ghost" href={thesis.repo!} target="_blank" rel="noopener"><span>{t('repo')}</span><span class="k" aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </article>
       <div class="work">
-        <a class="wcard" href={p("/projects/vihallulens/")} style="--c:var(--r-amber)">
-          <div class="vis"><div class="glow"></div><div class="heat" id="heat"></div></div>
-          <div class="meta"><span class="num">01</span><h3>ViHalluLens</h3><span class="tg">THESIS · ATTENTION · RAG</span><span class="m">macro-F1 0.745 · 2,271 params</span></div>
-        </a>
         <a class="wcard" href={p("/projects/study-app-mobile/")} style="--c:var(--r-coral)">
           <div class="vis"><div class="glow"></div><div class="phone"><b style="font-size:9px">p. 42 · Chương 3</b><i class="pg"></i><i class="pg hl"></i><i class="pg"></i><i class="pg hl" style="width:70%"></i><i class="pg"></i><span class="cite" style="--acc:var(--r-coral);justify-self:start">verified ✓</span></div></div>
           <div class="meta"><span class="num">02</span><h3>{t('w2')}</h3><span class="tg">MOBILE · RAG · VERIFY</span><span class="m">255 commits · 6 weeks</span></div>
@@ -126,37 +147,14 @@ const latestNotes = notesFor(lang).slice(0, 3);
     </div>
   </section>
 
-  <section class="s" id="research" style="background:var(--bg2)">
+  <section class="s" id="how">
     <div class="wrap">
-      <div class="s-head"><div><span class="idx" style="color:var(--r-amber)">03 /</span><h2>{t('res_h')}</h2></div><p>{t('res_p')}</p></div>
-      <div class="lab">
-        <div class="lens-box" id="lensBox">
-          <div class="ctx" id="ctx">
-            <div class="chunk"><small>CHUNK 1 · CONTEXT</small>Fansipan cao 3.143 mét, là đỉnh núi cao nhất Đông Dương, thuộc dãy Hoàng Liên Sơn.</div>
-            <div class="chunk"><small>CHUNK 2 · CONTEXT</small>Đỉnh nằm cách thị xã Sa Pa khoảng chín cây số về phía tây nam.</div>
-            <div class="chunk"><small>ANSWER · TO CHECK</small>Đỉnh núi cao nhất Đông Dương là Fansipan, cao 3.143 mét.</div>
-          </div>
-          <div class="lens" id="lens" aria-hidden="true"></div>
-        </div>
-        <div class="lab-side">
-          <div class="kpi"><b data-count="0.745" data-dec="3">0.745</b><span>{t('k1')}</span></div>
-          <div class="kpi"><b data-count="87.8" data-dec="1" data-suf="%">87.8%</b><span>{t('k2')}</span></div>
-          <div class="kpi"><b data-count="19">19</b><span>{t('k3')}</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="s" id="about">
-    <div class="wrap">
-      <div class="s-head"><div><span class="idx">04 /</span><h2>{t('how_h')}</h2></div><p>{t('how_p')}</p></div>
-      <figure class="talk"><img src="/img/how-i-work.webp" alt={lang === 'vi' ? 'Lân (bản hoạt hình) trình bày heatmap chú ý và biểu đồ kết quả trong phòng seminar' : 'Cartoon Lân presenting an attention heatmap and a results chart in a seminar room'} width="1536" height="1024" loading="lazy"></figure>
-      <div class="steps">
-        <div class="step"><b>01</b><h3>{t('s1')}</h3><p>{t('s1p')}</p></div>
-        <div class="step"><b>02</b><h3>{t('s2')}</h3><p>{t('s2p')}</p></div>
-        <div class="step"><b>03</b><h3>{t('s3')}</h3><p>{t('s3p')}</p></div>
-        <div class="step"><b>04</b><h3>{t('s4')}</h3><p>{t('s4p')}</p></div>
-        <div class="step"><b>05</b><h3>{t('s5')}</h3><p>{t('s5p')}</p></div>
+      <div class="s-head"><div><span class="idx">03 /</span><h2>{t('how_h')}</h2></div><p>{t('how_p')}</p></div>
+      <div class="how">
+        <figure class="talk"><img src="/img/how-i-work.webp" alt={lang === 'vi' ? 'Lân (bản hoạt hình) trình bày heatmap chú ý và biểu đồ kết quả trong phòng seminar' : 'Cartoon Lân presenting an attention heatmap and a results chart in a seminar room'} width="1536" height="1024" loading="lazy"></figure>
+        <ol class="steps">{stepEx.map((s, i) => (
+          <li class="step"><b>{String(i + 1).padStart(2, '0')}</b><div><h3>{t(s.k as any)}</h3><p>{t(`${s.k}p` as any)}</p><a class="ex" href={s.href}>{t('example')} · {s.label} <span aria-hidden="true">→</span></a></div></li>
+        ))}</ol>
       </div>
       <div class="skills" id="skills">
         <div class="sk-head"><h3>{t('skills_h')}</h3><p>{t('skills_p')}</p></div>
@@ -170,21 +168,35 @@ const latestNotes = notesFor(lang).slice(0, 3);
     </div>
   </section>
 
-  <section class="s" style="padding-top:0">
+  <section class="s" id="notes-home" style="padding-top:0">
     <div class="wrap">
-      <div class="s-head"><div><span class="idx">05 /</span><h2>{t('log_h')}</h2></div></div>
-      <div class="log">
-        <div class="row"><time>09–12 / 2026</time><h3>TMA Solutions</h3><p>{t('l1')}</p><span class="tag">BU2 · Batch 53</span></div>
-        <div class="row"><time>08–12 / 2026</time><h3>{t('l2h')}</h3><p>{t('l2')}</p><span class="tag">IUH</span></div>
-        <div class="row"><time>09–10 / 2026</time><h3>{t('l3h')}</h3><p>{t('l3')}</p><span class="tag">{t('l3t')}</span></div>
-        <div class="row"><time>2025 – 2026</time><h3>{t('l4h')}</h3><p>{t('l4')}</p><span class="tag">7 projects</span></div>
-        <div class="row"><time>2022 – now</time><h3>{t('l5h')}</h3><p>{t('l5')}</p><span class="tag">#9</span></div>
-      </div>
+      <div class="s-head"><div><span class="idx">04 /</span><h2>{t('notes_h')}</h2></div><p>{t('notes_home_p')}</p></div>
+      <div class="nh">{latestNotes.map(n => (
+        <a class="nh-card" href={p(`/notes/${n.slug}/`)}>
+          <span class="nl-meta"><time datetime={n.date}>{fmtDate(n.date, lang)}</time>{n.minutes && <span>{n.minutes} {t('read_min')}</span>}</span>
+          <h3>{n.title}</h3><p>{n.description}</p><span class="nh-go" aria-hidden="true">→</span>
+        </a>
+      ))}</div>
+      <div class="allp"><a class="btn ghost" href={p('/notes/')}><span>{t('back_notes')}</span><span class="k" aria-hidden="true">→</span></a></div>
     </div>
   </section>
 
-  <section class="s" style="padding-top:0">
+  <section class="s" id="about">
     <div class="wrap">
+      <div class="s-head"><div><span class="idx">05 /</span><h2>{t('about_h')}</h2></div><p>{t('about_p')}</p></div>
+      <article class="edu">
+        <div class="edu-main">
+          <span class="eyebrow"><i></i><span>{t('edu_h')}</span></span>
+          <h3>{tr(ed.degree, lang)}</h3>
+          <p class="edu-school">{tr(ed.school, lang)} · {ym(ed.start)} – {ym(ed.end)} ({tr(ed.end_note, lang)})</p>
+        </div>
+        <ul class="edu-facts">
+          <li><b>{ed.gpa}</b><span>GPA</span></li>
+          <li><b>6</b><span>{t('edu_sch')}</span></li>
+          <li><b>6.0</b><span>IELTS Academic</span></li>
+          <li><a href={p('/projects/vihallulens/')}><b>{t('edu_thesis')}</b><span>ViHalluLens →</span></a></li>
+        </ul>
+      </article>
       <div class="court">
         <div class="ttl"><span>{t('off1')}</span><br><em>{t('off2')}</em></div>
         <div class="badge" aria-label="Thẻ của Lân"><span class="strap" aria-hidden="true">IUH · DATA SCIENCE · IUH · DATA SCIENCE</span><span class="clip" aria-hidden="true"></span><div class="card"><span class="slot" aria-hidden="true"></span><div class="bhead"><span>IUH · IT</span><span>2022 – 2027</span></div><img src="/img/id-photo.jpg" alt="Ảnh thẻ Nguyễn Ngọc Lân" width="450" height="600"><b class="bname">NGUYỄN NGỌC LÂN</b><span class="brole">{t('brole')}</span><div class="bfoot"><span class="bnum">#9</span><span class="bars9" aria-hidden="true"></span><img class="bsig" src="/img/signature.svg" alt="" width="90" height="34"></div></div></div>
@@ -199,22 +211,9 @@ const latestNotes = notesFor(lang).slice(0, 3);
     </div>
   </section>
 
-  <section class="s" id="notes-home" style="padding-top:0">
-    <div class="wrap">
-      <div class="s-head"><div><span class="idx">06 /</span><h2>{t('notes_h')}</h2></div><p>{t('notes_home_p')}</p></div>
-      <div class="nh">{latestNotes.map(n => (
-        <a class="nh-card" href={p(`/notes/${n.slug}/`)}>
-          <span class="nl-meta"><time datetime={n.date}>{fmtDate(n.date, lang)}</time>{n.minutes && <span>{n.minutes} {t('read_min')}</span>}</span>
-          <h3>{n.title}</h3><p>{n.description}</p><span class="nh-go" aria-hidden="true">→</span>
-        </a>
-      ))}</div>
-      <div class="allp"><a class="btn ghost" href={p('/notes/')}><span>{t('back_notes')}</span><span class="k" aria-hidden="true">→</span></a></div>
-    </div>
-  </section>
-
   <section class="s" id="contact">
     <div class="wrap contact">
-      <span class="idx">07 /</span>
+      <span class="idx">06 /</span>
       <h2><span>{t('ct1')}</span><br><em>{t('ct2')}</em></h2>
       <div class="c-row">
         <div class="who2"><span class="me" title="Hi!"><img class="a0" src="/img/toon/avatar-wave.webp" alt="Nguyễn Ngọc Lân" width="360" height="360" loading="lazy"><img class="a1" src="/img/toon/avatar-wink.webp" alt="" width="360" height="360"></span><div><div class="eyebrow" style="margin-bottom:10px"><i></i><span>{t('avail')}</span></div><div class="mail" id="mail">nguyenngoclan120904@gmail.com</div></div></div>

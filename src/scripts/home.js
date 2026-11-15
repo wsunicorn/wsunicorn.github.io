@@ -32,12 +32,16 @@ import rig from '../data/toon-rig.json';
 
   const giant = $('#giant'), heads = $('#heads'), roleLine = $('#roleLine');
   const hero = $('.hero'), svg = $('#lines'), portrait = $('#portrait');
+  // nút chọn head đã được dựng sẵn trong HTML (tránh xê dịch bố cục) — chỉ gắn sự kiện; nếu thiếu thì tạo
   HEADS.forEach((h, i) => {
-    const b = document.createElement('button');
-    b.className = 'tab'; b.type = 'button'; b.role = 'tab'; b.id = 'tab-' + h.id;
-    b.innerHTML = `<small>${h.no}</small>${h.id.toUpperCase()}<i class="prog"></i>`;
+    let b = document.getElementById('tab-' + h.id);
+    if (!b) {
+      b = document.createElement('button');
+      b.className = 'tab'; b.type = 'button'; b.role = 'tab'; b.id = 'tab-' + h.id;
+      b.innerHTML = `<small>${h.no}</small>${h.id.toUpperCase()}<i class="prog"></i>`;
+      heads.appendChild(b);
+    }
     b.onclick = () => { select(i); hold(); };
-    heads.appendChild(b);
   });
   const cardEls = ['#o1', '#o2', '#o3'].map($);
   let cur = -1, timer, holdT;
@@ -113,7 +117,10 @@ import rig from '../data/toon-rig.json';
       { x: Math.min(Math.max(head.x + 120, pr.right - hr.left - 40), rightLimit), y: H * (h.cy ? h.cy[1] : .47) } ];
     cardEls.forEach((c, k) => {
       c.classList.toggle('off', wide && k === 0 && !leftFits);
-      if (wide) { c.style.left = Math.max(16, spots[k].x) + 'px'; c.style.top = spots[k].y + 'px'; } else { c.style.left = c.style.top = ''; } });
+      // đặt vị trí bằng transform (biến --x/--y) thay cho left/top: transform không tính là xê dịch bố cục (CLS)
+      if (wide) { c.style.left = c.style.top = '0px'; c.style.setProperty('--x', Math.max(16, spots[k].x) + 'px'); c.style.setProperty('--y', spots[k].y + 'px'); }
+      else { c.style.left = c.style.top = ''; c.style.removeProperty('--x'); c.style.removeProperty('--y'); }
+      c.classList.remove('pending'); });
     if (!wide) { svg.innerHTML = ''; return; }
     svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
     let d = '';
@@ -146,23 +153,6 @@ import rig from '../data/toon-rig.json';
   poseImgs[pi].classList.add('on');
   $('#poses').addEventListener('pointerenter', () => poseHover = true); $('#poses').addEventListener('pointerleave', () => poseHover = false);
   if (!reduce) setInterval(() => { if (poseHover) return; poseImgs[pi].classList.remove('on'); pi = (pi + 1) % poseImgs.length; poseImgs[pi].classList.add('on'); }, 650);
-
-  /* heatmap card */
-  $('#heat').innerHTML = Array.from({ length: 40 }, (_, i) => `<i style="--o:${(0.15 + Math.abs(Math.sin(i * 1.7)) * .85).toFixed(2)};--d:${-(i % 7) * .4}s"></i>`).join('');
-
-  /* research lens */
-  const box = $('#lensBox'), lens = $('#lens');
-  box.querySelectorAll('.chunk').forEach(ch => { const s = ch.querySelector('small').outerHTML; const txt = ch.textContent.replace(ch.querySelector('small').textContent, '').trim(); ch.innerHTML = s + txt.split(/\s+/).map(w => `<span class="w">${w}</span>`).join(' '); });
-  const lw = [...box.querySelectorAll('.w')];
-  function lensAt(x, y) { const r = box.getBoundingClientRect(); lens.style.left = (x - r.left) + 'px'; lens.style.top = (y - r.top) + 'px';
-    lw.forEach(w => { const b = w.getBoundingClientRect(); const d = Math.hypot(b.left + b.width / 2 - x, b.top + b.height / 2 - y); w.style.setProperty('--a', Math.max(0, 1 - d / 120).toFixed(2)); }); }
-  let lensHover = false;
-  box.addEventListener('pointermove', e => { lensHover = true; lensAt(e.clientX, e.clientY); });
-  box.addEventListener('pointerleave', () => lensHover = false);
-  const t0 = performance.now();
-  (function idle(t) { if (!lensHover) { const r = box.getBoundingClientRect(); if (r.bottom > 0 && r.top < innerHeight) { const k = reduce ? .35 : ((t - t0) / 6000) % 1;
-      lensAt(r.left + r.width * (.2 + .6 * (.5 - .5 * Math.cos(k * 6.283))), r.top + r.height * (.25 + .5 * (.5 - .5 * Math.cos(k * 12.566)))); } }
-    if (!reduce) requestAnimationFrame(idle); })(t0);
 
   /* counters when in view */
   const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; io.unobserve(e.target); const el = e.target, end = +el.dataset.count, dec = +(el.dataset.dec || 0), suf = el.dataset.suf || '';
