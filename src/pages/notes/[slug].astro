@@ -1,0 +1,8 @@
+---
+import Base from '../../layouts/Base.astro';
+import NotePage from '../../components/NotePage.astro';
+import { notesFor } from '../../lib/notes';
+export const getStaticPaths = () => notesFor('en').map(note => ({ params: { slug: note.slug }, props: { note } }));
+const { note } = Astro.props;
+---
+<Base lang="en" path={`/notes/${note.slug}/`} title={note.title} description={note.description}><NotePage lang="en" note={note} /></Base>

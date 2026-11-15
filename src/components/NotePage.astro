@@ -1,0 +1,37 @@
+---
+import SubNav from './SubNav.astro';
+import { useT, localePath, type Lang } from '../i18n/ui';
+import { fmtDate, notesFor, type NoteMeta } from '../lib/notes';
+import { projects, tr } from '../lib/data';
+interface Props { lang: Lang; note: NoteMeta & { Content: any } }
+const { lang, note } = Astro.props;
+const t = useT(lang);
+const { Content } = note;
+const proj = projects.find(p => p.slug === note.project);
+const others = notesFor(lang).filter(n => n.slug !== note.slug);
+---
+<SubNav lang={lang} path={`/notes/${note.slug}/`} />
+<main class="sub wrap">
+  <a class="back" href={localePath(lang, '/notes/')}>← {t('back_notes')}</a>
+  <article class="essay">
+    <header>
+      <span class="eyebrow"><i></i><span><time datetime={note.date}>{fmtDate(note.date, lang)}</time>{note.minutes && ` · ${note.minutes} ${t('read_min')}`}</span></span>
+      <h1>{note.title}</h1>
+      <p class="lede">{note.description}</p>
+    </header>
+    <div class="prose"><Content /></div>
+    {proj && (
+      <a class="ph-next" href={localePath(lang, `/projects/${proj.slug}/`)}>
+        <span class="eyebrow">{t('note_project')} →</span>
+        <b>{tr(proj.title, lang).split(' — ')[0]}</b>
+        <span>{tr(proj.tagline, lang)}</span>
+      </a>
+    )}
+  </article>
+  {others.length > 0 && (
+    <nav class="more-notes" aria-label={t('notes_h')}>
+      <span class="eyebrow">{t('more_notes')}</span>
+      <ul>{others.map(n => <li><a href={localePath(lang, `/notes/${n.slug}/`)}>{n.title}</a></li>)}</ul>
+    </nav>
+  )}
+</main>

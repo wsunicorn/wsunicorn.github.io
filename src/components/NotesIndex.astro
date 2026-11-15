@@ -1,0 +1,28 @@
+---
+import SubNav from './SubNav.astro';
+import { useT, localePath, type Lang } from '../i18n/ui';
+import { notesFor, fmtDate } from '../lib/notes';
+import { projects, tr } from '../lib/data';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useT(lang);
+const list = notesFor(lang);
+const projName = (slug?: string) => { const p = projects.find(x => x.slug === slug); return p ? tr(p.title, lang).split(' — ')[0] : ''; };
+---
+<SubNav lang={lang} path="/notes/" />
+<main class="sub wrap">
+  <header class="sub-head">
+    <span class="eyebrow"><i></i><span>{list.length} · {t('notes_eyebrow')}</span></span>
+    <h1>{t('notes_h')}</h1>
+    <p>{t('notes_p')}</p>
+  </header>
+  <ol class="nlist">
+    {list.map(n => (
+      <li><a href={localePath(lang, `/notes/${n.slug}/`)}>
+        <span class="nl-meta"><time datetime={n.date}>{fmtDate(n.date, lang)}</time>{n.minutes && <span>{n.minutes} {t('read_min')}</span>}{n.project && <span>{projName(n.project)}</span>}</span>
+        <h2>{n.title}</h2>
+        <p>{n.description}</p>
+      </a></li>
+    ))}
+  </ol>
+</main>

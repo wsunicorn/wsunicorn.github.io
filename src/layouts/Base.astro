@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import { ui, type Lang } from '../i18n/ui';
+import { profile } from '../lib/data';
+const gc: string = profile.analytics?.goatcounter ?? '';   // trống = không đo
 interface Props { lang: Lang; title?: string; description?: string; path: string; image?: string }
 const { lang, title, description, path, image = '/og.jpg' } = Astro.props;
 const site = Astro.site!.href.replace(/\/$/, '');
@@ -29,6 +31,7 @@ const desc = description ?? ui[lang].meta_desc;
   <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'vi_VN'}>
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#0b0c0e">
+  {gc && <script is:inline async data-goatcounter={`https://${gc}.goatcounter.com/count`} src="https://gc.zgo.at/count.js"></script>}
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">

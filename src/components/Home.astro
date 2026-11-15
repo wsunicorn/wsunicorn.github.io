@@ -11,7 +11,7 @@ const p = (path: string) => localePath(lang, path);
 
 <nav class="nav" aria-label="Main">
   <img class="sig" src="/img/signature.svg" alt="Nglan" width="80" height="22">
-  <a class="lk" href="#work">{t('nav_work')}</a><a class="lk" href="#research">{t('nav_research')}</a><a class="lk" href="#about">{t('nav_about')}</a><a class="lk" href="#contact">{t('nav_contact')}</a>
+  <a class="lk" href="#work">{t('nav_work')}</a><a class="lk" href="#research">{t('nav_research')}</a><a class="lk" href="#about">{t('nav_about')}</a><a class="lk" href={p('/notes/')}>{t('nav_notes')}</a><a class="lk" href="#contact">{t('nav_contact')}</a>
   <a class="pill" id="lang" href={altHref} hreflang={alt} lang={alt} aria-label={t("lang_name")}>{alt.toUpperCase()}</a>
   <button class="pill" id="theme" type="button" aria-label={t("theme")} title={t("theme")}>◐</button>
   <a class="btn" href="#contact" style="padding:6px 6px 6px 16px;font-size:13px"><span>CV</span><span class="k" aria-hidden="true">↗</span></a>

@@ -3,6 +3,7 @@ import SubNav from './SubNav.astro';
 import ProjectVisual from './ProjectVisual.astro';
 import { useT, localePath, type Lang } from '../i18n/ui';
 import { projects, tr, period, iconFor, INK_ICONS, accentFor, type Project } from '../lib/data';
+import { notesOfProject } from '../lib/notes';
 interface Props { lang: Lang; project: Project }
 const { lang, project: p } = Astro.props;
 const t = useT(lang);
@@ -10,6 +11,7 @@ const i = projects.findIndex(x => x.slug === p.slug);
 const next = projects[(i + 1) % projects.length];
 const [name, sub] = tr(p.title, lang).split(' — ');
 const c = p.case;
+const related = notesOfProject(p.slug, lang);
 const parseNum = (v: string) => { const m = v.match(/^([+−-]?)([\d.,]+)(.*)$/); if (!m || /–/.test(v)) return null;
   const raw = m[2].replace(/,/g, ''); const dec = (raw.split('.')[1] || '').length; return { sign: m[1], n: raw, dec, suf: m[3] }; };
 ---
@@ -88,6 +90,13 @@ const parseNum = (v: string) => { const m = v.match(/^([+−-]?)([\d.,]+)(.*)$/)
       {c.limits && <div><h2>{t('limits_h')}</h2><ul>{c.limits[lang].map(l => <li>{l}</li>)}</ul></div>}
       {c.next && <div class="again"><h2>{t('next_time')}</h2><p>{tr(c.next, lang)}</p></div>}
     </section>
+  )}
+
+  {related.length > 0 && (
+    <nav class="more-notes" aria-label={t('related_notes')}>
+      <span class="eyebrow">{t('related_notes')}</span>
+      <ul>{related.map(n => <li><a href={localePath(lang, `/notes/${n.slug}/`)}>{n.title}</a></li>)}</ul>
+    </nav>
   )}
 
   <a class="ph-next" href={localePath(lang, `/projects/${next.slug}/`)}>
