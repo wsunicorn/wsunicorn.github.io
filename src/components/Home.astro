@@ -1,18 +1,41 @@
 ---
 import { useT, localePath, type Lang } from '../i18n/ui';
-import { cvs, mainCv, tr } from '../lib/data';
+import { cvs, mainCv, tr, profile, projects, iconFor, INK_ICONS } from '../lib/data';
+import { notesFor, fmtDate } from '../lib/notes';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = useT(lang);
 const alt = lang === 'en' ? 'vi' : 'en';
 const altHref = localePath(alt, '/');
 const p = (path: string) => localePath(lang, path);
+
+// Experience: thực tập TMA (dữ liệu trong data/profile.yaml)
+const exp = profile.experience[0];
+const ym = (s: string) => { const [y, m] = String(s).split('-'); return lang === 'vi' ? `${m}/${y}` : `${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][+m - 1]} ${y}`; };
+
+// Kỹ năng kèm bằng chứng: mỗi mục link tới dự án đầu tiên có dùng nó (theo stack hoặc bullet)
+const tokens = (item: string) => item.split(' (')[0].split(/\s*(?:\/|\+|,)\s*/).map(x => x.trim()).filter(Boolean);
+const uses = (tok: string, pr: any) => {
+  const rx = new RegExp(`(^|[^A-Za-z0-9])${tok.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}([^A-Za-z0-9]|$)`, 'i');
+  return [...pr.stack, ...pr.bullets.en].some((s: string) => rx.test(s));
+};
+const skillGroups = profile.skills.map((g: any) => ({
+  group: tr(g.group, lang),
+  items: g.items.map((item: string) => {
+    const name = item.split(' (')[0];
+    const ev = g.evidence?.[name];                     // đối chiếu thủ công trong profile.yaml
+    if (ev === 'experience') return { name, icon: iconFor(name), href: '#experience', title: `${tr(exp.role, lang)} · ${exp.company}` };
+    const used = ev ? projects.filter(pr => pr.slug === ev) : projects.filter(pr => tokens(item).some(tok => uses(tok, pr)));
+    return { name, icon: iconFor(name), href: used[0] ? p(`/projects/${used[0].slug}/`) : null, title: used.map(u => tr(u.title, lang).split(' — ')[0]).join(' · ') };
+  }),
+}));
+const latestNotes = notesFor(lang).slice(0, 3);
 ---
 <div class="grain" aria-hidden="true"></div>
 
 <nav class="nav" aria-label="Main">
   <img class="sig" src="/img/signature.svg" alt="Nglan" width="80" height="22">
-  <a class="lk" href="#work">{t('nav_work')}</a><a class="lk" href="#research">{t('nav_research')}</a><a class="lk" href="#about">{t('nav_about')}</a><a class="lk" href={p('/notes/')}>{t('nav_notes')}</a><a class="lk" href="#contact">{t('nav_contact')}</a>
+  <a class="lk" href="#work">{t('nav_work')}</a><a class="lk" href="#experience">{t('nav_exp')}</a><a class="lk" href="#research">{t('nav_research')}</a><a class="lk" href="#about">{t('nav_about')}</a><a class="lk" href={p('/notes/')}>{t('nav_notes')}</a><a class="lk" href="#contact">{t('nav_contact')}</a>
   <a class="pill" id="lang" href={altHref} hreflang={alt} lang={alt} aria-label={t("lang_name")}>{alt.toUpperCase()}</a>
   <button class="pill" id="theme" type="button" aria-label={t("theme")} title={t("theme")}>◐</button>
   <a class="btn" href={mainCv(lang)} target="_blank" rel="noopener" style="padding:6px 6px 6px 16px;font-size:13px"><span>CV</span><span class="k" aria-hidden="true">↗</span></a>
@@ -45,8 +68,8 @@ const p = (path: string) => localePath(lang, path);
   <aside class="h-right" aria-label="Chỉ số">
     <div class="stat"><b data-count="3.61" data-dec="2">3.61</b><span>GPA · IUH</span></div>
     <div class="stat"><b data-count="11">11</b><span>{t('st_proj')}</span></div>
-    <div class="stat"><b data-count="4">4</b><span>{t('st_vb')}</span></div>
-    <div class="stat"><b>2026</b><span>{t('st_tma')}</span></div>
+    <div class="stat"><b>40/40</b><span>{t('st_drafts')}</span></div>
+    <div class="stat"><b>{t('st_avail_v')}</b><span>{t('st_avail')}</span></div>
   </aside>
   <img class="h-sig" src="/img/signature.svg" alt="" width="190" height="80">
 
@@ -85,9 +108,25 @@ const p = (path: string) => localePath(lang, path);
     </div>
   </section>
 
+  <section class="s" id="experience" style="padding-top:0">
+    <div class="wrap">
+      <div class="s-head"><div><span class="idx">02 /</span><h2>{t('exp_h')}</h2></div><p>{t('exp_p')}</p></div>
+      <article class="xp">
+        <header class="xp-head">
+          <div><h3>{tr(exp.role, lang)} · {exp.company}</h3><span class="xp-sub">{tr(exp.unit, lang)} · {tr(exp.location, lang)}</span></div>
+          <time>{ym(exp.start)} – {ym(exp.end)}</time>
+        </header>
+        <p class="xp-sum">{tr(exp.summary, lang)}</p>
+        <div class="xp-kpis">{exp.metrics.map((m: any) => <div class="kpi"><b>{m.value}</b><span>{tr(m.label, lang)}</span></div>)}</div>
+        <ul class="xp-list">{exp.bullets[lang].map((b: string) => <li>{b}</li>)}</ul>
+        <div class="xp-foot"><div class="stack">{exp.stack.map((s: string) => <span class="st">{s}</span>)}</div><span class="xp-nda">{t('exp_nda')}</span></div>
+      </article>
+    </div>
+  </section>
+
   <section class="s" id="research" style="background:var(--bg2)">
     <div class="wrap">
-      <div class="s-head"><div><span class="idx" style="color:var(--r-amber)">02 /</span><h2>{t('res_h')}</h2></div><p>{t('res_p')}</p></div>
+      <div class="s-head"><div><span class="idx" style="color:var(--r-amber)">03 /</span><h2>{t('res_h')}</h2></div><p>{t('res_p')}</p></div>
       <div class="lab">
         <div class="lens-box" id="lensBox">
           <div class="ctx" id="ctx">
@@ -108,7 +147,7 @@ const p = (path: string) => localePath(lang, path);
 
   <section class="s" id="about">
     <div class="wrap">
-      <div class="s-head"><div><span class="idx">03 /</span><h2>{t('how_h')}</h2></div><p>{t('how_p')}</p></div>
+      <div class="s-head"><div><span class="idx">04 /</span><h2>{t('how_h')}</h2></div><p>{t('how_p')}</p></div>
       <figure class="talk"><img src="/img/scene-talk.jpg" alt="Lân đang trình bày kết quả trước màn hình" width="1400" height="933" loading="lazy"></figure>
       <div class="steps">
         <div class="step"><b>01</b><h3>{t('s1')}</h3><p>{t('s1p')}</p></div>
@@ -117,15 +156,21 @@ const p = (path: string) => localePath(lang, path);
         <div class="step"><b>04</b><h3>{t('s4')}</h3><p>{t('s4p')}</p></div>
         <div class="step"><b>05</b><h3>{t('s5')}</h3><p>{t('s5p')}</p></div>
       </div>
-      <div class="logos" aria-label="Tools">
-        <span><img src="/icons/python.svg" alt="Python" width="24" height="24"></span><span><img src="/icons/pytorch.svg" alt="PyTorch" width="24" height="24"></span><span><img src="/icons/hugging-face.svg" alt="Hugging Face" width="24" height="24"></span><span><img src="/icons/langchain.svg" alt="LangChain" width="24" height="24"></span><span><img src="/icons/gemini.svg" alt="Gemini" width="24" height="24"></span><span><img class="ink" src="/icons/ollama.svg" alt="Ollama" width="24" height="24"></span><span><img src="/icons/qdrant.svg" alt="Qdrant" width="24" height="24"></span><span><img src="/icons/postgres.svg" alt="PostgreSQL" width="24" height="24"></span><span><img src="/icons/redis.svg" alt="Redis" width="24" height="24"></span><span><img src="/icons/fastapi.svg" alt="FastAPI" width="24" height="24"></span><span><img src="/icons/django.svg" alt="Django" width="24" height="24"></span><span><img src="/icons/docker.svg" alt="Docker" width="24" height="24"></span><span><img src="/icons/github-actions.svg" alt="GitHub Actions" width="24" height="24"></span><span><img src="/icons/aws.svg" alt="AWS" width="24" height="24"></span><span><img src="/icons/prometheus.svg" alt="Prometheus" width="24" height="24"></span><span><img src="/icons/grafana.svg" alt="Grafana" width="24" height="24"></span><span><img src="/icons/supabase.svg" alt="Supabase" width="24" height="24"></span><span><img src="/icons/react.svg" alt="React Native" width="24" height="24"></span><span><img class="ink" src="/icons/nextjs.svg" alt="Next.js" width="24" height="24"></span>
+      <div class="skills" id="skills">
+        <div class="sk-head"><h3>{t('skills_h')}</h3><p>{t('skills_p')}</p></div>
+        {skillGroups.map((g: any) => (
+          <div class="sk-row"><span class="sk-g">{g.group}</span><div class="sk-items">{g.items.map((s: any) => {
+            const inner = <>{s.icon && <img class={INK_ICONS.has(s.icon) ? 'ink' : ''} src={`/icons/${s.icon}.svg`} alt="" width="16" height="16" />}{s.name}</>;
+            return s.href ? <a class="st" href={s.href} title={s.title}>{inner}<span class="arr" aria-hidden="true">↗</span></a> : <span class="st">{inner}</span>;
+          })}</div></div>
+        ))}
       </div>
     </div>
   </section>
 
   <section class="s" style="padding-top:0">
     <div class="wrap">
-      <div class="s-head"><div><span class="idx">04 /</span><h2>{t('log_h')}</h2></div></div>
+      <div class="s-head"><div><span class="idx">05 /</span><h2>{t('log_h')}</h2></div></div>
       <div class="log">
         <div class="row"><time>09–12 / 2026</time><h3>TMA Solutions</h3><p>{t('l1')}</p><span class="tag">BU2 · Batch 53</span></div>
         <div class="row"><time>08–12 / 2026</time><h3>{t('l2h')}</h3><p>{t('l2')}</p><span class="tag">IUH</span></div>
@@ -152,9 +197,22 @@ const p = (path: string) => localePath(lang, path);
     </div>
   </section>
 
+  <section class="s" id="notes-home" style="padding-top:0">
+    <div class="wrap">
+      <div class="s-head"><div><span class="idx">06 /</span><h2>{t('notes_h')}</h2></div><p>{t('notes_home_p')}</p></div>
+      <div class="nh">{latestNotes.map(n => (
+        <a class="nh-card" href={p(`/notes/${n.slug}/`)}>
+          <span class="nl-meta"><time datetime={n.date}>{fmtDate(n.date, lang)}</time>{n.minutes && <span>{n.minutes} {t('read_min')}</span>}</span>
+          <h3>{n.title}</h3><p>{n.description}</p><span class="nh-go" aria-hidden="true">→</span>
+        </a>
+      ))}</div>
+      <div class="allp"><a class="btn ghost" href={p('/notes/')}><span>{t('back_notes')}</span><span class="k" aria-hidden="true">→</span></a></div>
+    </div>
+  </section>
+
   <section class="s" id="contact">
     <div class="wrap contact">
-      <span class="idx">05 /</span>
+      <span class="idx">07 /</span>
       <h2><span>{t('ct1')}</span><br><em>{t('ct2')}</em></h2>
       <div class="c-row">
         <div class="who2"><span class="me" title="Hi!"><picture><source srcset="/img/toon/avatar-wave-poster.webp" media="(prefers-reduced-motion: reduce)"><img class="a0" src="/img/toon/avatar-wave-anim.webp" alt="Nguyễn Ngọc Lân" width="360" height="360" loading="lazy"></picture><img class="a1" src="/img/toon/avatar-wink.webp" alt="" width="360" height="360"></span><div><div class="eyebrow" style="margin-bottom:10px"><i></i><span>{t('avail')}</span></div><div class="mail" id="mail">nguyenngoclan120904@gmail.com</div></div></div>

@@ -117,6 +117,29 @@
           "Mọi lựa chọn cấu hình đều qua thử nghiệm có luật chọn viết trước, khoảng tin cậy Wilson, và báo cả kết quả âm."
         ]
       },
+      "metrics": [
+        {
+          "value": "40/40",
+          "label": {
+            "en": "valid drafts, up from 34/40",
+            "vi": "bản nháp hợp lệ, từ 34/40"
+          }
+        },
+        {
+          "value": "0.82",
+          "label": {
+            "en": "MRR — right exercise first on 26/32 forms",
+            "vi": "MRR — bài đúng lên đầu ở 26/32 form"
+          }
+        },
+        {
+          "value": "0.995",
+          "label": {
+            "en": "AUC — near-duplicate warning in 0.19 s",
+            "vi": "AUC — cảnh báo trùng lặp trong 0,19 giây"
+          }
+        }
+      ],
       "stack": [
         "Python",
         "LLM structured output",
@@ -158,7 +181,14 @@
       "tags": [
         "ai-engineer",
         "research"
-      ]
+      ],
+      "evidence": {
+        "Tool calling": "agent-platform-hitl",
+        "Structured outputs": "experience",
+        "Guardrails": "agent-platform-hitl",
+        "Human-in-the-loop": "agent-platform-hitl",
+        "Prompt registry": "viragops"
+      }
     },
     {
       "group": {
@@ -181,7 +211,11 @@
         "ai-engineer",
         "ml-engineer",
         "research"
-      ]
+      ],
+      "evidence": {
+        "Attention analysis": "vihallulens",
+        "Reinforcement learning": "rl-trading"
+      }
     },
     {
       "group": {
@@ -204,7 +238,13 @@
         "ai-engineer",
         "ml-engineer",
         "research"
-      ]
+      ],
+      "evidence": {
+        "Golden-set evals": "viragops",
+        "CI quality gates": "viragops",
+        "LLM-as-judge": "vihallulens",
+        "Statistical testing": "experience"
+      }
     },
     {
       "group": {
