@@ -1,0 +1,74 @@
+[
+  {
+    "id": "ai-engineer",
+    "main": true,
+    "label": {
+      "en": "AI Engineer",
+      "vi": "Kỹ sư AI"
+    },
+    "file": {
+      "en": "/cv/CV_NguyenNgocLan_AIEngineer_Fresher_EN.pdf",
+      "vi": "/cv/CV_NguyenNgocLan_AIEngineer_Fresher_VI.pdf"
+    }
+  },
+  {
+    "id": "ml-engineer",
+    "main": false,
+    "label": {
+      "en": "Machine Learning Engineer",
+      "vi": "Kỹ sư Học máy"
+    },
+    "file": {
+      "en": "/cv/CV_NguyenNgocLan_MLEngineer_Fresher_EN.pdf",
+      "vi": "/cv/CV_NguyenNgocLan_MLEngineer_Fresher_VI.pdf"
+    }
+  },
+  {
+    "id": "cv-engineer",
+    "main": false,
+    "label": {
+      "en": "Computer Vision Engineer",
+      "vi": "Kỹ sư Thị giác máy tính"
+    },
+    "file": {
+      "en": "/cv/CV_NguyenNgocLan_ComputerVision_Fresher_EN.pdf",
+      "vi": "/cv/CV_NguyenNgocLan_ComputerVision_Fresher_VI.pdf"
+    }
+  },
+  {
+    "id": "ai-research",
+    "main": false,
+    "label": {
+      "en": "AI Research Engineer",
+      "vi": "Kỹ sư Nghiên cứu AI"
+    },
+    "file": {
+      "en": "/cv/CV_NguyenNgocLan_AIResearch_Fresher_EN.pdf",
+      "vi": "/cv/CV_NguyenNgocLan_AIResearch_Fresher_VI.pdf"
+    }
+  },
+  {
+    "id": "data-engineer",
+    "main": false,
+    "label": {
+      "en": "Data Engineer",
+      "vi": "Kỹ sư Dữ liệu"
+    },
+    "file": {
+      "en": "/cv/CV_NguyenNgocLan_DataEngineer_Fresher_EN.pdf",
+      "vi": "/cv/CV_NguyenNgocLan_DataEngineer_Fresher_VI.pdf"
+    }
+  },
+  {
+    "id": "data-analyst",
+    "main": false,
+    "label": {
+      "en": "Data Scientist / Data Analyst",
+      "vi": "Khoa học / Phân tích Dữ liệu"
+    },
+    "file": {
+      "en": "/cv/CV_NguyenNgocLan_DataScientist_Fresher_EN.pdf",
+      "vi": "/cv/CV_NguyenNgocLan_DataScientist_Fresher_VI.pdf"
+    }
+  }
+]

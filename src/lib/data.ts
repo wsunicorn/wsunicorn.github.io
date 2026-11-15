@@ -16,6 +16,12 @@ export interface Project {
 export const projects = projectsJson as unknown as Project[];
 export const profile = profileJson as any;
 
+// CV công khai (không số điện thoại) — sinh bởi `python cv/build.py --public`
+import cvsJson from '../data/cvs.json';
+export interface PublicCv { id: string; main: boolean; label: Bi; file: { en: string; vi: string } }
+export const cvs = cvsJson as PublicCv[];
+export const mainCv = (lang: 'en' | 'vi') => (cvs.find(c => c.main) ?? cvs[0]).file[lang];
+
 export const tr = (b: Bi | undefined, lang: Lang) => (b ? b[lang] ?? b.en : '');
 
 const MONTHS = { en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], vi: [] as string[] };

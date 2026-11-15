@@ -1,5 +1,6 @@
 ---
 import { useT, localePath, type Lang } from '../i18n/ui';
+import { cvs, mainCv, tr } from '../lib/data';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = useT(lang);
@@ -14,7 +15,7 @@ const p = (path: string) => localePath(lang, path);
   <a class="lk" href="#work">{t('nav_work')}</a><a class="lk" href="#research">{t('nav_research')}</a><a class="lk" href="#about">{t('nav_about')}</a><a class="lk" href={p('/notes/')}>{t('nav_notes')}</a><a class="lk" href="#contact">{t('nav_contact')}</a>
   <a class="pill" id="lang" href={altHref} hreflang={alt} lang={alt} aria-label={t("lang_name")}>{alt.toUpperCase()}</a>
   <button class="pill" id="theme" type="button" aria-label={t("theme")} title={t("theme")}>◐</button>
-  <a class="btn" href="#contact" style="padding:6px 6px 6px 16px;font-size:13px"><span>CV</span><span class="k" aria-hidden="true">↗</span></a>
+  <a class="btn" href={mainCv(lang)} target="_blank" rel="noopener" style="padding:6px 6px 6px 16px;font-size:13px"><span>CV</span><span class="k" aria-hidden="true">↗</span></a>
 </nav>
 
 <header class="hero" id="top">
@@ -27,7 +28,7 @@ const p = (path: string) => localePath(lang, path);
     <p class="pitch">{t('pitch')}</p>
     <div class="cta">
       <a class="btn" href="#work"><span>{t('cta_work')}</span><span class="k" aria-hidden="true">↗</span></a>
-      <a class="btn ghost" href="#contact"><span>{t('cta_cv')}</span><span class="k" aria-hidden="true">↓</span></a>
+      <a class="btn ghost" href={mainCv(lang)} target="_blank" rel="noopener"><span>{t('cta_cv')}</span><span class="k" aria-hidden="true">↓</span></a>
     </div>
   </div>
 
@@ -160,7 +161,7 @@ const p = (path: string) => localePath(lang, path);
         <div class="cta"><button class="btn" type="button" id="copy"><span>{t('copy')}</span><span class="k" aria-hidden="true">⧉</span></button><a class="btn ghost" href="https://github.com/wsunicorn" target="_blank" rel="noopener"><span>GitHub</span><span class="k" aria-hidden="true">↗</span></a><a class="btn ghost" href="https://www.linkedin.com/in/wsunicorn/" target="_blank" rel="noopener"><span>LinkedIn</span><span class="k" aria-hidden="true">↗</span></a></div>
       </div>
       <div><div class="eyebrow" style="margin-bottom:12px"><span>{t('cvby')}</span></div>
-        <div class="cvs"><span class="pill">AI Engineer ★</span><span class="pill">ML Engineer</span><span class="pill">AI Research</span><span class="pill">Data Engineer</span><span class="pill">Data Analyst</span></div></div>
+        <div class="cvs">{cvs.map(c => <a class="pill" href={c.file[lang]} target="_blank" rel="noopener">{tr(c.label, lang)}{c.main && ' ★'} <span aria-hidden="true">↓</span></a>)}</div></div>
     </div>
   </section>
 </main>
