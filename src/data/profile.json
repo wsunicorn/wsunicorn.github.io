@@ -266,7 +266,8 @@
       "tags": [
         "ai-engineer",
         "data-engineer",
-        "data-analyst"
+        "data-analyst",
+        "python-engineer"
       ]
     },
     {
@@ -285,8 +286,29 @@
       "tags": [
         "ai-engineer",
         "data-engineer",
-        "ml-engineer"
+        "ml-engineer",
+        "python-engineer"
       ]
+    },
+    {
+      "group": {
+        "en": "Engineering practice",
+        "vi": "Thực hành kỹ thuật"
+      },
+      "items": [
+        "Unit, integration & E2E tests (Pytest)",
+        "CI quality gates (PASS / WARN / BLOCK)",
+        "Async workers (Redis, Celery)",
+        "AI coding agents: task spec, diff review, test before merge"
+      ],
+      "tags": [
+        "python-engineer"
+      ],
+      "evidence": {
+        "Unit, integration & E2E tests": "agent-platform-hitl",
+        "CI quality gates": "viragops",
+        "Async workers": "rag-assistant-bilingual"
+      }
     }
   ],
   "core_skills": [
