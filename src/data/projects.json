@@ -6,7 +6,7 @@
     "featured": true,
     "title": {
       "en": "ViHalluLens — Hallucination Detection for Vietnamese RAG",
-      "vi": "ViHalluLens — Phát hiện ảo giác cho RAG tiếng Việt"
+      "vi": "ViHalluLens — Phát hiện ảo giác trong RAG tiếng Việt"
     },
     "tagline": {
       "en": "Reads the model's own attention to tell whether an answer is grounded in the retrieved context — in one forward pass, no paid judge.",
@@ -74,11 +74,11 @@
         "Reported the limits honestly across 19 experiments on 4 Vietnamese datasets; shipped a Python library, a REST service with an attention viewer, and a Docker image."
       ],
       "vi": [
-        "Tái lập Lookback Lens trên Qwen2.5-7B: bộ phân loại tuyến tính trên 756 tỷ lệ lookback (2.271 tham số) đạt macro-F1 ba lớp 0,745 — ngang PhoBERT-large tinh chỉnh (0,749, 369 triệu tham số) và tốt hơn ở lớp ảo giác nội tại.",
-        "Đầu chú ý mạnh nhất chỉ đúng đoạn bằng chứng ở 87,8 % mẫu ISE-DSC01 (gấp 14,3 lần ngẫu nhiên), đúng hơn cắt bỏ ngữ cảnh (0,850 so với 0,733) mà rẻ hơn khoảng 11 lần.",
-        "Đề xuất chunk-aware lookback ratio: bộ phát hiện hiệu chỉnh xác suất tốt nhất trong nghiên cứu (ECE 0,044 so với 0,109), còn mức tăng F1 (0,757 so với 0,745) không có ý nghĩa thống kê — ghi đúng như vậy.",
-        "Lấy trọng số chú ý bằng forward hook để Qwen2.5-7B-Instruct 4 bit chạy vừa một GPU T4 16 GB.",
-        "Báo cáo trung thực giới hạn qua 19 thí nghiệm trên 4 bộ dữ liệu tiếng Việt; sản phẩm gồm thư viện Python, dịch vụ REST có giao diện quan sát chú ý và ảnh Docker."
+        "Tái lập Lookback Lens trên Qwen2.5-7B: bộ phân loại tuyến tính dùng 756 tỷ lệ lookback (2.271 tham số) đạt macro-F1 ba lớp 0,745, tương đương PhoBERT-large đã tinh chỉnh (0,749 với 369 triệu tham số) và tốt hơn ở lớp ảo giác nội tại.",
+        "Đầu chú ý tốt nhất xác định đúng đoạn bằng chứng ở 87,8% mẫu ISE-DSC01 (gấp 14,3 lần mức ngẫu nhiên), chính xác hơn phương pháp cắt bỏ ngữ cảnh (0,850 so với 0,733) với chi phí thấp hơn khoảng 11 lần.",
+        "Đề xuất chunk-aware lookback ratio, cho xác suất được hiệu chỉnh tốt nhất trong nghiên cứu (ECE 0,044 so với 0,109); mức tăng F1 (0,757 so với 0,745) không có ý nghĩa thống kê và được báo cáo rõ.",
+        "Trích xuất trọng số chú ý bằng forward hook để chạy Qwen2.5-7B-Instruct 4 bit trên một GPU T4 16 GB.",
+        "Thực hiện 19 thí nghiệm trên 4 bộ dữ liệu tiếng Việt và trình bày rõ các giới hạn; sản phẩm gồm thư viện Python, dịch vụ REST có giao diện quan sát trọng số chú ý và Docker image."
       ]
     },
     "case": {
@@ -198,7 +198,7 @@
     "featured": true,
     "title": {
       "en": "viRAGops — Vietnamese RAG with Full LLMOps",
-      "vi": "viRAGops — RAG tiếng Việt với LLMOps trọn vẹn"
+      "vi": "viRAGops — RAG tiếng Việt với quy trình LLMOps đầy đủ"
     },
     "tagline": {
       "en": "Q&A over university regulations built on one rule — every retrieval, prompt or model change goes through the gate.",
@@ -210,7 +210,7 @@
     },
     "role": {
       "en": "Personal project · solo",
-      "vi": "Dự án cá nhân · tự làm toàn bộ"
+      "vi": "Dự án cá nhân · thực hiện độc lập"
     },
     "repo": "https://github.com/wsunicorn/viragops",
     "tags": [
@@ -275,9 +275,9 @@
         "Ran it like production — Langfuse tracing, Prometheus/Grafana dashboards, feedback loop with error clustering, semantic caching and cost-aware model routing."
       ],
       "vi": [
-        "Xây golden set 300 câu và cổng chất lượng PASS/WARN/BLOCK trong CI/CD chặn đủ 9/9 thay đổi xấu trong 16 kịch bản mô phỏng, không chặn nhầm; truy hồi lai đạt Recall@5 0,932.",
-        "Xây trọn hệ thống thành 9 module có phiên bản: DataOps nạp/chia/nhúng/đánh chỉ mục trên Qdrant, RAG runtime bắt buộc trích dẫn và từ chối khi thiếu căn cứ, PromptOps registry, gateway LiteLLM có fallback.",
-        "Vận hành như production — tracing Langfuse, dashboard Prometheus/Grafana, vòng phản hồi gom cụm lỗi, semantic cache và định tuyến model theo chi phí."
+        "Xây dựng bộ đánh giá 300 câu hỏi và cổng chất lượng PASS/WARN/BLOCK trong CI/CD, chặn đúng 9/9 thay đổi gây lỗi trong 16 kịch bản mô phỏng và không chặn nhầm; tìm kiếm kết hợp đạt Recall@5 0,932.",
+        "Phát triển toàn bộ hệ thống gồm 9 mô-đun có quản lý phiên bản: xử lý và lập chỉ mục dữ liệu trên Qdrant, RAG bắt buộc trích dẫn và từ chối trả lời khi thiếu căn cứ, quản lý prompt và cổng LiteLLM có phương án dự phòng.",
+        "Vận hành với Langfuse, Prometheus và Grafana; thu thập phản hồi và phân nhóm lỗi, sử dụng semantic cache và lựa chọn mô hình theo chi phí."
       ]
     },
     "case": {
@@ -411,7 +411,7 @@
     "confidential": true,
     "title": {
       "en": "Page-Grounded AI Study App (iOS & Android)",
-      "vi": "Ứng dụng học tập AI neo theo trang (iOS & Android)"
+      "vi": "Ứng dụng học tập AI trích dẫn theo trang tài liệu (iOS và Android)"
     },
     "tagline": {
       "en": "Learners upload their own course material; every answer, quiz and grade points back to the exact page — or says it isn't there.",
@@ -423,7 +423,7 @@
     },
     "role": {
       "en": "Own product venture · solo full-stack AI engineer — testing user reach and revenue",
-      "vi": "Sản phẩm riêng · tự làm full-stack AI — thử nghiệm khả năng tiếp cận người dùng và thu nhập"
+      "vi": "Sản phẩm cá nhân · phát triển độc lập để đánh giá nhu cầu người dùng và khả năng tạo doanh thu"
     },
     "repo": null,
     "tags": [
@@ -467,9 +467,9 @@
         "Offline flashcards with FSRS spaced repetition on SQLite, quiz generation and rubric-based essay grading; bilingual Vietnamese–English from v1."
       ],
       "vi": [
-        "Xây lớp kiểm chứng đối chiếu từng câu mô hình sinh ra với đoạn đã trích trước khi hiển thị, kèm nhãn độ tin cậy cho mỗi câu trả lời.",
-        "Worker nạp tài liệu (FastAPI + PyMuPDF) trích text kèm toạ độ trang và OCR ảnh chụp nhiều trang; tìm kiếm trên Supabase pgvector qua Edge Function làm proxy LLM định tuyến nhiều model — không để khóa API trong app.",
-        "Flashcard offline lặp lại ngắt quãng FSRS trên SQLite, sinh quiz và chấm tự luận theo rubric; song ngữ Việt–Anh từ bản đầu."
+        "Xây dựng lớp kiểm chứng, đối chiếu từng câu do mô hình tạo ra với đoạn được trích dẫn trước khi hiển thị, kèm mức độ tin cậy của câu trả lời.",
+        "Phát triển dịch vụ xử lý tài liệu (FastAPI, PyMuPDF) trích xuất văn bản kèm vị trí trên trang và nhận dạng chữ từ nhiều ảnh chụp; tìm kiếm trên Supabase pgvector, gọi LLM qua Edge Function để không lưu khóa API trong ứng dụng.",
+        "Hỗ trợ thẻ ghi nhớ ngoại tuyến theo thuật toán FSRS trên SQLite, tạo câu hỏi trắc nghiệm và chấm bài tự luận theo tiêu chí; giao diện Việt–Anh."
       ]
     },
     "case": {
@@ -560,7 +560,7 @@
     "featured": true,
     "title": {
       "en": "AI Agent Platform with Human Approval",
-      "vi": "Nền tảng AI Agent có người duyệt"
+      "vi": "Nền tảng AI Agent có bước phê duyệt của con người"
     },
     "tagline": {
       "en": "A support-operations agent that drafts replies and runs tools — but keeps a human in control of every sensitive action.",
@@ -572,7 +572,7 @@
     },
     "role": {
       "en": "Personal project · solo",
-      "vi": "Dự án cá nhân · tự làm toàn bộ"
+      "vi": "Dự án cá nhân · thực hiện độc lập"
     },
     "repo": "https://github.com/wsunicorn/AI-Agent-Platform-with-Human-Approval",
     "tags": [
@@ -609,9 +609,9 @@
         "Kept it dependable with Gemini-first / Ollama-fallback routing and unit, integration and E2E test suites."
       ],
       "vi": [
-        "Thiết kế chính sách bảo vệ 3 tầng (an toàn / cần duyệt / chặn), chống lặp hành động nhạy cảm và ghi nhật ký kiểm toán đầy đủ.",
-        "Agent FastAPI + LangGraph với RAG lai trên pgvector và bảng duyệt thời gian thực.",
-        "Ổn định nhờ định tuyến Gemini trước / Ollama dự phòng cùng bộ test unit, integration và E2E."
+        "Thiết kế chính sách kiểm soát hành động của agent theo ba mức (an toàn, cần phê duyệt, bị chặn), ngăn thực hiện trùng các hành động nhạy cảm và lưu đầy đủ nhật ký.",
+        "Xây dựng agent bằng FastAPI và LangGraph, kết hợp hybrid RAG trên pgvector và trang phê duyệt cập nhật theo thời gian thực.",
+        "Ưu tiên Gemini và tự động chuyển sang Ollama khi gặp sự cố; có đủ kiểm thử unit, integration và end-to-end."
       ]
     },
     "case": {
@@ -744,7 +744,7 @@
     "featured": false,
     "title": {
       "en": "Vietnamese–English Document AI Assistant",
-      "vi": "Trợ lý AI tài liệu Việt–Anh"
+      "vi": "Trợ lý hỏi đáp tài liệu Việt–Anh"
     },
     "tagline": {
       "en": "Ask questions over your own documents in Vietnamese or English — answers always cite their sources or honestly say \"not found\".",
@@ -756,7 +756,7 @@
     },
     "role": {
       "en": "Personal project · solo",
-      "vi": "Dự án cá nhân · tự làm toàn bộ"
+      "vi": "Dự án cá nhân · thực hiện độc lập"
     },
     "repo": "https://github.com/wsunicorn/Vietnamese_English_RAG_Assistant",
     "tags": [
@@ -790,9 +790,9 @@
         "Async FastAPI services with Redis workers, PostgreSQL job tracking, feedback/metrics endpoints; optional Slack, Discord and Telegram bots."
       ],
       "vi": [
-        "Nạp 7 loại nguồn (PDF, DOCX, Markdown, Notion export, website, sitemap) với chia đoạn theo metadata.",
-        "Tìm kiếm lai dense + BM25 trên Qdrant, có rerank tùy chọn, trích dẫn và xử lý khi không có câu trả lời.",
-        "Dịch vụ FastAPI bất đồng bộ với Redis worker, theo dõi job trên PostgreSQL, endpoint phản hồi/số liệu; bot Slack, Discord, Telegram tùy chọn."
+        "Tiếp nhận 7 loại nguồn tài liệu (PDF, DOCX, Markdown, Notion, trang web, sitemap…) và chia đoạn dựa trên metadata.",
+        "Tìm kiếm kết hợp dense và BM25 trên Qdrant, có reranking tùy chọn, trích dẫn nguồn và thông báo khi không tìm thấy câu trả lời.",
+        "Xây dựng dịch vụ FastAPI bất đồng bộ với Redis worker, theo dõi tác vụ trên PostgreSQL, ghi nhận phản hồi và số liệu; hỗ trợ bot Slack, Discord và Telegram."
       ]
     }
   },
@@ -803,7 +803,7 @@
     "featured": false,
     "title": {
       "en": "Multi-Agent Content Generation Pipeline",
-      "vi": "Pipeline đa agent sinh nội dung"
+      "vi": "Hệ thống đa agent tạo nội dung"
     },
     "tagline": {
       "en": "Give it a topic, audience and tone; a team of LangGraph agents researches, outlines, writes, fact-checks and optimises a long-form article.",
@@ -815,7 +815,7 @@
     },
     "role": {
       "en": "Data Platforms course project · main developer",
-      "vi": "Đồ án môn Nền tảng dữ liệu · người phát triển chính"
+      "vi": "Đồ án môn Nền tảng dữ liệu · phát triển chính"
     },
     "repo": "https://github.com/wsunicorn/Agent-based-Content-Generation",
     "tags": [
@@ -861,9 +861,9 @@
         "Routes across Ollama, Gemini and any OpenAI-compatible server; auto-sources section images from Wikimedia Commons with URL filtering."
       ],
       "vi": [
-        "Điều phối 8 agent LangGraph (Research → Outline → Writer → Editor → FactChecker → SEO → QA), viết song song từng phần rồi gộp, định tuyến sửa lại và tùy chọn cho người duyệt dàn ý.",
-        "Job dài chạy trên Django + Celery/Redis, tiến trình từng agent cập nhật trực tiếp qua WebSocket; xuất Markdown, HTML, DOCX.",
-        "Định tuyến giữa Ollama, Gemini và server tương thích OpenAI; tự tìm ảnh minh họa từ Wikimedia Commons có lọc URL."
+        "Điều phối 8 agent bằng LangGraph (nghiên cứu, lập dàn ý, viết, biên tập, kiểm chứng, SEO, kiểm tra chất lượng); các phần được viết song song rồi ghép lại, có thể yêu cầu sửa và cho người dùng duyệt dàn ý.",
+        "Xử lý tác vụ dài bằng Django, Celery và Redis; cập nhật tiến độ từng agent qua WebSocket; xuất ra Markdown, HTML và DOCX.",
+        "Cho phép lựa chọn giữa Ollama, Gemini và các máy chủ tương thích OpenAI; tự động tìm ảnh minh họa từ Wikimedia Commons và lọc đường dẫn."
       ]
     }
   },
@@ -928,8 +928,8 @@
         "Reached 0.76–0.81 test accuracy (C1–C3) and BERTScore F1 0.743 (C4), with contrastive learning, error analysis and a web demo."
       ],
       "vi": [
-        "Thiết kế pipeline hai luồng trên ImageCLEF VQA-Med 2019 (bản dịch tiếng Việt): PhoBERT + ViT cross-attention cho phân loại, ViT + ViT5 tinh chỉnh LoRA cho sinh câu trả lời.",
-        "Đạt accuracy 0,76–0,81 trên tập test (C1–C3) và BERTScore F1 0,743 (C4), có học tương phản, phân tích lỗi và web demo."
+        "Thiết kế hai hướng xử lý trên bộ ImageCLEF VQA-Med 2019 (bản dịch tiếng Việt): PhoBERT và ViT với cross-attention để phân loại, ViT và ViT5 tinh chỉnh bằng LoRA để tạo câu trả lời.",
+        "Đạt accuracy 0,76–0,81 trên tập kiểm tra (C1–C3) và BERTScore F1 0,743 (C4); áp dụng học tương phản, phân tích lỗi và xây dựng trang web minh họa."
       ]
     }
   },
@@ -940,7 +940,7 @@
     "featured": false,
     "title": {
       "en": "Sleep Disorder Detection — MLOps Pipeline",
-      "vi": "Phát hiện rối loạn giấc ngủ — Pipeline MLOps"
+      "vi": "Phát hiện rối loạn giấc ngủ — Quy trình MLOps"
     },
     "tagline": {
       "en": "7-class EEG classification run like production ML, from data versioning to drift-triggered retraining on AWS.",
@@ -952,7 +952,7 @@
     },
     "role": {
       "en": "Emerging Technologies course · main developer (team of 2)",
-      "vi": "Môn Công nghệ mới · người làm chính (nhóm 2)"
+      "vi": "Môn Công nghệ mới · phát triển chính (nhóm 2 người)"
     },
     "repo": "https://github.com/wsunicorn/sleep-disorder-mlops",
     "tags": [
@@ -994,9 +994,9 @@
         "GitHub Actions CI/CD: test → build → push to ECR → deploy on ECS Fargate behind an ALB → migrate → smoke test."
       ],
       "vi": [
-        "Xây pipeline EEG 7 lớp trên CAP Sleep với DVC quản lý phiên bản dữ liệu, MLflow Registry và quy trình tự huấn luyện lại khi phát hiện drift.",
-        "Phục vụ model stage Production qua Django REST API và dashboard, có fallback tải artifact từ S3.",
-        "CI/CD GitHub Actions: test → build → đẩy ECR → deploy ECS Fargate sau ALB → migrate → smoke test."
+        "Xây dựng quy trình phân loại EEG 7 lớp trên bộ CAP Sleep, quản lý phiên bản dữ liệu bằng DVC, quản lý mô hình bằng MLflow Registry và huấn luyện lại khi phát hiện drift.",
+        "Triển khai mô hình qua Django REST API và trang theo dõi; tự động lấy mô hình từ S3 khi registry không khả dụng.",
+        "Thiết lập CI/CD bằng GitHub Actions: kiểm thử, đóng gói, đẩy lên ECR, triển khai trên ECS Fargate sau ALB, cập nhật cơ sở dữ liệu và kiểm tra nhanh sau triển khai."
       ]
     }
   },
@@ -1019,7 +1019,7 @@
     },
     "role": {
       "en": "Computer Vision course · main developer",
-      "vi": "Đồ án môn Thị giác máy tính · người làm chính"
+      "vi": "Đồ án môn Thị giác máy tính · phát triển chính"
     },
     "repo": "https://github.com/wsunicorn/VEHICLE-COUNTING-SYSTEM-USING-DETECTION-TRACKING-COUNTING",
     "tags": [
@@ -1061,9 +1061,9 @@
         "Tested automatic ROI with SAM and Grounding DINO + SAM (77% and 70%), documenting where automation still loses to manual setup; web demo included."
       ],
       "vi": [
-        "Pipeline: YOLO phát hiện → theo dõi đa đối tượng Kalman + Hungarian → gán hướng ROI/MOI → CSV đếm và video overlay (định dạng AI City Challenge Track 1).",
-        "Đạt độ chính xác đếm 98,96 % (95/96 xe) trên camera tham chiếu; sinh MOI từ quỹ đạo thay cho vẽ tay mà giữ nguyên độ chính xác.",
-        "Thử ROI tự động bằng SAM và Grounding DINO + SAM (77 % và 70 %), ghi rõ chỗ tự động hóa còn thua cấu hình tay; có web demo."
+        "Xây dựng quy trình gồm phát hiện bằng YOLO, theo dõi nhiều đối tượng bằng Kalman và Hungarian, xác định hướng di chuyển theo ROI/MOI, xuất tệp CSV và video kết quả theo định dạng AI City Challenge Track 1.",
+        "Đạt độ chính xác đếm 98,96% (95/96 xe) trên camera tham chiếu; tự động tạo MOI từ quỹ đạo thay cho thao tác vẽ tay mà vẫn giữ độ chính xác.",
+        "Thử nghiệm tạo ROI tự động bằng SAM và Grounding DINO kết hợp SAM (77% và 70%), chỉ ra những trường hợp còn kém cấu hình thủ công; có trang web minh họa."
       ]
     }
   },
@@ -1074,7 +1074,7 @@
     "featured": false,
     "title": {
       "en": "Risk-Sensitive Reinforcement Learning for Trading",
-      "vi": "Học tăng cường nhạy rủi ro cho giao dịch"
+      "vi": "Học tăng cường có kiểm soát rủi ro trong giao dịch"
     },
     "tagline": {
       "en": "Can a trading agent earn returns while controlling deep drawdowns? PPO versus CVaR- and Sortino-penalised variants on SPY.",
@@ -1086,7 +1086,7 @@
     },
     "role": {
       "en": "Quantitative Trading course · main developer (team of 2)",
-      "vi": "Môn Giao dịch định lượng · người làm chính (nhóm 2)"
+      "vi": "Môn Giao dịch định lượng · phát triển chính (nhóm 2 người)"
     },
     "repo": "https://github.com/wsunicorn/Risk-sensitiveRLForTrading",
     "tags": [
@@ -1127,9 +1127,9 @@
         "In the 2020 COVID crash CVaR-PPO returned +1.4% with a −15% max drawdown versus −5.6% / −34% for buy-and-hold; in the 2023–24 bull run buy-and-hold still won (+58.8% vs +19.0%), reported as is."
       ],
       "vi": [
-        "Xây pipeline dữ liệu (16 đặc trưng thị trường gồm SMA, RSI, MACD, Bollinger, ATR) và môi trường một tài sản với phí 0,1 %, trượt giá 0,05 %.",
-        "Huấn luyện PPO, CVaR-PPO, Sortino-PPO trên cùng kiến trúc Actor-Critic; đánh giá bằng Sharpe, Sortino, Calmar, Max DD, VaR/CVaR-95.",
-        "Mùa sụp đổ COVID 2020, CVaR-PPO lãi +1,4 % với sụt giảm tối đa −15 %, so với −5,6 % / −34 % của mua-giữ; ở thị trường tăng 2023–24 mua-giữ vẫn thắng (+58,8 % so với +19,0 %), báo cáo nguyên trạng."
+        "Xây dựng pipeline dữ liệu với 16 đặc trưng thị trường (SMA, RSI, MACD, Bollinger, ATR…) và môi trường giao dịch một tài sản có phí 0,1% và trượt giá 0,05%.",
+        "Huấn luyện PPO, CVaR-PPO và Sortino-PPO trên cùng kiến trúc Actor-Critic; đánh giá bằng Sharpe, Sortino, Calmar, mức sụt giảm tối đa và VaR/CVaR-95.",
+        "Giai đoạn COVID 2020, CVaR-PPO lãi 1,4% với mức sụt giảm tối đa 15%, trong khi chiến lược mua và giữ lỗ 5,6% với mức sụt giảm 34%; giai đoạn thị trường tăng 2023–24, mua và giữ đạt kết quả cao hơn (58,8% so với 19,0%)."
       ]
     }
   },
@@ -1152,7 +1152,7 @@
     },
     "role": {
       "en": "Recommender Systems course · main developer (team project)",
-      "vi": "Môn Hệ thống gợi ý · người làm chính (đồ án nhóm)"
+      "vi": "Môn Hệ thống gợi ý · phát triển chính (đồ án nhóm)"
     },
     "repo": "https://github.com/wsunicorn/food-recommendation-system",
     "tags": [
@@ -1183,8 +1183,8 @@
         "Cold-start users fall back to a popularity list; delivered as a Flask web app with login, category browsing, search and per-item recommendations."
       ],
       "vi": [
-        "Kết hợp lọc theo nội dung (TF-IDF, cosine similarity) với lọc cộng tác trong xếp hạng lai có trọng số (70 % nội dung, 30 % cộng tác) để gợi ý đa dạng hơn.",
-        "Người dùng mới chưa có lịch sử được gợi ý theo độ phổ biến; sản phẩm là web app Flask có đăng nhập, duyệt danh mục, tìm kiếm và gợi ý theo từng món."
+        "Kết hợp lọc theo nội dung (TF-IDF, cosine similarity) và lọc cộng tác theo tỷ lệ 70% và 30% để kết quả gợi ý đa dạng hơn.",
+        "Gợi ý theo độ phổ biến cho người dùng mới; sản phẩm là ứng dụng web Flask có đăng nhập, danh mục, tìm kiếm và gợi ý theo từng món."
       ]
     }
   }

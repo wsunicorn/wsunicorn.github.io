@@ -101,7 +101,7 @@
       "end": "2026-12",
       "summary": {
         "en": "LLM + RAG pipeline that drafts structured therapy exercises for an early-intervention app (internal PoC); I owned the knowledge base, retrieval, schema and validation.",
-        "vi": "Pipeline LLM + RAG tự soạn bản nháp bài tập có cấu trúc cho một ứng dụng can thiệp sớm (PoC nội bộ); tôi phụ trách kho tri thức, tìm kiếm, schema và kiểm tra hợp lệ."
+        "vi": "Hệ thống LLM kết hợp RAG tạo bản nháp bài tập có cấu trúc cho một ứng dụng can thiệp sớm (thử nghiệm nội bộ); tôi phụ trách kho tri thức, truy xuất, cấu trúc dữ liệu và kiểm tra đầu ra."
       },
       "bullets": {
         "en": [
@@ -111,10 +111,10 @@
           "Ran every configuration choice as a pre-registered experiment with Wilson intervals, and reported the negative result too."
         ],
         "vi": [
-          "Xây tầng tìm kiếm trên thư viện 40 bài với embedding tiếng Việt trong cơ sở dữ liệu vector; bài đúng lên đầu ở 26/32 form (MRR 0,82).",
-          "Thiết kế bộ kiểm tra đầu ra ba tầng, bị chặn thì hỏi lại kèm lý do — số bản nháp hợp lệ tăng từ 34/40 lên 40/40, trung vị 9,45 giây mỗi form.",
-          "Làm cảnh báo trùng lặp bắt 28/29 cặp có nhãn (AUC 0,995) trong 0,19 giây; một chỉ dẫn prompt mới nâng bản nháp không lỗi từ 12/40 lên 28/40 (McNemar p = 0,00086).",
-          "Mọi lựa chọn cấu hình đều qua thử nghiệm có luật chọn viết trước, khoảng tin cậy Wilson, và báo cả kết quả âm."
+          "Xây dựng phần truy xuất trên thư viện 40 bài tập, dùng embedding tiếng Việt và cơ sở dữ liệu vector; bài phù hợp đứng đầu kết quả ở 26/32 phiếu (MRR 0,82).",
+          "Thiết kế bộ kiểm tra đầu ra gồm ba bước; khi chưa đạt, hệ thống yêu cầu mô hình tạo lại kèm lý do. Số bản nháp hợp lệ tăng từ 34/40 lên 40/40, thời gian trung vị 9,45 giây mỗi phiếu.",
+          "Phát triển tính năng cảnh báo bài gần trùng, phát hiện 28/29 cặp đã gán nhãn (AUC 0,995) trong 0,19 giây; điều chỉnh prompt giúp số bản nháp không lỗi tăng từ 12/40 lên 28/40 (McNemar p = 0,00086).",
+          "Lựa chọn cấu hình bằng thí nghiệm có tiêu chí xác định trước và khoảng tin cậy Wilson; báo cáo cả những kết quả không như kỳ vọng."
         ]
       },
       "metrics": [
@@ -129,7 +129,7 @@
           "value": "0.82",
           "label": {
             "en": "MRR — right exercise first on 26/32 forms",
-            "vi": "MRR — bài đúng lên đầu ở 26/32 form"
+            "vi": "MRR — bài phù hợp đứng đầu ở 26/32 phiếu"
           }
         },
         {
@@ -293,21 +293,36 @@
     {
       "group": {
         "en": "Engineering practice",
-        "vi": "Thực hành kỹ thuật"
+        "vi": "Quy trình phát triển"
       },
       "items": [
         "Unit, integration & E2E tests (Pytest)",
-        "CI quality gates (PASS / WARN / BLOCK)",
-        "Async workers (Redis, Celery)",
-        "AI coding agents: task spec, diff review, test before merge"
+        "CI quality gates (PASS / WARN / BLOCK)"
       ],
       "tags": [
         "python-engineer"
       ],
       "evidence": {
         "Unit, integration & E2E tests": "agent-platform-hitl",
-        "CI quality gates": "viragops",
-        "Async workers": "rag-assistant-bilingual"
+        "CI quality gates": "viragops"
+      }
+    },
+    {
+      "group": {
+        "en": "AI-assisted development",
+        "vi": "Phát triển phần mềm với AI"
+      },
+      "items": [
+        "AI coding agents (task spec with acceptance criteria, diff review)",
+        "Verifying AI output with tests and measurements",
+        "Reusable project rules for agents",
+        "Prompt design & structured outputs (LLM APIs)"
+      ],
+      "tags": [
+        "python-engineer"
+      ],
+      "evidence": {
+        "Prompt design & structured outputs": "experience"
       }
     }
   ],
@@ -409,7 +424,7 @@
       },
       "level": {
         "en": "Native",
-        "vi": "Bản ngữ"
+        "vi": "Ngôn ngữ mẹ đẻ"
       }
     },
     {
@@ -419,7 +434,7 @@
       },
       "level": {
         "en": "IELTS 6.0 — technical reading & writing",
-        "vi": "IELTS 6.0 — đọc và viết tài liệu kỹ thuật"
+        "vi": "IELTS 6.0, đọc và viết tài liệu kỹ thuật"
       }
     }
   ],

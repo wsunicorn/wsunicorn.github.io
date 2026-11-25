@@ -7,8 +7,8 @@
       "vi": "Kỹ sư AI"
     },
     "file": {
-      "en": "/cv/CV_NguyenNgocLan_AIEngineer_Fresher_EN.pdf",
-      "vi": "/cv/CV_NguyenNgocLan_AIEngineer_Fresher_VI.pdf"
+      "en": "/cv/CV_NguyenNgocLan_AIEngineer.pdf",
+      "vi": "/cv/CV_NguyenNgocLan_AIEngineer.pdf"
     }
   },
   {
@@ -19,8 +19,8 @@
       "vi": "Kỹ sư Học máy"
     },
     "file": {
-      "en": "/cv/CV_NguyenNgocLan_MLEngineer_Fresher_EN.pdf",
-      "vi": "/cv/CV_NguyenNgocLan_MLEngineer_Fresher_VI.pdf"
+      "en": "/cv/CV_NguyenNgocLan_MLEngineer.pdf",
+      "vi": "/cv/CV_NguyenNgocLan_MLEngineer.pdf"
     }
   },
   {
@@ -31,8 +31,8 @@
       "vi": "Kỹ sư Thị giác máy tính"
     },
     "file": {
-      "en": "/cv/CV_NguyenNgocLan_ComputerVision_Fresher_EN.pdf",
-      "vi": "/cv/CV_NguyenNgocLan_ComputerVision_Fresher_VI.pdf"
+      "en": "/cv/CV_NguyenNgocLan_ComputerVisionEngineer.pdf",
+      "vi": "/cv/CV_NguyenNgocLan_ComputerVisionEngineer.pdf"
     }
   },
   {
@@ -43,8 +43,8 @@
       "vi": "Kỹ sư Nghiên cứu AI"
     },
     "file": {
-      "en": "/cv/CV_NguyenNgocLan_AIResearch_Fresher_EN.pdf",
-      "vi": "/cv/CV_NguyenNgocLan_AIResearch_Fresher_VI.pdf"
+      "en": "/cv/CV_NguyenNgocLan_AIResearchEngineer.pdf",
+      "vi": "/cv/CV_NguyenNgocLan_AIResearchEngineer.pdf"
     }
   },
   {
@@ -55,8 +55,8 @@
       "vi": "Kỹ sư Dữ liệu"
     },
     "file": {
-      "en": "/cv/CV_NguyenNgocLan_DataEngineer_Fresher_EN.pdf",
-      "vi": "/cv/CV_NguyenNgocLan_DataEngineer_Fresher_VI.pdf"
+      "en": "/cv/CV_NguyenNgocLan_DataEngineer.pdf",
+      "vi": "/cv/CV_NguyenNgocLan_DataEngineer.pdf"
     }
   },
   {
@@ -64,11 +64,11 @@
     "main": false,
     "label": {
       "en": "Data Scientist / Data Analyst",
-      "vi": "Khoa học / Phân tích Dữ liệu"
+      "vi": "Khoa học Dữ liệu / Phân tích Dữ liệu"
     },
     "file": {
-      "en": "/cv/CV_NguyenNgocLan_DataScientist_Fresher_EN.pdf",
-      "vi": "/cv/CV_NguyenNgocLan_DataScientist_Fresher_VI.pdf"
+      "en": "/cv/CV_NguyenNgocLan_DataScientist.pdf",
+      "vi": "/cv/CV_NguyenNgocLan_DataScientist.pdf"
     }
   }
 ]
