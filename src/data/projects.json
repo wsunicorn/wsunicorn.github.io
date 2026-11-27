@@ -65,6 +65,20 @@
         "source": "https://github.com/wsunicorn/vihallulens/blob/main/docs/EXPERIMENTS.md"
       }
     ],
+    "cv_bullets": {
+      "en": [
+        "Detected RAG hallucinations from the model's attention: a 2,271-parameter classifier matches fine-tuned PhoBERT-large (macro-F1 0.745 vs 0.749).",
+        "The best attention head finds the supporting passage in 87.8% of samples, at about 1/11 the cost of removing context.",
+        "Proposed a chunk-aware variant, the best-calibrated detector in the study (ECE 0.044 vs 0.109); its F1 gain was not significant.",
+        "Ran 19 experiments on 4 Vietnamese datasets with significance tests; shipped a Python library and a REST service."
+      ],
+      "vi": [
+        "Phát hiện ảo giác trong RAG từ trọng số chú ý: bộ phân loại 2.271 tham số đạt kết quả tương đương PhoBERT-large đã tinh chỉnh (macro-F1 0,745 so với 0,749).",
+        "Đầu chú ý tốt nhất xác định đúng đoạn bằng chứng ở 87,8% mẫu, với chi phí chỉ khoảng 1/11 so với phương pháp cắt bỏ ngữ cảnh.",
+        "Đề xuất biến thể chunk-aware cho xác suất được hiệu chỉnh tốt nhất trong nghiên cứu (ECE 0,044 so với 0,109); mức tăng F1 không có ý nghĩa thống kê.",
+        "Thực hiện 19 thí nghiệm trên 4 bộ dữ liệu tiếng Việt có kiểm định thống kê; đóng gói thành thư viện Python và dịch vụ REST."
+      ]
+    },
     "bullets": {
       "en": [
         "Reproduced Lookback Lens on Qwen2.5-7B: a linear probe on 756 lookback ratios (2,271 parameters) reached 3-class macro-F1 0.745 — on par with fine-tuned PhoBERT-large (0.749, 369M parameters) and better on intrinsic hallucinations.",
@@ -268,6 +282,20 @@
         "source": "https://github.com/wsunicorn/viragops/blob/main/docs/system/experiments/golden_set_design.md"
       }
     ],
+    "cv_bullets": {
+      "en": [
+        "Built a Vietnamese RAG assistant for university regulations that must cite its sources; hybrid search reaches Recall@5 0.932.",
+        "Added a CI quality gate with a 300-question test set that blocked all 9 harmful changes in 16 scenarios, with no false alarms.",
+        "Built the pipeline that ingests, chunks, embeds and indexes regulation documents on Qdrant, as versioned modules.",
+        "Monitored it like a production service with Langfuse tracing and Prometheus/Grafana dashboards."
+      ],
+      "vi": [
+        "Xây dựng trợ lý RAG tiếng Việt về quy chế đào tạo, bắt buộc trích dẫn nguồn; tìm kiếm kết hợp đạt Recall@5 0,932.",
+        "Thêm cổng chất lượng trong CI với bộ 300 câu hỏi kiểm thử, chặn đúng 9/9 thay đổi gây lỗi trong 16 kịch bản và không chặn nhầm.",
+        "Xây dựng quy trình tiếp nhận, chia đoạn, tạo embedding và lập chỉ mục văn bản quy chế trên Qdrant, chia thành các mô-đun có quản lý phiên bản.",
+        "Theo dõi hệ thống như dịch vụ thật bằng Langfuse, Prometheus và Grafana."
+      ]
+    },
     "bullets": {
       "en": [
         "Built a 300-question golden set and a PASS/WARN/BLOCK quality gate in CI/CD that blocked all 9 bad changes in 16 simulated scenarios with no false blocks; hybrid retrieval reached Recall@5 0.932.",
@@ -602,6 +630,16 @@
         "source": "https://github.com/wsunicorn/AI-Agent-Platform-with-Human-Approval/blob/main/docs/GUARDRAILS_AND_APPROVALS.md"
       }
     ],
+    "cv_bullets": {
+      "en": [
+        "Built a customer-support agent (FastAPI, LangGraph) that classifies tickets, drafts replies and calls tools such as refunds; every sensitive action waits for human approval and is logged.",
+        "Covered the approval flow with unit, integration and end-to-end tests; Gemini runs first with a local Ollama fallback."
+      ],
+      "vi": [
+        "Xây dựng agent chăm sóc khách hàng (FastAPI, LangGraph) phân loại yêu cầu, soạn phản hồi và gọi công cụ như hoàn tiền; mọi thao tác nhạy cảm đều chờ người duyệt và được ghi nhật ký.",
+        "Kiểm thử luồng phê duyệt bằng unit, integration và end-to-end test; ưu tiên Gemini và chuyển sang Ollama khi cần."
+      ]
+    },
     "bullets": {
       "en": [
         "Designed a 3-tier guardrail policy (safe / approval-required / blocked) with duplicate sensitive-action prevention and full audit logs.",
@@ -783,6 +821,16 @@
         }
       }
     ],
+    "cv_bullets": {
+      "en": [
+        "Built a bilingual document assistant that ingests 7 source types and answers with citations, using hybrid search on Qdrant.",
+        "Runs on asynchronous FastAPI services with Redis workers and PostgreSQL job tracking."
+      ],
+      "vi": [
+        "Xây dựng trợ lý tài liệu song ngữ tiếp nhận 7 loại nguồn và trả lời kèm trích dẫn, dùng tìm kiếm kết hợp trên Qdrant.",
+        "Vận hành bằng dịch vụ FastAPI bất đồng bộ, Redis worker và theo dõi tác vụ trên PostgreSQL."
+      ]
+    },
     "bullets": {
       "en": [
         "Ingests 7 source types (PDF, DOCX, Markdown, Notion export, websites, sitemaps) with metadata-aware chunking.",
@@ -922,6 +970,16 @@
         }
       }
     ],
+    "cv_bullets": {
+      "en": [
+        "Built a Vietnamese medical visual question answering model: PhoBERT + ViT for classification and ViT + ViT5 with LoRA for answer generation.",
+        "Reached 0.76–0.81 test accuracy on three question types and BERTScore F1 0.743 on open-ended answers."
+      ],
+      "vi": [
+        "Xây dựng mô hình hỏi đáp hình ảnh y tế tiếng Việt: PhoBERT và ViT để phân loại, ViT và ViT5 tinh chỉnh bằng LoRA để tạo câu trả lời.",
+        "Đạt accuracy 0,76–0,81 trên ba nhóm câu hỏi và BERTScore F1 0,743 với câu trả lời mở."
+      ]
+    },
     "bullets": {
       "en": [
         "Designed a two-stream pipeline on ImageCLEF VQA-Med 2019 (Vietnamese translation): PhoBERT + ViT cross-attention for classification and ViT + ViT5 with LoRA fine-tuning for answer generation.",
@@ -987,6 +1045,16 @@
         }
       }
     ],
+    "cv_bullets": {
+      "en": [
+        "Built a 7-class sleep-disorder classifier from EEG with versioned data (DVC), a model registry (MLflow) and drift-triggered retraining.",
+        "Deployed it on AWS ECS through GitHub Actions CI/CD (test, build, deploy, smoke test), served by a Django REST API."
+      ],
+      "vi": [
+        "Xây dựng mô hình phân loại 7 loại rối loạn giấc ngủ từ EEG, quản lý dữ liệu bằng DVC, mô hình bằng MLflow và tự huấn luyện lại khi phát hiện drift.",
+        "Triển khai lên AWS ECS qua CI/CD với GitHub Actions (kiểm thử, đóng gói, triển khai, kiểm tra sau triển khai), cung cấp qua Django REST API."
+      ]
+    },
     "bullets": {
       "en": [
         "Built a 7-class EEG pipeline on CAP Sleep with DVC data versioning, MLflow Registry and drift-triggered retraining workflows.",
@@ -1054,6 +1122,16 @@
         }
       }
     ],
+    "cv_bullets": {
+      "en": [
+        "Counted vehicles by turning movement with YOLO detection and Kalman/Hungarian tracking, reaching 98.96% accuracy (95 of 96 vehicles).",
+        "Generated movement paths from trajectories instead of drawing them by hand, and tested automatic ROI with SAM against manual setup."
+      ],
+      "vi": [
+        "Đếm phương tiện theo hướng di chuyển bằng YOLO kết hợp theo dõi Kalman và Hungarian, đạt độ chính xác 98,96% (95/96 xe).",
+        "Tự tạo hướng di chuyển từ quỹ đạo thay cho vẽ tay, và so sánh vùng quan sát tự động bằng SAM với cấu hình thủ công."
+      ]
+    },
     "bullets": {
       "en": [
         "Pipeline: YOLO detection → Kalman + Hungarian multi-object tracking → ROI/MOI movement assignment → counting CSV and overlay video (AI City Challenge Track 1 format).",
@@ -1120,6 +1198,16 @@
         }
       }
     ],
+    "cv_bullets": {
+      "en": [
+        "Built a trading environment with 16 market features, fees and slippage, and trained PPO, CVaR-PPO and Sortino-PPO agents.",
+        "In the 2020 crash, CVaR-PPO cut maximum drawdown to 15% versus 34% for buy-and-hold; in the 2023–24 bull market, buy-and-hold still won."
+      ],
+      "vi": [
+        "Xây dựng môi trường giao dịch với 16 đặc trưng thị trường, phí và trượt giá; huấn luyện các tác tử PPO, CVaR-PPO và Sortino-PPO.",
+        "Trong đợt sụt giảm năm 2020, CVaR-PPO giới hạn mức sụt giảm tối đa ở 15% so với 34% của mua và giữ; ở thị trường tăng 2023–24, mua và giữ vẫn tốt hơn."
+      ]
+    },
     "bullets": {
       "en": [
         "Built the data pipeline (16 market features incl. SMA, RSI, MACD, Bollinger, ATR) and a single-asset environment with 0.1% fees and 0.05% slippage.",
@@ -1177,6 +1265,14 @@
         }
       }
     ],
+    "cv_bullets": {
+      "en": [
+        "Built a hybrid food recommender that combines content-based (TF-IDF) and collaborative filtering, delivered as a Flask web app."
+      ],
+      "vi": [
+        "Xây dựng hệ thống gợi ý món ăn kết hợp lọc theo nội dung (TF-IDF) và lọc cộng tác, triển khai dưới dạng ứng dụng web Flask."
+      ]
+    },
     "bullets": {
       "en": [
         "Combined content-based filtering (TF-IDF, cosine similarity) with collaborative filtering in a weighted hybrid ranking (70% content, 30% collaborative) for better item diversity.",

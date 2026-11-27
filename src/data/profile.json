@@ -98,23 +98,23 @@
         "vi": "TP. Hồ Chí Minh"
       },
       "start": "2026-09",
-      "end": "2026-12",
+      "end": "present",
       "summary": {
         "en": "LLM + RAG pipeline that drafts structured therapy exercises for an early-intervention app (internal PoC); I owned the knowledge base, retrieval, schema and validation.",
         "vi": "Hệ thống LLM kết hợp RAG tạo bản nháp bài tập có cấu trúc cho một ứng dụng can thiệp sớm (thử nghiệm nội bộ); tôi phụ trách kho tri thức, truy xuất, cấu trúc dữ liệu và kiểm tra đầu ra."
       },
       "bullets": {
         "en": [
-          "Built the retrieval layer over a 40-exercise library with Vietnamese embeddings in a vector DB; the right exercise ranks first on 26/32 forms (MRR 0.82).",
-          "Designed a three-tier output validator with reasoned retries, raising valid drafts from 34/40 to 40/40 at a median 9.45 s per form.",
-          "Shipped a near-duplicate warning that catches 28/29 labelled pairs (AUC 0.995) in 0.19 s; a prompt change lifted zero-defect drafts from 12/40 to 28/40 (McNemar p = 0.00086).",
-          "Ran every configuration choice as a pre-registered experiment with Wilson intervals, and reported the negative result too."
+          "Built retrieval over a 40-exercise library with Vietnamese embeddings; the right exercise ranks first for 26 of 32 test forms.",
+          "Designed a three-step output validator with retries, raising valid drafts from 34/40 to 40/40.",
+          "Added a near-duplicate warning that catches 28 of 29 labelled duplicate pairs.",
+          "Rewrote the prompt instructions, raising defect-free drafts from 12/40 to 28/40 (statistically significant)."
         ],
         "vi": [
-          "Xây dựng phần truy xuất trên thư viện 40 bài tập, dùng embedding tiếng Việt và cơ sở dữ liệu vector; bài phù hợp đứng đầu kết quả ở 26/32 phiếu (MRR 0,82).",
-          "Thiết kế bộ kiểm tra đầu ra gồm ba bước; khi chưa đạt, hệ thống yêu cầu mô hình tạo lại kèm lý do. Số bản nháp hợp lệ tăng từ 34/40 lên 40/40, thời gian trung vị 9,45 giây mỗi phiếu.",
-          "Phát triển tính năng cảnh báo bài gần trùng, phát hiện 28/29 cặp đã gán nhãn (AUC 0,995) trong 0,19 giây; điều chỉnh prompt giúp số bản nháp không lỗi tăng từ 12/40 lên 28/40 (McNemar p = 0,00086).",
-          "Lựa chọn cấu hình bằng thí nghiệm có tiêu chí xác định trước và khoảng tin cậy Wilson; báo cáo cả những kết quả không như kỳ vọng."
+          "Xây dựng phần truy xuất trên thư viện 40 bài tập bằng embedding tiếng Việt; bài phù hợp đứng đầu kết quả ở 26/32 phiếu thử nghiệm.",
+          "Thiết kế bộ kiểm tra đầu ra ba bước có cơ chế tạo lại, nâng số bản nháp hợp lệ từ 34/40 lên 40/40.",
+          "Bổ sung cảnh báo bài gần trùng, phát hiện 28/29 cặp trùng đã gán nhãn.",
+          "Viết lại chỉ dẫn prompt, nâng số bản nháp không lỗi từ 12/40 lên 28/40 (có ý nghĩa thống kê)."
         ]
       },
       "metrics": [

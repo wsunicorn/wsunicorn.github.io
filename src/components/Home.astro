@@ -13,7 +13,7 @@ const p = (path: string) => localePath(lang, path);
 
 // Experience: thực tập TMA (dữ liệu trong data/profile.yaml)
 const exp = profile.experience[0];
-const ym = (s: string) => { const [y, m] = String(s).split('-'); return lang === 'vi' ? `${m}/${y}` : `${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][+m - 1]} ${y}`; };
+const ym = (s: string) => { if (s === 'present') return lang === 'vi' ? 'hiện tại' : 'Present'; const [y, m] = String(s).split('-'); return lang === 'vi' ? `${m}/${y}` : `${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][+m - 1]} ${y}`; };
 
 // 14 kỹ năng cốt lõi (profile.yaml → core_skills), mỗi kỹ năng link tới bằng chứng
 const projName = (slug: string) => { const pr = projects.find(x => x.slug === slug); return pr ? tr(pr.title, lang).split(' — ')[0] : ''; };
